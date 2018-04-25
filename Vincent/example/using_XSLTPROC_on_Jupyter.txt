@@ -1,6 +1,6 @@
 First initial test: 
 					the xsl mathbook-jupyter.xsl file worked on a small example to convert into a Jupyter file.
-					One issue was the the script is formated to be used with a sagemath kernel (we want to run python 3)
+					One issue was the the script is formatted to be used with a sagemath kernel (we want to run python 3)
 					so i forked Rob's mathbook repo and changed line 240 sagemath -> python3. Doing this removes
 					the error generated when first trying to run the notebook with the missing sagemath kernel. 
 
@@ -28,14 +28,15 @@ First initial test:
 Conversion of example LogProperties: 
 					I tried repeating the process with the example LogProperties.ptx (this example was
 					converted from LaTex to PreTeXt by Dave?). The first issue I had was that there was
-					some open/close tag missmatch in the file. These are not hard issues to fix but
-					can be time consuming/frustrating when trying to locate the tag causing isses.
+					some open/close tag mismatch in the file. These are not hard issues to fix but
+					can be time consuming/frustrating when trying to locate the tag causing issues.
 					There are tools out there to help with this. 
 
-					The real problems I ran into was after fixing these missmatch issues. xsltproc
+					The real problems I ran into was after fixing these mismatch issues. xsltproc
 					produced many errors which to me are quite cryptic (lack of xsl knowledge). 
 					
 					See error log below:
+
 
 							MBX:ERROR: Equation numbering level not determined
 							MBX:BUG: New document type for maximum level defaults
@@ -105,7 +106,7 @@ Conversion of example LogProperties:
 					are causing the "Templates and Variables" erros. In a small scale test I changed
 					a <theorem> tag to a <section> tab, this removed the issues and added a link from the
 					notebook calling the <xref>. This link, once clicked, opens up a new tab with a notebook 
-					including the "properly" formated theorem. I will try changing the theorem tags inside the
+					including the "properly" formatted theorem. I will try changing the theorem tags inside the
 					LogProperties file to test on a bigger scale.
 
 					<solution> tags do not seem to work within Jupyter, it creates a dead link and does not
@@ -115,7 +116,9 @@ Conversion of example LogProperties:
 					I played around some more with compiling some of the examples from Rob's site. For some of the
 					bigger examples I ended up getting the same errors as with out LogProperties file... I may try
 					and compile it on a different machine and see if the Jupyter server is missing some dependencies.
-					I would assume that the examples on Rob's GitHub page should comile so it is most likely an 
+					I would assume that the examples on Rob's GitHub page should compile so it is most likely an 
 					issue on my end.(*Update: when creating bigger projects with reference to different files we must 
-					add -xinclude ex: xsltproc -xinclude /xsl/mathbook-html.xsl ./sampleBook.xml)
+					add -xinclude ex: xsltproc -xinclude /xsl/mathbook-html.xsl ./sampleBook.xml). Still not compiling
+					LogProperties natively...
+
 
