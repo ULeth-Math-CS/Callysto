@@ -1,0 +1,121 @@
+First initial test: 
+					the xsl mathbook-jupyter.xsl file worked on a small example to convert into a Jupyter file.
+					One issue was the the script is formated to be used with a sagemath kernel (we want to run python 3)
+					so i forked Rob's mathbook repo and changed line 240 sagemath -> python3. Doing this removes
+					the error generated when first trying to run the notebook with the missing sagemath kernel. 
+
+					I managed to add to the quickstart.xml example to include two sections. When doing this it 
+					separates out each section as its own notebook (Probably a good thing). I currently only have title
+					and paragraphs <p> tags, each one of these get their own individual cells. Again this is better
+					than having all of the text into a single cell but im not sure how we go about some 
+					paragraphs grouped into a single cell. (*Update: wrapping text with <section> tag will
+					incapsolate everything within the tag into a single cell).
+
+					I also noticed a few formatting hiccups, as it seems to be converting to html first then 
+					converting it to make a jupyter notebook it has link tags <a href="#"> which don’t work. 
+					It also adds a ¶ at the end of the title as well as a number directly attached to the title
+					(1Beginning for example). A lot of these things are probably relatively easy to fix but
+					being unfamiliar with xsl I am not sure how.
+
+					One thing it does well is create a notebook with a list of all the sections including
+					working hyperlinks to the actual notebooks with those sections. I am not sure
+					if this is really relevant to us as we are not creating a complete book into a 
+					Jupyter notebook but simply bite-sized collection of topics. This however could be
+					useful for Sean if converting an entire textbook then quickly finding a section
+					to forward to one of us to turn into its own notebook.
+
+
+Conversion of example LogProperties: 
+					I tried repeating the process with the example LogProperties.ptx (this example was
+					converted from LaTex to PreTeXt by Dave?). The first issue I had was that there was
+					some open/close tag missmatch in the file. These are not hard issues to fix but
+					can be time consuming/frustrating when trying to locate the tag causing isses.
+					There are tools out there to help with this. 
+
+					The real problems I ran into was after fixing these missmatch issues. xsltproc
+					produced many errors which to me are quite cryptic (lack of xsl knowledge). 
+					
+					See error log below:
+
+							MBX:ERROR: Equation numbering level not determined
+							MBX:BUG: New document type for maximum level defaults
+							MBX:ERROR: Theorem numbering level not determined
+							MBX:ERROR: Theorem numbering level not determined
+							MBX:ERROR: Footnote numbering level not determined
+							MBX:ERROR: Table of Contents level not determined
+							MBX:BUG: Level offset undefined for this document type
+							MBX:ERROR: HTML chunk level not determined
+							MBX:ERROR: Level computation is out-of-bounds (input as -1, normalized to NaN)
+							runtime error: file /home/vincent.cote/mathbookXML/mathbook/xsl/mathbook-html.xsl line 468 element element
+							xsl:element: The effective name '' is not a valid QName.
+							runtime error: file /home/vincent.cote/mathbookXML/mathbook/xsl/mathbook-common.xsl line 671 element value-of
+							xsltApplySequenceConstructor: A potential infinite template recursion was detected.
+							You can adjust xsltMaxDepth (--maxdepth) in order to raise the maximum number of nested template calls and variables/params (currently set to 3000).
+							Templates:
+							#0 name * name level
+							#1 name * name is-intermediate
+							#2 name * name has-id-on-enclosure
+							#3 name * name has-id-on-enclosure
+							#4 name * name has-id-on-enclosure
+							#5 name * name has-id-on-enclosure
+							#6 name * name has-id-on-enclosure
+							#7 name * name has-id-on-enclosure
+							#8 name * name has-id-on-enclosure
+							#9 name * name has-id-on-enclosure
+							#10 name * name has-id-on-enclosure
+							#11 name * name has-id-on-enclosure
+							#12 name * name has-id-on-enclosure
+							#13 name * name has-id-on-enclosure
+							#14 name * name has-id-on-enclosure
+							Variables:
+							#0
+							var hierarchy
+							#1
+							var structural
+							#2
+							var chunk
+							#3
+							var intermediate
+							#4
+							var chunk
+							#5
+							var intermediate
+							#6
+							var chunk
+							#7
+							var intermediate
+							#8
+							var chunk
+							#9
+							var intermediate
+							#10
+							var chunk
+							#11
+							var intermediate
+							#12
+							var chunk
+							#13
+							var intermediate
+							#14
+							var chunk
+							no result for ./LogProperties.xml
+
+
+					I played around with it some more and it seems that the <xref> tags to theorems 
+					are causing the "Templates and Variables" erros. In a small scale test I changed
+					a <theorem> tag to a <section> tab, this removed the issues and added a link from the
+					notebook calling the <xref>. This link, once clicked, opens up a new tab with a notebook 
+					including the "properly" formated theorem. I will try changing the theorem tags inside the
+					LogProperties file to test on a bigger scale.
+
+					<solution> tags do not seem to work within Jupyter, it creates a dead link and does not
+					show the text. opening the markdown cell shows there is a lot of information there. 
+					Maybe we could turn solution tags into toggle text on/off using javascript.
+
+					I played around some more with compiling some of the examples from Rob's site. For some of the
+					bigger examples I ended up getting the same errors as with out LogProperties file... I may try
+					and compile it on a different machine and see if the Jupyter server is missing some dependencies.
+					I would assume that the examples on Rob's GitHub page should comile so it is most likely an 
+					issue on my end.(*Update: when creating bigger projects with reference to different files we must 
+					add -xinclude ex: xsltproc -xinclude /xsl/mathbook-html.xsl ./sampleBook.xml)
+

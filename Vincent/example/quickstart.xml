@@ -1,6 +1,236 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mathbook>
-	<article>
-		<p>This is a short sentence.</p>
+     <section xml:id="algpropexpfcns">
+      <title>Algebraic Properties of Exponential Functions</title>
+      <statement>
+        <p>
+          Let <m>f(x) = b^{x}</m> be an exponential function (<m>b > 0</m>,
+          <m>b\neq 1</m>) and let <m>u</m> and <m>w</m> be real numbers.
+              <idx><h>exponential function</h><h>algebraic properties of</h></idx>
+
+          <ul>
+            <li>
+              <p>
+                <em>Product Rule:</em>
+                    <idx><h>product rule</h><h>for exponential functions</h></idx>
+          <m>f(u+w) = f(u) f(w)</m>.
+                In other words, <m>b^{u+w} = b^{u} b^{w}</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <em>Quotient Rule:</em>
+              <idx><h>quotient rule</h><h>for exponential functions</h></idx>
+          <m>f(u-w) = \dfrac{f(u)}{f(w)}</m>.
+                In other words, <m>b^{u-w} = \dfrac{b^{u}}{b^{w}}</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <em>Power Rule:</em>
+              <idx><h>power rule</h><h>for exponential functions</h></idx>
+          <m>\left(f(u)\right)^w = f(uw)</m>.
+                In other words, <m>\left(b^{u}\right)^{w} = b^{uw}</m>
+              </p>
+            </li>
+          </ul>
+        </p>
+      </statement>
+    </section>
+	<article xml:id="quick">
+        <title>My First Small Example</title>
+        <p>This is a short sentence.</p>
+        <introduction>
+            <p>Let's get started.</p>
+        </introduction>
+        
+        <section xml:id="section-short">
+            <title>Beginnings</title>
+            <p>This is a short section</p>
+        </section>
+        
+        <section xml:id="section-multiple-paragraph">
+            <title>Endings</title>
+            <statement>
+	            <p>This is a longer sentence that is followed by another sentence.
+	                Two sentences, and a secound paragraph to follow.</p>
+	            
+	            <p>The last paragraph which has <url href="https://google.ca"><em>a link</em></url></p>
+	            
+	            <p>While the properties listed in <xref ref="algpropexpfcns">Theorem</xref>
+	               are certainly believable based on similar properties of integer and rational exponents,
+	               the full proofs require Calculus.
+	               To each of these properties of exponential functions corresponds an analogous property of logarithmic functions.
+	               We list these below in our next theorem.
+	            </p>
+        </statement>
+            
+     <example xml:id="expandlogex">
+      <title>Expanding logarithmic expressions</title>
+      <statement>
+        <p>
+          Expand the following using the properties of logarithms and simplify.
+          Assume when necessary that all quantities represent positive real numbers.
+        </p>
+
+        <aside>
+          <p>
+            Interestingly enough, expanding logarithms is the exact
+            <em>opposite</em> process
+            (which we will practice later)
+            that is most useful in Algebra.
+            The utility of expanding logarithms becomes apparent in Calculus.
+          </p>
+        </aside>
+        <ol>
+          <li>
+            <p>
+              <m>\log_{2}\left(\dfrac{8}{x}\right)</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\log_{0.1} \left(10 x^2 \right)</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ln \left(\dfrac{3}{ex}\right)^2</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\log \sqrt[3]{\dfrac{100 x^2}{yz^5}}</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\log_{117}\left(x^2 - 4\right)</m>
+            </p>
+          </li>
+        </ol>
+      </statement>
+      <statement>
+        <p>
+          <ol>
+            <li>
+              <p>
+                To expand <m>\log_{2}\left(\frac{8}{x}\right)</m>,
+                we use the Quotient Rule identifying <m>u = 8</m> and <m>w=x</m> and simplify.
+                <md>
+                  <mrow>\log_{2}\left(\dfrac{8}{x}\right) \amp  =   \log_{2}(8) - \log_{2}(x) \tag{Quotient Rule}</mrow>
+                  <mrow>\amp  =   3 - \log_{2}(x)  \tag{Since $2^{3} = 8$}</mrow>
+                  <mrow>\amp  =  - \log_{2}(x) + 3</mrow>
+                </md>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                In the expression <m>\log_{0.1} \left(10 x^2 \right)</m>,
+                we have a power
+                (the <m>x^2</m>)
+                and a product.
+                In order to use the Product Rule,
+                the <em>entire</em>
+                quantity inside the logarithm must be raised to the same exponent.
+                Since the exponent <m>2</m> applies only to the <m>x</m>,
+                we first apply the Product Rule with <m>u=10</m> and <m>w=x^2</m>.
+                Once we get the <m>x^2</m> by itself inside the log,
+                we may apply the Power Rule with <m>u=x</m> and <m>w=2</m> and simplify.
+                <md>
+                  <mrow>\log_{0.1} \left(10 x^2 \right) \amp  =   \log_{0.1} (10) +  \log_{0.1} \left(x^2 \right) \tag{Product Rule}</mrow>
+                  <mrow>\amp  =   \log_{0.1} (10)+ 2 \log_{0.1} (x)  \tag{Power Rule}</mrow>
+                  <mrow>\amp  =   -1 + 2 \log_{0.1} (x)  \tag{Since $(0.1)^{-1} = 10$}</mrow>
+                  <mrow>\amp  =   2 \log_{0.1} (x) - 1</mrow>
+                </md>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                We have a power,
+                quotient and product occurring in <m>\ln \left(\frac{3}{ex}\right)^2</m>.
+                Since the exponent <m>2</m> applies to the entire quantity inside the logarithm,
+                we begin with the Power Rule with <m>u=\frac{3}{ex}</m> and <m>w = 2</m>.
+                Next, we see the Quotient Rule is applicable,
+                with <m>u=3</m> and <m>w=ex</m>,
+                so we replace <m>\ln\left(\frac{3}{ex}\right)</m>  with the quantity <m>\ln(3) - \ln(ex)</m>.
+                Since <m>\ln \left(\frac{3}{ex}\right)</m> is being multiplied by <m>2</m>,
+                the entire quantity
+          <m>\ln(3) - \ln(ex)</m> is multiplied by <m>2</m>.
+                Finally,
+          we apply the Product Rule with <m>u=e</m> and <m>w=x</m>,
+                and replace <m>\ln(ex)</m> with the quantity <m>\ln(e) + \ln(x)</m>,
+                and simplify,
+                keeping in mind that the natural log is log base <m>e</m>.
+                <md>
+                  <mrow>\ln \left(\dfrac{3}{ex}\right)^2 \amp  =  2 \ln \left(\dfrac{3}{ex}\right)  \tag{Power Rule}</mrow>
+                  <mrow>\amp  =  2 \left[ \ln(3) - \ln(ex) \right]  \tag{Quotient Rule}</mrow>
+                  <mrow>\amp  =  2 \ln(3) - 2\ln(ex)</mrow>
+                  <mrow>\amp  =  2 \ln(3) - 2\left[\ln(e) + \ln(x)\right]  \tag{Product Rule}</mrow>
+                  <mrow>\amp  =  2 \ln(3) - 2\ln(e) - 2 \ln(x)</mrow>
+                  <mrow>\amp  =  2\ln(3) - 2 - 2 \ln(x)  \tag{Since $e^{1} = e$}</mrow>
+                  <mrow>\amp  =  - 2 \ln(x) + 2\ln(3) - 2</mrow>
+                </md>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                In <xref ref="algproplogfcns">Theorem</xref>,
+                there is no mention of how to deal with radicals.
+                However,
+          thinking back to <xref ref="rationalexponentdefn">Definition</xref>,
+                we can rewrite the cube root as a <m>\frac{1}{3}</m> exponent.
+                We begin by using the Power Rule,
+                and we keep in mind that the common log is log base <m>10</m>.
+
+                <aside>
+                  <p>
+                    At this point in the text,
+                    the reader is encouraged to carefully read through each step and think of which quantity is playing the role of <m>u</m> and which is playing the role of <m>w</m> as we apply each property.
+                  </p>
+                </aside>
+                <md>
+                  <mrow>\log \sqrt[3]{\dfrac{100 x^2}{yz^5}} \amp  =  \log \left(\dfrac{100 x^2}{yz^5}\right)^{1/3}</mrow>
+                  <mrow>\amp  =  \frac{1}{3} \log\left(\dfrac{100 x^2}{yz^5}\right)  \tag{Power Rule}</mrow>
+                  <mrow>\amp  =  \frac{1}{3} \left[ \log\left(100x^2\right) - \log\left(yz^5\right) \right]  \tag{Quotient Rule}</mrow>
+                  <mrow>\amp  = \frac{1}{3}\log\left(100x^2\right) - \frac{1}{3}\log\left(yz^5\right)</mrow>
+                  <mrow>\amp  =  \frac{1}{3}\left[ \log(100) + \log\left(x^2\right)\right] - \frac{1}{3} \left[ \log(y) + \log\left(z^5\right) \right]  \tag{Product Rule}</mrow>
+                  <mrow>\amp  = \frac{1}{3} \log(100) + \frac{1}{3} \log\left(x^2\right) - \frac{1}{3} \log(y) - \frac{1}{3} \log\left(z^5\right)</mrow>
+                  <mrow>\amp  =  \frac{1}{3} \log(100) + \frac{2}{3} \log(x) - \frac{1}{3} \log(y) - \frac{5}{3} \log(z)  \tag{Power Rule}</mrow>
+                  <mrow>\amp  =  \frac{2}{3} + \frac{2}{3} \log(x) - \frac{1}{3} \log(y) - \frac{5}{3} \log(z)  \tag{Since $10^2=100$}</mrow>
+                  <mrow>\amp  =   \frac{2}{3} \log(x) - \frac{1}{3} \log(y) - \frac{5}{3} \log(z) + \frac{2}{3}</mrow>
+                </md>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                At first it seems as if we have no means of simplifying <m>\log_{117}\left(x^2-4\right)</m>,
+                since none of the properties of logs addresses the issue of expanding a difference
+                <em>inside</em> the logarithm.
+                However, we may factor
+          <m>x^2 - 4 = (x+2)(x-2)</m> thereby introducing a product which gives us license to use the Product Rule.
+                <md>
+                  <mrow>\log_{117}\left(x^2-4\right) \amp  =  \log_{117} \left[(x+2)(x-2)\right]  \tag{Factor}</mrow>
+                  <mrow>\amp  =  \log_{117}(x+2) + \log_{117}(x-2)  \tag{Product Rule}</mrow>
+                </md>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </example>
+            
+        </section>
+        <p>outside of a section</p>
 	</article>
 </mathbook>
