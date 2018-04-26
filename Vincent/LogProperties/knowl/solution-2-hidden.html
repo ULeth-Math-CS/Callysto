@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--**************************************-->
+<!--*    Generated from PreTeXt source   *-->
+<!--*    on 2018-04-26T15:09:29Z    *-->
+<!--*                                    *-->
+<!--*   http://mathbook.pugetsound.edu   *-->
+<!--*                                    *-->
+<!--**************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body><span class="solution"><p>Whereas in <a knowl="./knowl/expandlogex.html" knowl-id="xref-expandlogex" alt="Example 1.1 Expanding logarithmic expressions" title="Example 1.1 Expanding logarithmic expressions">Example 1.1</a> we read the properties in <a href="LogProperties.html#algproplogfcns" class="xref" alt="Section 1.4 Algebraic Properties of Logarithmic Functions" title="Section 1.4 Algebraic Properties of Logarithmic Functions">Theorem 1.4</a> from left to right to expand logarithms, in this example we read them from right to left. </p>
+<ol class="decimal">
+<li><p>The difference of logarithms requires the Quotient Rule: \(\log_{3}(x-1) - \log_{3}(x+1) = \log_{3}\left(\frac{x-1}{x+1}\right)\text{.}\)</p></li>
+<li>
+<p>In the expression, \(\log(x) + 2\log(y) - \log(z)\text{,}\) we have both a sum and difference of logarithms. However, before we use the product rule to combine \(\log(x) + 2\log(y)\text{,}\) we note that we need to somehow deal with the coefficient \(2\) on \(\log(y)\text{.}\) This can be handled using the Power Rule. We can then apply the Product and Quotient Rules as we move from left to right. Putting it all together, we have</p>
+<div class="displaymath">
+\begin{align*}
+\log(x) + 2\log(y) - \log(z) \amp  =  \log(x) + \log\left(y^2\right) - \log(z)  \tag{Power Rule}\\
+\amp  =  \log\left(xy^2\right) - \log(z)  \tag{Product Rule}\\
+\amp  =  \log\left( \dfrac{xy^2}{z}\right)  \tag{Quotient Rule}
+\end{align*}
+</div>
+</li>
+<li>
+<p>We can certainly get started rewriting \(4\log_{2}(x) + 3\) by applying the Power Rule to \(4\log_{2}(x)\) to obtain \(\log_{2}\left(x^4\right)\text{,}\) but in order to use the Product Rule to handle the addition, we need to rewrite \(3\) as a logarithm base \(2\text{.}\) From <a href="LogProperties.html#invpropslogs" class="xref" alt="Section 1.1 Inverse Properties of Exponential and Logarithmic Functions" title="Section 1.1 Inverse Properties of Exponential and Logarithmic Functions">Theorem 1.1</a>, we know \(3 = \log_{2}\left(2^3\right)\text{,}\) so we get</p>
+<div class="displaymath">
+\begin{align*}
+4\log_{2}(x) + 3 \amp  =  \log_{2}\left(x^4\right) + 3   \tag{Power Rule}\\
+\amp  =  \log_{2}\left(x^4\right) + \log_{2}\left(2^3\right) \tag{Since $3 = \log_{2}\left(2^3\right)$}\\
+\amp  =  \log_{2}\left(x^4\right) + \log_{2}(8)\\
+\amp  =  \log_{2}\left( 8x^4\right)  \tag{Product Rule}
+\end{align*}
+</div>
+</li>
+<li>
+<p>To get started with \(-\ln(x) - \frac{1}{2}\text{,}\) we rewrite  \(-\ln(x)\) as \((-1) \ln(x)\text{.}\) We can then use the Power Rule to obtain \((-1)\ln(x) = \ln\left(x^{-1}\right)\text{.}\) In order to use the Quotient Rule, we need to write \(\frac{1}{2}\) as a natural logarithm. <a href="LogProperties.html#invpropslogs" class="xref" alt="Section 1.1 Inverse Properties of Exponential and Logarithmic Functions" title="Section 1.1 Inverse Properties of Exponential and Logarithmic Functions">Theorem 1.1</a> gives us \(\frac{1}{2} = \ln\left(e^{1/2}\right) = \ln\left(\sqrt{e}\right)\text{.}\) We have</p>
+<div class="displaymath">
+\begin{align*}
+-\ln(x) - \frac{1}{2} \amp  =  (-1)\ln(x) - \frac{1}{2}\\
+\amp  =  \ln\left(x^{-1}\right) - \frac{1}{2}  \tag{Power Rule}\\
+\amp  =  \ln\left(x^{-1}\right) - \ln\left(e^{1/2}\right) \tag{Since $\frac{1}{2} = \ln\left(e^{1/2}\right)$}\\
+\amp  =  \ln\left(x^{-1}\right) - \ln\left(\sqrt{e} \right)\\
+\amp  =  \ln\left(\dfrac{x^{-1}}{\sqrt{e}}\right)  \tag{Quotient Rule}\\
+\amp  =  \ln\left(\dfrac{1}{x\sqrt{e}}\right)
+\end{align*}
+</div>
+</li>
+</ol></span></body>
+</html>
