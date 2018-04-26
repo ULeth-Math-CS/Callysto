@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<!--**************************************-->
+<!--*    Generated from PreTeXt source   *-->
+<!--*    on 2018-04-25T21:37:13Z    *-->
+<!--*                                    *-->
+<!--*   http://mathbook.pugetsound.edu   *-->
+<!--*                                    *-->
+<!--**************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AATA Subgroups</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<script type="text/javascript" src="https://sagecell.sagemath.org/static/jquery.min.js"></script><script type="text/javascript" src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['\\(','\\)']],
+    },
+    TeX: {
+        extensions: ["extpfeil.js", "autobold.js", "https://aimath.org/mathbook/mathjaxknowl.js", ],
+        // scrolling to fragment identifiers is controlled by other Javascript
+        positionToHash: false,
+        equationNumbers: { autoNumber: "none", useLabelIds: true, },
+        TagSide: "right",
+        TagIndent: ".8em",
+    },
+    // HTML-CSS output Jax to be dropped for MathJax 3.0
+    "HTML-CSS": {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+    CommonHTML: {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML-full"></script><script type="text/javascript" src="https://aimath.org/knowl.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.sticky.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.espy.min.js"></script><script src="https://aimath.org/mathbook/js/Mathbook.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link href="https://aimath.org/mathbook/stylesheets/mathbook-3.css" rel="stylesheet" type="text/css">
+<link href="https://aimath.org/mathbook/mathbook-add-on.css" rel="stylesheet" type="text/css">
+</head>
+<body class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div class="hidden-content">\(\newcommand{\identity}{\mathrm{id}}
+\newcommand{\notdivide}{{\not{\mid}}}
+\newcommand{\notsubset}{\not\subset}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\gf}{\operatorname{GF}}
+\newcommand{\inn}{\operatorname{Inn}}
+\newcommand{\aut}{\operatorname{Aut}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\cis}{\operatorname{cis}}
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Null}{\operatorname{Null}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://abstract.pugetsound.edu" target="_blank"><img src="images/cover_aata_2014.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="sample-book.html"><span class="title">Abstract Algebra</span><span class="subtitle">MATHBOOK XML SAMPLE ONLY</span></a></h1>
+<p class="byline">Thomas W. Judson</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index" alt="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-groups-define.html" title="Previous" alt="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="groups.html" title="Up" alt="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="groups-sage.html" title="Next" alt="Next">Next</a></span>
+</div>
+<button class="sidebar-right-toggle-button button active">Annotations</button>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-groups-define.html" title="Previous" alt="Previous">Prev</a><a class="up-button button toolbar-item" href="groups.html" title="Up" alt="Up">Up</a><a class="next-button button toolbar-item" href="groups-sage.html" title="Next" alt="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<aside id="sidebar-left" class="sidebar"><div class="sidebar-content">
+<nav id="toc"><h2 class="link"><a href="index.html" data-scroll="index"><span class="title">Front Matter</span></a></h2>
+<ul>
+<li><a href="front-colophon.html" data-scroll="front-colophon">Colophon</a></li>
+<li><a href="author-bio-TWJ.html" data-scroll="author-bio-TWJ">Author Biography</a></li>
+<li><a href="author-bio-RAB.html" data-scroll="author-bio-RAB">About Robert A. Beezer</a></li>
+<li><a href="dedication.html" data-scroll="dedication">Dedication</a></li>
+<li><a href="acknowledgement.html" data-scroll="acknowledgement">Acknowledgements</a></li>
+<li><a href="preface.html" data-scroll="preface">Preface</a></li>
+<li><a href="contributors.html" data-scroll="contributors">Contributors to the 4\(^\mathrm{th}\) Edition</a></li>
+</ul>
+<h2 class="link"><a href="part-basics.html" data-scroll="part-basics"><span class="codenumber">I</span><span class="title">Basics</span></a></h2>
+<h2 class="link"><a href="sets.html" data-scroll="sets"><span class="codenumber">1</span><span class="title">Preliminaries</span></a></h2>
+<ul>
+<li><a href="section-note-on-proofs.html" data-scroll="section-note-on-proofs">A Short Note on Proofs</a></li>
+<li><a href="section-sets-and-equivalence-relations.html" data-scroll="section-sets-and-equivalence-relations">Sets and Equivalence Relations</a></li>
+<li><a href="sets-sage.html" data-scroll="sets-sage">Sage</a></li>
+<li><a href="exercises-sets.html" data-scroll="exercises-sets">Exercises</a></li>
+<li><a href="sets-sage-exercises.html" data-scroll="sets-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-1.html" data-scroll="references-1">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="integers.html" data-scroll="integers"><span class="codenumber">2</span><span class="title">The Integers</span></a></h2>
+<ul>
+<li><a href="section-math-induction.html" data-scroll="section-math-induction">Mathematical Induction</a></li>
+<li><a href="section-division-algorithm.html" data-scroll="section-division-algorithm">The Division Algorithm</a></li>
+<li><a href="integers-sage.html" data-scroll="integers-sage">Sage</a></li>
+<li><a href="exercises-integers.html" data-scroll="exercises-integers">Exercises</a></li>
+<li><a href="exercises-4.html" data-scroll="exercises-4">Programming Exercises</a></li>
+<li><a href="integers-sage-exercises.html" data-scroll="integers-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-2.html" data-scroll="references-2">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="part-algebra.html" data-scroll="part-algebra"><span class="codenumber">II</span><span class="title">Algebra</span></a></h2>
+<h2 class="link"><a href="groups.html" data-scroll="groups"><span class="codenumber">3</span><span class="title">Groups</span></a></h2>
+<ul>
+<li><a href="section-mod-n-sym.html" data-scroll="section-mod-n-sym">Integer Equivalence Classes and Symmetries</a></li>
+<li><a href="section-groups-define.html" data-scroll="section-groups-define">Definitions and Examples</a></li>
+<li><a href="section-subgroups.html" data-scroll="section-subgroups" class="active">Subgroups</a></li>
+<li><a href="groups-sage.html" data-scroll="groups-sage">Sage</a></li>
+<li><a href="exercises-groups.html" data-scroll="exercises-groups">Exercises</a></li>
+<li><a href="exercises-7.html" data-scroll="exercises-7">Additional Exercises: Detecting Errors</a></li>
+<li><a href="groups-sage-exercises.html" data-scroll="groups-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-3.html" data-scroll="references-3">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="cyclic.html" data-scroll="cyclic"><span class="codenumber">4</span><span class="title">Cyclic Groups</span></a></h2>
+<ul>
+<li><a href="section-11.html" data-scroll="section-11">Cyclic groups</a></li>
+<li><a href="section-12.html" data-scroll="section-12">Subgroups of a Cyclic Group</a></li>
+<li><a href="section-13.html" data-scroll="section-13">Cyclic Groups of Complex Numbers</a></li>
+<li><a href="section-14.html" data-scroll="section-14">Large Powers of Integers</a></li>
+<li><a href="exercises-cyclic.html" data-scroll="exercises-cyclic">Exercises</a></li>
+<li><a href="exercises-10.html" data-scroll="exercises-10">Programming Exercises</a></li>
+<li><a href="cyclic-sage-exercises.html" data-scroll="cyclic-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-4.html" data-scroll="references-4">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></h2>
+<ul>
+<li><a href="appendix-1.html" data-scroll="appendix-1">Notation</a></li>
+<li><a href="appendix-2.html" data-scroll="appendix-2">Hints and Solutions to Selected Exercises</a></li>
+<li><a href="appendix-3.html" data-scroll="appendix-3">A Structured Appendix</a></li>
+<li><a href="appendix-gfdl.html" data-scroll="appendix-gfdl">GNU Free Documentation License</a></li>
+<li><a href="index-1.html" data-scroll="index-1">Index</a></li>
+<li><a href="back-colophon.html" data-scroll="back-colophon">Colophon</a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://mathbook.pugetsound.edu">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax"></a></nav></div>
+</div></aside><main class="main"><div id="content" class="mathbook-content"><section class="section" id="section-subgroups"><h2 class="heading hide-type" alt="Section 3.3 Subgroups">
+<span class="type">Section</span><span class="codenumber">3.3</span><span class="title">Subgroups</span>
+</h2>
+<a href="section-subgroups.html" class="permalink">¶</a><section class="subsection" id="subsection-21"><h3 class="heading hide-type" alt="Subsection 3.3.1 Definitions and Examples">
+<span class="type">Subsection</span><span class="codenumber">3.3.1</span><span class="title">Definitions and Examples</span>
+</h3>
+<p id="p-454">Sometimes we wish to investigate smaller groups sitting inside a larger group.   The set of even integers \(2{\mathbb Z} = \{\ldots, -2, 0, 2, 4, \ldots \}\) is a group  under the operation of addition. This smaller group sits naturally inside of the group of integers under addition.  We define a <dfn class="terminology">subgroup</dfn> \(H\) of a group \(G\) to be a subset \(H\) of \(G\) such that when the group operation of \(G\) is restricted to \(H\text{,}\) \(H\) is a group in its own right. Observe that every group \(G\) with at least two elements will always have at least two subgroups, the subgroup consisting of the identity element alone and the entire group itself. The subgroup \(H = \{ e \}\) of a group \(G\) is called the <dfn class="terminology">trivial subgroup</dfn>.  A subgroup that is a proper subset of \(G\) is called a <dfn class="terminology">proper subgroup</dfn>. In many of the examples that we have investigated up to this point, there exist other subgroups besides the trivial and improper subgroups.</p>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-groups-multiplicative-subgroup" id="example-groups-multiplicative-subgroup"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">3.3.1</span>
+</h6></a></article><div id="hk-example-groups-multiplicative-subgroup" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-455">Consider the set of nonzero real numbers, \({\mathbb R}^*\text{,}\) with the group operation of multiplication.  The identity of this group is 1 and the inverse of any element \(a \in {\mathbb R}^*\) is just \(1/a\text{.}\) We will show that</p>
+<div class="displaymath">
+\begin{equation*}
+{\mathbb Q}^* = \{ p/q : p \, {\rm and }\, q\, {\rm are\, nonzero\, integers} \}
+\end{equation*}
+</div>
+<p>is a subgroup of \({\mathbb R}^*\text{.}\)  The identity of \({\mathbb R}^*\) is 1; however,  \(1 = 1/1\) is the quotient of two nonzero integers. Hence, the identity of \({\mathbb R}^*\) is in \({\mathbb Q}^*\text{.}\) Given two elements in \({\mathbb Q}^*\text{,}\) say \(p/q\) and \(r/s\text{,}\) their product \(pr/qs\) is also in \({\mathbb Q}^*\text{.}\) The inverse of any element \(p/q \in {\mathbb Q}^*\) is again in \({\mathbb Q}^*\) since \((p/q)^{-1} = q/p\text{.}\) Since multiplication in \({\mathbb R}^*\) is associative, multiplication in \({\mathbb Q}^*\) is associative.</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-groups-subgroup-h" id="example-groups-subgroup-h"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">3.3.2</span>
+</h6></a></article><div id="hk-example-groups-subgroup-h" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-456">Recall that \({\mathbb C}^{\ast}\)  is the multiplicative group of nonzero complex numbers. Let \(H = \{ 1, -1, i, -i \}\text{.}\) Then \(H\) is a subgroup of \({\mathbb C}^{\ast}\text{.}\) It is quite easy to verify  that \(H\) is a group under multiplication and that \(H \subset {\mathbb C}^{\ast}\text{.}\)</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-groups-sl2" id="example-groups-sl2"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">3.3.3</span>
+</h6></a></article><div id="hk-example-groups-sl2" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-457">Let \(SL_2( {\mathbb R})\) be the subset of \(GL_2( {\mathbb R })\)consisting of matrices of determinant one; that is, a matrix </p>
+<div class="displaymath">
+\begin{equation*}
+A =
+\begin{pmatrix}
+a &amp; b \\
+c &amp; d
+\end{pmatrix}
+\end{equation*}
+</div>
+<p>is in \(SL_2( {\mathbb R})\) exactly when \(ad - bc = 1\text{.}\) To show that \(SL_2( {\mathbb R})\) is a subgroup of the general linear group, we must show that it is a group under matrix multiplication.  The \(2 \times 2\) identity matrix is in \(SL_2( {\mathbb R})\text{,}\) as is the inverse of the matrix \(A\text{:}\)</p>
+<div class="displaymath">
+\begin{equation*}
+A^{-1} =
+\begin{pmatrix}
+d  &amp; -b \\
+-c &amp;  a
+\end{pmatrix}.
+\end{equation*}
+</div>
+<p>It remains to show that multiplication is closed; that is, that the product of two matrices of determinant one also has determinant one. We will leave this task as an exercise. The group \(SL_2({\mathbb R})\) is called the <dfn class="terminology">special linear group</dfn>.</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-groups-gl2-subgroup" id="example-groups-gl2-subgroup"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">3.3.4</span>
+</h6></a></article><div id="hk-example-groups-gl2-subgroup" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-458">It is important to realize that a subset \(H\) of a group \(G\) can be a group without being a subgroup of \(G\text{.}\) For \(H\) to be a subgroup of \(G\) it must inherit \(G\)'s binary operation.  The set of all \(2 \times 2\) matrices, \({\mathbb M}_2(\mathbb R)\text{,}\) forms a group under the operation of addition. The \(2 \times 2\) general linear group is a subset of \({\mathbb M}_2(\mathbb R)\) and is a group under matrix multiplication, but it is not a subgroup of \({\mathbb M}_2(\mathbb R)\text{.}\)  If we add two invertible matrices, we do not necessarily obtain another invertible matrix. Observe that</p>
+<div class="displaymath">
+\begin{equation*}
+\begin{pmatrix}
+1 &amp; 0 \\
+0 &amp; 1
+\end{pmatrix}
++
+\begin{pmatrix}
+-1 &amp;  0 \\
+0  &amp; -1
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 &amp; 0 \\
+0 &amp; 0
+\end{pmatrix}\text{,}
+\end{equation*}
+</div>
+<p>but the zero matrix is not in \(GL_2( {\mathbb R })\text{.}\)</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-groups-z2xz2" id="example-groups-z2xz2"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">3.3.5</span>
+</h6></a></article><div id="hk-example-groups-z2xz2" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-459">One way of telling whether or not two groups are the same is by examining their subgroups.  Other than the trivial subgroup and the group itself, the group \({\mathbb Z}_4\) has a single subgroup consisting of the elements 0 and 2. From the group \({\mathbb Z}_2\text{,}\) we can form another group of four elements as follows.  As a set this group is \({\mathbb Z}_2 \times {\mathbb Z}_2\text{.}\) We perform the group operation coordinatewise; that is, \((a,b) + (c,d) = (a+c, b+d)\text{.}\) Figure <a knowl="./knowl/figure-z2xz2.html" knowl-id="xref-figure-z2xz2" alt="Figure 3.3.6 " title="Figure 3.3.6 ">Figure 3.3.6</a> is an addition table for \({\mathbb Z}_2 \times {\mathbb Z}_2\text{.}\) Since there are three nontrivial proper subgroups of \({\mathbb Z}_2 \times {\mathbb Z}_2\text{,}\) \(H_1 = \{ (0,0), (0,1) \}\text{,}\) \(H_2 = \{ (0,0), (1,0) \}\text{,}\) and \(H_3 = \{ (0,0), (1,1) \}\text{,}\) \({\mathbb Z}_4\) and \({\mathbb Z}_2 \times {\mathbb Z}_2\) must be different groups.</p></article></div>
+<figure class="figure-like" id="figure-z2xz2"><div class="sidebyside" id="sidebyside-6"><div class="sbsrow" style="margin-left:0%;margin-right:0%;"><div class="sbspanel" style="width:100%;justify-content:flex-start;"><div class="displaymath" id="p-460">
+\begin{equation*}
+\begin{array}{c|cccc}
++     &amp; (0,0) &amp; (0,1) &amp; (1,0) &amp; (1,1) \\
+\hline
+(0,0) &amp; (0,0) &amp; (0,1) &amp; (1,0) &amp; (1,1) \\
+(0,1) &amp; (0,1) &amp; (0,0) &amp; (1,1) &amp; (1,0) \\
+(1,0) &amp; (1,0) &amp; (1,1) &amp; (0,0) &amp; (0,1) \\
+(1,1) &amp; (1,1) &amp; (1,0) &amp; (0,1) &amp; (0,0)
+\end{array}
+\end{equation*}
+</div></div></div></div>
+<figcaption><span class="type">Figure</span><span class="codenumber">3.3.6</span>Addition table for \({\mathbb Z}_2 \times {\mathbb Z}_2\)</figcaption></figure></section><section class="subsection" id="subsection-22"><h3 class="heading hide-type" alt="Subsection 3.3.2 Some Subgroup Theorems">
+<span class="type">Subsection</span><span class="codenumber">3.3.2</span><span class="title">Some Subgroup Theorems</span>
+</h3>
+<p id="p-461">Let us examine some criteria for determining exactly when a subset of a group is a subgroup.</p>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-proposition-9" id="proposition-9"><h6 class="heading">
+<span class="type">Proposition</span><span class="codenumber">3.3.7</span>
+</h6></a></article><div id="hk-proposition-9" class="hidden-content tex2jax_ignore">
+<article class="theorem-like"><p id="p-462">A subset \(H\) of \(G\) is a subgroup if and only if it satisfies the following conditions.</p>
+<ol class="decimal">
+<li id="li-98"><p id="p-463">The identity \(e\) of \(G\) is in \(H\text{.}\)</p></li>
+<li id="li-99"><p id="p-464">If \(h_1, h_2 \in H\text{,}\) then \(h_1h_2 \in H\text{.}\)</p></li>
+<li id="li-100"><p id="p-465">If \(h \in H\text{,}\) then \(h^{-1} \in H\text{.}\)</p></li>
+</ol></article><article class="hiddenproof"><a knowl="" class="id-ref" refid="hk-proof-18" id="proof-18"><h6 class="heading"><span class="type">Proof</span></h6></a></article><div id="hk-proof-18" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-466">First suppose that \(H\) is a subgroup of \(G\text{.}\)  We must show that the three conditions hold.  Since \(H\) is a group, it must have an identity \(e_H\text{.}\)  We must show that \(e_H = e\text{,}\) where \(e\) is the identity of \(G\text{.}\) We know that \(e_H e_H = e_H\) and that \(ee_H = e_H e = e_H\text{;}\) hence, \(ee_H = e_H e_H\text{.}\)  By right-hand cancellation, \(e =e_H\text{.}\)  The second condition holds since a subgroup \(H\) is a group.  To prove the third condition, let \(h \in H\text{.}\)  Since \(H\) is a group, there is  an element \(h' \in H\) such that \(hh' = h'h = e\text{.}\)  By the uniqueness  of the inverse in \(G\text{,}\) \(h' = h^{-1}\text{.}\)</p>
+<p id="p-467">Conversely, if the three conditions hold, we must show that \(H\) is a group under the same operation as \(G\text{;}\) however, these conditions plus the associativity of the binary operation are exactly the axioms stated in the definition of a group.</p></article></div>
+</div>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-proposition-subgroup" id="proposition-subgroup"><h6 class="heading">
+<span class="type">Proposition</span><span class="codenumber">3.3.8</span>
+</h6></a></article><div id="hk-proposition-subgroup" class="hidden-content tex2jax_ignore">
+<article class="theorem-like"><p id="p-468">Let \(H\) be a subset of a group \(G\text{.}\)  Then \(H\) is a subgroup of \(G\) if and only if \(H \neq \emptyset\text{,}\) and whenever \(g, h \in H\) then \(gh^{-1}\) is in \(H\text{.}\)</p></article><article class="hiddenproof"><a knowl="" class="id-ref" refid="hk-proof-19" id="proof-19"><h6 class="heading"><span class="type">Proof</span></h6></a></article><div id="hk-proof-19" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-469">First assume that \(H\) is a subgroup of \(G\text{.}\)  We wish to show that \(gh^{-1} \in H\) whenever \(g\) and \(h\) are in \(H\text{.}\)  Since \(h\) is in \(H\text{,}\) its inverse \(h^{-1}\) must also be in \(H\text{.}\)  Because of the closure of the group operation, \(gh^{-1} \in H\text{.}\)</p>
+<p id="p-470">Conversely, suppose that \(H \subset G\) such that \(H \neq \emptyset\) and  \(g h^{-1} \in H\) whenever \(g, h \in H\text{.}\)  If \(g \in H\text{,}\) then \(gg^{-1} = e\) is in \(H\text{.}\)  If \(g \in H\text{,}\) then \(eg^{-1} = g^{-1}\) is also in \(H\text{.}\) Now let \(h_1, h_2 \in H\text{.}\) We must show that their product is also in \(H\text{.}\)  However, \(h_1(h_2^{-1})^{-1} = h_1 h_2 \in H\text{.}\)  Hence, \(H\) is a subgroup of \(G\text{.}\)</p></article></div>
+</div>
+<article class="remark-like" id="remark-2"><h6 class="heading">
+<span class="type">Remark</span><span class="codenumber">3.3.9</span><span class="title">Sage</span>
+</h6>
+<p id="p-471">The first half of this text is about group theory.  Sage includes Groups, Algorithms and Programming (GAP), a program designed primarly for just group theory, and in continuous development since 1986.  Many of Sage's computations for groups ultimately are performed by GAP.</p></article></section></section></div></main>
+</div>
+</body>
+</html>

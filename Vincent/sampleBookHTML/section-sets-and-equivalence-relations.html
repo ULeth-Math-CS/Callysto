@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<!--**************************************-->
+<!--*    Generated from PreTeXt source   *-->
+<!--*    on 2018-04-25T21:37:09Z    *-->
+<!--*                                    *-->
+<!--*   http://mathbook.pugetsound.edu   *-->
+<!--*                                    *-->
+<!--**************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AATA Sets and Equivalence Relations</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<script type="text/javascript" src="https://sagecell.sagemath.org/static/jquery.min.js"></script><script type="text/javascript" src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['\\(','\\)']],
+    },
+    TeX: {
+        extensions: ["extpfeil.js", "autobold.js", "https://aimath.org/mathbook/mathjaxknowl.js", ],
+        // scrolling to fragment identifiers is controlled by other Javascript
+        positionToHash: false,
+        equationNumbers: { autoNumber: "none", useLabelIds: true, },
+        TagSide: "right",
+        TagIndent: ".8em",
+    },
+    // HTML-CSS output Jax to be dropped for MathJax 3.0
+    "HTML-CSS": {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+    CommonHTML: {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML-full"></script><script type="text/javascript" src="https://aimath.org/knowl.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.sticky.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.espy.min.js"></script><script src="https://aimath.org/mathbook/js/Mathbook.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link href="https://aimath.org/mathbook/stylesheets/mathbook-3.css" rel="stylesheet" type="text/css">
+<link href="https://aimath.org/mathbook/mathbook-add-on.css" rel="stylesheet" type="text/css">
+</head>
+<body class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div class="hidden-content">\(\newcommand{\identity}{\mathrm{id}}
+\newcommand{\notdivide}{{\not{\mid}}}
+\newcommand{\notsubset}{\not\subset}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\gf}{\operatorname{GF}}
+\newcommand{\inn}{\operatorname{Inn}}
+\newcommand{\aut}{\operatorname{Aut}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\cis}{\operatorname{cis}}
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Null}{\operatorname{Null}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://abstract.pugetsound.edu" target="_blank"><img src="images/cover_aata_2014.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="sample-book.html"><span class="title">Abstract Algebra</span><span class="subtitle">MATHBOOK XML SAMPLE ONLY</span></a></h1>
+<p class="byline">Thomas W. Judson</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index" alt="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-note-on-proofs.html" title="Previous" alt="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="sets.html" title="Up" alt="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="sets-sage.html" title="Next" alt="Next">Next</a></span>
+</div>
+<button class="sidebar-right-toggle-button button active">Annotations</button>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-note-on-proofs.html" title="Previous" alt="Previous">Prev</a><a class="up-button button toolbar-item" href="sets.html" title="Up" alt="Up">Up</a><a class="next-button button toolbar-item" href="sets-sage.html" title="Next" alt="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<aside id="sidebar-left" class="sidebar"><div class="sidebar-content">
+<nav id="toc"><h2 class="link"><a href="index.html" data-scroll="index"><span class="title">Front Matter</span></a></h2>
+<ul>
+<li><a href="front-colophon.html" data-scroll="front-colophon">Colophon</a></li>
+<li><a href="author-bio-TWJ.html" data-scroll="author-bio-TWJ">Author Biography</a></li>
+<li><a href="author-bio-RAB.html" data-scroll="author-bio-RAB">About Robert A. Beezer</a></li>
+<li><a href="dedication.html" data-scroll="dedication">Dedication</a></li>
+<li><a href="acknowledgement.html" data-scroll="acknowledgement">Acknowledgements</a></li>
+<li><a href="preface.html" data-scroll="preface">Preface</a></li>
+<li><a href="contributors.html" data-scroll="contributors">Contributors to the 4\(^\mathrm{th}\) Edition</a></li>
+</ul>
+<h2 class="link"><a href="part-basics.html" data-scroll="part-basics"><span class="codenumber">I</span><span class="title">Basics</span></a></h2>
+<h2 class="link"><a href="sets.html" data-scroll="sets"><span class="codenumber">1</span><span class="title">Preliminaries</span></a></h2>
+<ul>
+<li><a href="section-note-on-proofs.html" data-scroll="section-note-on-proofs">A Short Note on Proofs</a></li>
+<li><a href="section-sets-and-equivalence-relations.html" data-scroll="section-sets-and-equivalence-relations" class="active">Sets and Equivalence Relations</a></li>
+<li><a href="sets-sage.html" data-scroll="sets-sage">Sage</a></li>
+<li><a href="exercises-sets.html" data-scroll="exercises-sets">Exercises</a></li>
+<li><a href="sets-sage-exercises.html" data-scroll="sets-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-1.html" data-scroll="references-1">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="integers.html" data-scroll="integers"><span class="codenumber">2</span><span class="title">The Integers</span></a></h2>
+<ul>
+<li><a href="section-math-induction.html" data-scroll="section-math-induction">Mathematical Induction</a></li>
+<li><a href="section-division-algorithm.html" data-scroll="section-division-algorithm">The Division Algorithm</a></li>
+<li><a href="integers-sage.html" data-scroll="integers-sage">Sage</a></li>
+<li><a href="exercises-integers.html" data-scroll="exercises-integers">Exercises</a></li>
+<li><a href="exercises-4.html" data-scroll="exercises-4">Programming Exercises</a></li>
+<li><a href="integers-sage-exercises.html" data-scroll="integers-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-2.html" data-scroll="references-2">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="part-algebra.html" data-scroll="part-algebra"><span class="codenumber">II</span><span class="title">Algebra</span></a></h2>
+<h2 class="link"><a href="groups.html" data-scroll="groups"><span class="codenumber">3</span><span class="title">Groups</span></a></h2>
+<ul>
+<li><a href="section-mod-n-sym.html" data-scroll="section-mod-n-sym">Integer Equivalence Classes and Symmetries</a></li>
+<li><a href="section-groups-define.html" data-scroll="section-groups-define">Definitions and Examples</a></li>
+<li><a href="section-subgroups.html" data-scroll="section-subgroups">Subgroups</a></li>
+<li><a href="groups-sage.html" data-scroll="groups-sage">Sage</a></li>
+<li><a href="exercises-groups.html" data-scroll="exercises-groups">Exercises</a></li>
+<li><a href="exercises-7.html" data-scroll="exercises-7">Additional Exercises: Detecting Errors</a></li>
+<li><a href="groups-sage-exercises.html" data-scroll="groups-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-3.html" data-scroll="references-3">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="cyclic.html" data-scroll="cyclic"><span class="codenumber">4</span><span class="title">Cyclic Groups</span></a></h2>
+<ul>
+<li><a href="section-11.html" data-scroll="section-11">Cyclic groups</a></li>
+<li><a href="section-12.html" data-scroll="section-12">Subgroups of a Cyclic Group</a></li>
+<li><a href="section-13.html" data-scroll="section-13">Cyclic Groups of Complex Numbers</a></li>
+<li><a href="section-14.html" data-scroll="section-14">Large Powers of Integers</a></li>
+<li><a href="exercises-cyclic.html" data-scroll="exercises-cyclic">Exercises</a></li>
+<li><a href="exercises-10.html" data-scroll="exercises-10">Programming Exercises</a></li>
+<li><a href="cyclic-sage-exercises.html" data-scroll="cyclic-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-4.html" data-scroll="references-4">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></h2>
+<ul>
+<li><a href="appendix-1.html" data-scroll="appendix-1">Notation</a></li>
+<li><a href="appendix-2.html" data-scroll="appendix-2">Hints and Solutions to Selected Exercises</a></li>
+<li><a href="appendix-3.html" data-scroll="appendix-3">A Structured Appendix</a></li>
+<li><a href="appendix-gfdl.html" data-scroll="appendix-gfdl">GNU Free Documentation License</a></li>
+<li><a href="index-1.html" data-scroll="index-1">Index</a></li>
+<li><a href="back-colophon.html" data-scroll="back-colophon">Colophon</a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://mathbook.pugetsound.edu">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax"></a></nav></div>
+</div></aside><main class="main"><div id="content" class="mathbook-content"><section class="section" id="section-sets-and-equivalence-relations"><h2 class="heading hide-type" alt="Section 1.2 Sets and Equivalence Relations">
+<span class="type">Section</span><span class="codenumber">1.2</span><span class="title">Sets and Equivalence Relations</span>
+</h2>
+<a href="section-sets-and-equivalence-relations.html" class="permalink">¶</a><section class="subsection" id="subsection-2"><h3 class="heading hide-type" alt="Subsection 1.2.1 Set Theory">
+<span class="type">Subsection</span><span class="codenumber">1.2.1</span><span class="title">Set Theory</span>
+</h3>
+<p id="p-50">A <dfn class="terminology">set</dfn> is a well-defined collection of objects; that is, it is defined in such a manner that we can determine for any given object \(x\) whether or not \(x\) belongs to the set.  The objects that belong to a set are called its <dfn class="terminology">elements</dfn> or <dfn class="terminology">members</dfn>. We will denote sets by capital letters, such as \(A\) or \(X\text{;}\) if \(a\) is an element of the set \(A\text{,}\) we write \(a \in A\text{.}\) </p>
+<p id="p-51">A set is usually specified either by listing all of its elements inside a pair of braces or by stating the property that determines whether or not an object \(x\) belongs to the set. We might write</p>
+<div class="displaymath">
+\begin{equation*}
+X = \{ x_1, x_2, \ldots, x_n \}
+\end{equation*}
+</div>
+<p>for a set containing elements \(x_1, x_2, \ldots, x_n\) or</p>
+<div class="displaymath">
+\begin{equation*}
+X = \{ x :x \text{ satisfies }{\mathcal P}\}
+\end{equation*}
+</div>
+<p>if each \(x\) in \(X\) satisfies a certain property \({\mathcal P}\text{.}\)  For example, if \(E\) is the set of even positive integers, we can describe \(E\) by writing either</p>
+<div class="displaymath">
+\begin{equation*}
+E = \{2, 4, 6, \ldots \} \quad \text{or} \quad E = \{ x : x \text{ is an even integer and } x \gt 0 \}.
+\end{equation*}
+</div>
+<p>We write \(2 \in E\) when we want to say that 2 is in the set \(E\text{,}\) and \(-3 \notin E\) to say that \(-3\) is not in the set \(E\text{.}\)</p>
+<p id="p-52">Some of the more important sets that we will consider are the following:</p>
+<div class="displaymath">
+\begin{align*}
+{\mathbb N} &amp;= \{n: n \text{ is a natural number}\}  = \{1, 2, 3, \ldots \};\\
+{\mathbb Z} &amp;= \{n : n \text{ is an integer} \} = \{\ldots, -1, 0, 1,  2, \ldots \};\\
+{\mathbb Q} &amp;= \{r : r \text{ is a rational number}\} = \{p/q : p, q \in {\mathbb Z} \text{ where } q \neq 0\};\\
+{\mathbb R} &amp;= \{ x : x \text{ is a real number} \};\\
+{\mathbb C} &amp;= \{z : z \text{ is a complex number}\}.
+\end{align*}
+</div>
+<p> </p>
+<p id="p-53">We can find various relations between sets as well as perform operations on sets.  A set \(A\) is a <dfn class="terminology">subset</dfn> of \(B\text{,}\) written \(A \subset B\) or \(B \supset A\text{,}\) if every element of \(A\) is also an element of \(B\text{.}\)   For example,</p>
+<div class="displaymath">
+\begin{equation*}
+\{4,5,8\} \subset \{2, 3, 4, 5, 6, 7, 8, 9 \}
+\end{equation*}
+</div>
+<p>and</p>
+<div class="displaymath">
+\begin{equation*}
+{\mathbb N} \subset {\mathbb Z} \subset {\mathbb Q} \subset {\mathbb R} \subset {\mathbb C}.
+\end{equation*}
+</div>
+<p>Trivially, every set is a subset of itself.  A set \(B\) is a <dfn class="terminology">proper subset</dfn> of a set \(A\) if \(B \subset A\) but \(B \neq A\text{.}\) If \(A\) is not a subset of \(B\text{,}\) we write \(A \notsubset B\text{;}\) for example, \(\{4, 7, 9\} \notsubset \{2, 4, 5,  8, 9 \}\text{.}\)  Two sets are <dfn class="terminology">equal</dfn>, written \(A = B\text{,}\) if we can show that \(A \subset B\) and \(B \subset A\text{.}\)</p>
+<p id="p-54">It is convenient to have a set with no elements in it.  This set is called the <dfn class="terminology">empty set</dfn> and is denoted by \(\emptyset\text{.}\)  Note that the empty set is a subset of every set. </p>
+<p id="p-55">To construct new sets out of old sets, we can perform certain operations: the <dfn class="terminology">union</dfn> \(A \cup B\) of two sets \(A\) and \(B\) is defined as</p>
+<div class="displaymath">
+\begin{equation*}
+A \cup B = \{x : x \in A \text{ or } x \in B \};
+\end{equation*}
+</div>
+<p>the <dfn class="terminology">intersection</dfn> of \(A\) and \(B\)  is defined by</p>
+<div class="displaymath">
+\begin{equation*}
+A \cap B = \{x :  x \in A \text{ and } x \in B \}.
+\end{equation*}
+</div>
+<p> If \(A = \{1, 3, 5\}\) and \(B = \{ 1, 2, 3, 9 \}\text{,}\) then</p>
+<div class="displaymath">
+\begin{equation*}
+A \cup B = \{1, 2, 3, 5, 9 \} \quad \text{and} \quad A \cap B = \{ 1, 3 \}.
+\end{equation*}
+</div>
+<p>We can consider the union and the intersection of more than two sets.  In this case we write</p>
+<div class="displaymath">
+\begin{equation*}
+\bigcup_{i = 1}^{n} A_{i} = A_{1} \cup \ldots \cup A_n
+\end{equation*}
+</div>
+<p>and</p>
+<div class="displaymath">
+\begin{equation*}
+\bigcap_{i = 1}^{n} A_{i} = A_{1} \cap \ldots \cap A_n
+\end{equation*}
+</div>
+<p>for the union and intersection, respectively, of the sets \(A_1, \ldots, A_n\text{.}\)</p>
+<p id="p-56">When two sets have no elements in common, they are said to be <dfn class="terminology">disjoint</dfn>; for example, if \(E\) is the set of even integers and \(O\) is the set of odd integers, then \(E\) and \(O\) are disjoint.  Two sets \(A\) and \(B\) are disjoint exactly when \(A \cap B = \emptyset\text{.}\)</p>
+<p id="p-57">Sometimes we will work within one fixed set \(U\text{,}\) called the <dfn class="terminology">universal set</dfn>.  For any set \(A \subset U\text{,}\) we define the <dfn class="terminology">complement</dfn> of \(A\text{,}\) denoted by \(A'\text{,}\) to be the set </p>
+<div class="displaymath">
+\begin{equation*}
+A' = \{ x : x \in U \text{ and } x \notin A \}.
+\end{equation*}
+</div>
+<p id="p-58">We define the <dfn class="terminology">difference</dfn> of two sets \(A\) and \(B\) to be </p>
+<div class="displaymath">
+\begin{equation*}
+A \setminus B = A \cap B'  = \{ x : x \in A \text{ and } x \notin B \}.
+\end{equation*}
+</div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-operations" id="example-sets-operations"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.1</span>
+</h6></a></article><div id="hk-example-sets-operations" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-59">Let \({\mathbb R}\) be the universal set and suppose that</p>
+<div class="displaymath">
+\begin{equation*}
+A = \{ x \in {\mathbb R} : 0 \lt x \leq 3 \} \quad \text{and} \quad B = \{ x \in {\mathbb R} : 2 \leq x \lt 4 \}.
+\end{equation*}
+</div>
+<p>Then</p>
+<div class="displaymath">
+\begin{align*}
+A \cap B &amp; =  \{ x \in {\mathbb R} : 2 \leq x \leq 3 \}\\
+A \cup B &amp; =  \{ x \in {\mathbb R} : 0 \lt x \lt 4 \}\\
+A \setminus B &amp; =  \{ x \in {\mathbb R} : 0 \lt x \lt 2  \}\\
+A' &amp; =  \{ x \in {\mathbb R} : x \leq 0 \text{ or } x \gt 3 \}.
+\end{align*}
+</div></article></div>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-proposition-1" id="proposition-1"><h6 class="heading">
+<span class="type">Proposition</span><span class="codenumber">1.2.2</span>
+</h6></a></article><div id="hk-proposition-1" class="hidden-content tex2jax_ignore">
+<article class="theorem-like"><p id="p-60">Let \(A\text{,}\) \(B\text{,}\) and \(C\) be sets. Then</p>
+<ol class="decimal">
+<li id="li-23"><p id="p-61">\(A \cup A = A\text{,}\) \(A \cap A = A\text{,}\) and \(A \setminus A = \emptyset\text{;}\)</p></li>
+<li id="li-24"><p id="p-62">\(A \cup \emptyset = A\) and \(A \cap \emptyset = \emptyset\text{;}\)</p></li>
+<li id="li-25"><p id="p-63">\(A \cup (B \cup C) = (A \cup B) \cup C\) and  \(A \cap (B \cap C) = (A \cap B) \cap C\text{;}\)</p></li>
+<li id="li-26"><p id="p-64">\(A \cup B = B \cup A\) and \(A \cap B = B \cap A\text{;}\)</p></li>
+<li id="li-27"><p id="p-65">\(A \cup (B \cap C) = (A \cup B) \cap (A \cup C)\text{;}\)</p></li>
+<li id="li-28"><p id="p-66">\(A \cap (B \cup C) = (A \cap B) \cup (A \cap C)\text{.}\)</p></li>
+</ol></article><article class="hiddenproof"><a knowl="" class="id-ref" refid="hk-proof-1" id="proof-1"><h6 class="heading"><span class="type">Proof</span></h6></a></article><div id="hk-proof-1" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-67">We will prove (1) and (3) and leave the remaining results to be proven in the exercises.</p>
+<p id="p-68">(1) Observe that</p>
+<div class="displaymath">
+\begin{align*}
+A \cup A &amp; =  \{ x :  x \in A \text{ or } x \in A \}\\
+&amp; =  \{ x : x \in A \}\\
+&amp; =  A\\
+\end{align*}
+<p class="intertext">and</p>
+\begin{align*}
+A \cap A &amp; =  \{ x : x \in A \text{ and } x \in A \}\\
+&amp; =  \{ x : x \in A  \}\\
+&amp; =  A.
+\end{align*}
+</div>
+<p id="p-69">Also, \(A \setminus A = A \cap A' = \emptyset\text{.}\)</p>
+<p id="p-70">(3) For sets \(A\text{,}\) \(B\text{,}\) and \(C\text{,}\)</p>
+<div class="displaymath">
+\begin{align*}
+A \cup (B \cup C) &amp; = A \cup \{ x : x \in B \text{ or } x \in C \}\\
+&amp; = \{ x : x \in A \text{ or } x \in B, \text{ or } x \in C \}\\
+&amp; = \{ x : x \in A \text{ or } x \in B \} \cup C\\
+&amp; = (A \cup B) \cup C. 
+\end{align*}
+</div>
+<p id="p-71">A similar argument proves that  \(A \cap (B \cap C) = (A \cap B) \cap C\text{.}\)</p></article></div>
+</div>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-theorem-1" id="theorem-1"><h6 class="heading">
+<span class="type">Theorem</span><span class="codenumber">1.2.3</span><span class="title">De Morgan's Laws</span>
+</h6></a></article><div id="hk-theorem-1" class="hidden-content tex2jax_ignore">
+<article class="theorem-like"><p id="p-72">Let \(A\) and \(B\) be sets. Then</p>
+<ol class="decimal">
+<li id="li-29"><p id="p-73">\((A \cup B)' = A' \cap B'\text{;}\)</p></li>
+<li id="li-30"><p id="p-74">\((A \cap B)' = A' \cup B'\text{.}\)</p></li>
+</ol></article><article class="hiddenproof"><a knowl="" class="id-ref" refid="hk-proof-2" id="proof-2"><h6 class="heading"><span class="type">Proof</span></h6></a></article><div id="hk-proof-2" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-75">(1) We must show that \((A \cup B)' \subset A' \cap B'\) and \((A \cup B)' \supset A' \cap B'\text{.}\) Let \(x \in (A \cup B)'\text{.}\)  Then \(x \notin A \cup B\text{.}\) So \(x\) is neither in \(A\) nor in \(B\text{,}\) by the definition of the union of sets.  By the definition of the complement, \(x \in A'\) and \(x \in B'\text{.}\)  Therefore, \(x \in A' \cap B'\) and we have \((A \cup B)' \subset A' \cap B'\text{.}\)</p>
+<p id="p-76">To show the reverse inclusion, suppose that \(x \in A' \cap B'\text{.}\)  Then \(x \in A'\) and \(x \in B'\text{,}\) and so \(x \notin A\) and \(x \notin B\text{.}\) Thus \(x \notin A \cup B\) and so \(x \in (A \cup B)'\text{.}\)  Hence, \((A \cup B)' \supset A' \cap B'\) and so \((A \cup B)' = A' \cap B'\text{.}\)</p>
+<p id="p-77">The proof of (2) is left as an exercise.</p></article></div>
+</div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-other-relations" id="example-sets-other-relations"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.4</span>
+</h6></a></article><div id="hk-example-sets-other-relations" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-78">Other relations between sets often hold true. For example,</p>
+<div class="displaymath">
+\begin{equation*}
+( A \setminus B) \cap (B \setminus A) = \emptyset.
+\end{equation*}
+</div>
+<p>To see that this is true, observe that</p>
+<div class="displaymath">
+\begin{align*}
+( A \setminus B) \cap (B \setminus A) &amp; = ( A \cap B') \cap (B \cap A')\\
+&amp; = A \cap A' \cap B \cap B'\\
+&amp; = \emptyset.
+\end{align*}
+</div></article></div></section><section class="subsection" id="subsection-3"><h3 class="heading hide-type" alt="Subsection 1.2.2 Cartesian Products and Mappings">
+<span class="type">Subsection</span><span class="codenumber">1.2.2</span><span class="title">Cartesian Products and Mappings</span>
+</h3>
+<p id="p-79">Given sets \(A\) and \(B\text{,}\) we can define a new set \(A \times B\text{,}\) called the <dfn class="terminology">Cartesian product</dfn>  of \(A\) and \(B\text{,}\) as a set of ordered pairs.  That is, </p>
+<div class="displaymath">
+\begin{equation*}
+A \times B = \{ (a,b) : a \in A \text{ and } b \in B \}.
+\end{equation*}
+</div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-cartesian-products" id="example-sets-cartesian-products"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.5</span>
+</h6></a></article><div id="hk-example-sets-cartesian-products" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-80">If \(A = \{ x, y \}\text{,}\) \(B = \{ 1, 2, 3 \}\text{,}\) and \(C = \emptyset\text{,}\) then \(A \times B\) is the set</p>
+<div class="displaymath">
+\begin{equation*}
+\{ (x, 1), (x, 2), (x, 3), (y, 1), (y, 2), (y, 3) \}
+\end{equation*}
+</div>
+<p>and</p>
+<div class="displaymath">
+\begin{equation*}
+A \times C = \emptyset.
+\end{equation*}
+</div></article></div>
+<p id="p-81">We define the <dfn class="terminology">Cartesian product of \(n\) sets</dfn> to be</p>
+<div class="displaymath">
+\begin{equation*}
+A_1 \times \cdots \times A_n = \{ (a_1, \ldots, a_n): a_i \in A_i \text{ for } i = 1, \ldots, n \}.
+\end{equation*}
+</div>
+<p>If \(A = A_1 = A_2 = \cdots = A_n\text{,}\) we often write \(A^n\) for \(A \times \cdots \times A\) (where \(A\) would be written \(n\) times).  For example, the set \({\mathbb R}^3\) consists of all of 3-tuples of real numbers.</p>
+<p id="p-82">Subsets of \(A \times B\) are called <dfn class="terminology">relations</dfn>.  We will define a  <dfn class="terminology">mapping</dfn> or <dfn class="terminology">function</dfn> \(f \subset A \times B\) from a set \(A\) to a set \(B\) to be the special type of relation where \((a, b) \in f\) if for every element \(a \in A\) there exists a unique element \(b \in B\text{.}\) Another way of saying this is that for every element in \(A\text{,}\) \(f\) assigns a unique element in \(B\text{.}\)  We usually write \(f:A \rightarrow B\) or \(A \stackrel{f}{\rightarrow} B\text{.}\)  Instead of writing down ordered pairs  \((a,b) \in A \times B\text{,}\) we write \(f(a) = b\) or \(f : a \mapsto b\text{.}\)  The set  \(A\) is called the <dfn class="terminology">domain</dfn> of \(f\) and</p>
+<div class="displaymath">
+\begin{equation*}
+f(A) = \{ f(a) : a \in A \} \subset B
+\end{equation*}
+</div>
+<p>is called the <dfn class="terminology">range</dfn> or <dfn class="terminology">image</dfn> of \(f\text{.}\)  We can think of the elements in the function's domain as input values and the elements in the function's range as output values.</p>
+<figure class="figure-like" id="figure-sets-mappings"><img src="images/sets-mappings.svg" width="100%" style="display: block; margin: 0 auto;" alt=""><figcaption><span class="type">Figure</span><span class="codenumber">1.2.6</span>Mappings and relations</figcaption></figure><article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-mappings" id="example-sets-mappings"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.7</span>
+</h6></a></article><div id="hk-example-sets-mappings" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-83">Suppose \(A = \{1, 2, 3 \}\) and \(B = \{a, b, c \}\text{.}\)  In Figure <a knowl="./knowl/figure-sets-mappings.html" knowl-id="xref-figure-sets-mappings" alt="Figure 1.2.6 " title="Figure 1.2.6 ">Figure 1.2.6</a> we define relations \(f\) and  \(g\) from \(A\) to \(B\text{.}\)  The relation \(f\) is a mapping, but \(g\) is not because \(1 \in A\) is not assigned to a unique element in \(B\text{;}\) that is, \(g(1) = a\) and \(g(1) = b\text{.}\)</p></article></div>
+<p id="p-84">Given a function \(f : A \rightarrow B\text{,}\) it is often possible to write a list describing what the function does to each specific element in the domain.  However, not all functions can be described in this manner.  For example, the function \(f: {\mathbb R} \rightarrow {\mathbb R}\) that sends each real number to its cube is a mapping that must be described by writing \(f(x) = x^3\) or \(f:x \mapsto x^3\text{.}\)</p>
+<p id="p-85">Consider the relation \(f : {\mathbb Q} \rightarrow {\mathbb Z}\) given by \(f(p/q) = p\text{.}\)  We know that \(1/2 = 2/4\text{,}\) but is \(f(1/2) = 1\) or 2?  This relation cannot be a mapping because it is not well-defined.  A relation is <dfn class="terminology">well-defined</dfn> if each element in the domain is assigned to a <em class="emphasis">unique</em> element in the range.</p>
+<p id="p-86">If \(f:A \rightarrow B\) is a map and the image of \(f\) is \(B\text{,}\) i.e., \(f(A) = B\text{,}\) then \(f\) is said to be <dfn class="terminology">onto</dfn> or <dfn class="terminology">surjective</dfn>. In other words, if there exists an \(a \in A\) for each \(b \in B\) such that \(f(a) = b\text{,}\) then \(f\) is onto. A map is <dfn class="terminology">one-to-one</dfn> or <dfn class="terminology">injective</dfn> if \(a_1 \neq a_2\) implies \(f(a_1) \neq f(a_2)\text{.}\)  Equivalently, a function is one-to-one if \(f(a_1) = f(a_2)\) implies \(a_1 = a_2\text{.}\)  A map that is both one-to-one and onto is called <dfn class="terminology">bijective</dfn>.</p>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-one-to-one-onto" id="example-sets-one-to-one-onto"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.8</span>
+</h6></a></article><div id="hk-example-sets-one-to-one-onto" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-87">Let \(f:{\mathbb Z} \rightarrow {\mathbb Q}\) be defined by \(f(n) = n/1\text{.}\)  Then \(f\) is one-to-one but not onto.  Define \(g : {\mathbb Q} \rightarrow {\mathbb Z}\) by \(g(p/q) = p\) where \(p/q\) is a rational number expressed in its lowest terms with a positive denominator.  The function \(g\) is onto but not one-to-one.</p></article></div>
+<p id="p-88">Given two functions, we can construct a new function by using the range of the first function as the domain of the second function.  Let \(f : A \rightarrow B\) and \(g : B \rightarrow C\) be mappings.  Define a new map, the <dfn class="terminology">composition</dfn> of \(f\) and \(g\) from \(A\) to \(C\text{,}\) by \((g \circ f)(x) = g(f(x))\text{.}\)</p>
+<figure class="figure-like" id="figure-sets-composition"><img src="images/sets-composition.svg" width="100%" style="display: block; margin: 0 auto;" alt=""><figcaption><span class="type">Figure</span><span class="codenumber">1.2.9</span>Composition of maps</figcaption></figure><article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-composition" id="example-sets-composition"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.10</span>
+</h6></a></article><div id="hk-example-sets-composition" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-89">Consider the functions \(f: A \rightarrow B\) and \(g: B \rightarrow C\) that are defined in Figure <a knowl="./knowl/figure-sets-composition.html" knowl-id="xref-figure-sets-composition" alt="Figure 1.2.9 " title="Figure 1.2.9 ">Figure 1.2.9</a> (top).  The composition of these functions, \(g \circ f: A \rightarrow C\text{,}\) is defined in Figure <a knowl="./knowl/figure-sets-composition.html" knowl-id="xref-figure-sets-composition" alt="Figure 1.2.9 " title="Figure 1.2.9 ">Figure 1.2.9</a> (bottom).</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-composition-noncommute" id="example-sets-composition-noncommute"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.11</span>
+</h6></a></article><div id="hk-example-sets-composition-noncommute" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-90">Let \(f(x) = x^2\) and \(g(x) = 2x + 5\text{.}\) Then</p>
+<div class="displaymath">
+\begin{equation*}
+(f \circ g)(x) = f(g(x)) = (2x + 5)^2 = 4x^2 + 20x + 25
+\end{equation*}
+</div>
+<p>and</p>
+<div class="displaymath">
+\begin{equation*}
+(g \circ f)(x) = g(f(x)) = 2x^2 + 5.
+\end{equation*}
+</div>
+<p>In general, order makes a difference; that is, in most cases \(f \circ g \neq g \circ f\text{.}\)</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-composition-commute" id="example-sets-composition-commute"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.12</span>
+</h6></a></article><div id="hk-example-sets-composition-commute" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-91">Sometimes it is the case that \(f \circ g= g \circ f\text{.}\)  Let \(f(x) = x^3\) and \(g(x) = \sqrt[3]{x}\text{.}\) Then</p>
+<div class="displaymath">
+\begin{equation*}
+(f \circ g )(x) = f(g(x)) = f( \sqrt[3]{x}\, ) = (\sqrt[3]{x}\, )^3 = x
+\end{equation*}
+</div>
+<p>and</p>
+<div class="displaymath">
+\begin{equation*}
+(g \circ f )(x) = g(f(x)) = g( x^3) = \sqrt[3]{ x^3} = x.
+\end{equation*}
+</div></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-linear-map" id="example-sets-linear-map"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.13</span>
+</h6></a></article><div id="hk-example-sets-linear-map" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-92">Given a \(2 \times 2\) matrix</p>
+<div class="displaymath">
+\begin{equation*}
+A =
+\begin{pmatrix}
+a &amp; b \\
+c &amp; d
+\end{pmatrix},
+\end{equation*}
+</div>
+<p>we can define a map \(T_A : {\mathbb R}^2 \rightarrow {\mathbb R}^2\) by</p>
+<div class="displaymath">
+\begin{equation*}
+T_A (x,y) = (ax + by, cx +dy)
+\end{equation*}
+</div>
+<p>for \((x,y)\) in \({\mathbb R}^2\text{.}\)  This is actually matrix multiplication; that is,</p>
+<div class="displaymath">
+\begin{equation*}
+\begin{pmatrix}
+a &amp; b \\
+c &amp; d
+\end{pmatrix}
+\begin{pmatrix}
+x \\ y
+\end{pmatrix}
+=
+\begin{pmatrix}
+ax + by \\
+cx +dy
+\end{pmatrix}.
+\end{equation*}
+</div>
+<p>Maps from \({\mathbb R}^n\) to \({\mathbb R}^m\) given by matrices are called <dfn class="terminology">linear maps</dfn> or <dfn class="terminology">linear transformations</dfn>.</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-permutation" id="example-sets-permutation"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.14</span>
+</h6></a></article><div id="hk-example-sets-permutation" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-93">Suppose that \(S = \{ 1,2,3  \}\text{.}\) Define a map \(\pi :S\rightarrow S\) by</p>
+<div class="displaymath">
+\begin{equation*}
+\pi( 1 )  = 2, \qquad \pi( 2 )  = 1, \qquad \pi( 3 )  = 3.
+\end{equation*}
+</div>
+<p>This is a bijective map.  An alternative way to  write \(\pi\) is</p>
+<div class="displaymath">
+\begin{equation*}
+\begin{pmatrix}
+1 &amp; 2 &amp; 3 \\
+\pi(1) &amp; \pi(2) &amp; \pi(3)
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 &amp; 2 &amp; 3 \\
+2 &amp; 1 &amp; 3
+\end{pmatrix}.
+\end{equation*}
+</div>
+<p>For any set \(S\text{,}\) a one-to-one and onto mapping \(\pi : S \rightarrow S\) is called a <dfn class="terminology">permutation</dfn> of \(S\text{.}\)</p></article></div>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-theorem-2" id="theorem-2"><h6 class="heading">
+<span class="type">Theorem</span><span class="codenumber">1.2.15</span>
+</h6></a></article><div id="hk-theorem-2" class="hidden-content tex2jax_ignore">
+<article class="theorem-like"><p id="p-94">Let \(f : A \rightarrow B\text{,}\) \(g : B \rightarrow C\text{,}\) and \(h : C \rightarrow D\text{.}\) Then</p>
+<ol class="decimal">
+<li id="li-31"><p id="p-95">The composition of mappings is associative; that is, \((h \circ g) \circ f = h \circ (g \circ f)\text{;}\)</p></li>
+<li id="li-32"><p id="p-96">If \(f\) and \(g\) are both one-to-one, then the mapping \(g \circ f\) is one-to-one;</p></li>
+<li id="li-33"><p id="p-97">If \(f\) and \(g\) are both onto, then the mapping \(g \circ f\) is onto;</p></li>
+<li id="li-34"><p id="p-98">If \(f\) and \(g\) are bijective, then so is \(g \circ f\text{.}\)</p></li>
+</ol></article><article class="hiddenproof"><a knowl="" class="id-ref" refid="hk-proof-3" id="proof-3"><h6 class="heading"><span class="type">Proof</span></h6></a></article><div id="hk-proof-3" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-99">We will prove (1) and (3). Part (2) is left as an exercise.  Part (4) follows directly from (2) and (3).</p>
+<p id="p-100">(1) We must show that</p>
+<div class="displaymath">
+\begin{equation*}
+h \circ (g \circ f) = (h \circ g) \circ f.
+\end{equation*}
+</div>
+<p>For \(a \in A\) we have</p>
+<div class="displaymath">
+\begin{align*}
+(h \circ (g \circ f))(a) &amp; = h((g \circ f)(a))\\
+&amp; = h(g(f(a))) \\
+&amp; = (h \circ g)(f(a))\\
+&amp; = ((h \circ g) \circ f)(a).
+\end{align*}
+</div>
+<p id="p-101">(3) Assume that \(f\) and \(g\) are both onto functions. Given \(c \in C\text{,}\) we must show that there exists an \(a \in A\) such that \((g \circ f)(a) = g(f(a)) = c\text{.}\) However, since \(g\) is onto, there is an element \(b \in B\) such that \(g(b) = c\text{.}\) Similarly, there is an \(a \in A\) such that \(f(a) = b\text{.}\) Accordingly,</p>
+<div class="displaymath">
+\begin{equation*}
+(g \circ f)(a) = g(f(a)) = g(b) = c.
+\end{equation*}
+</div></article></div>
+</div>
+<p id="p-102">If \(S\) is any set, we will use \(id_S\) or \(id\) to denote the <dfn class="terminology">identity mapping</dfn> from \(S\) to itself.  Define this map by \(id(s) = s\) for all \(s \in S\text{.}\)  A map \(g: B \rightarrow A\) is an <dfn class="terminology">inverse mapping</dfn> of \(f: A \rightarrow B\) if \(g \circ f = id_A\) and \(f \circ g = id_B\text{;}\) in other words, the inverse function of a function simply “undoes” the function.   A map is said to be <dfn class="terminology">invertible</dfn> if it has an inverse.  We usually write \(f^{-1}\) for the inverse of \(f\text{.}\) </p>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-inverse-function" id="example-sets-inverse-function"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.16</span>
+</h6></a></article><div id="hk-example-sets-inverse-function" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-103">The function \(f(x) = x^3\) has inverse \(f^{-1}(x) = \sqrt[3]{x}\) by Example <a knowl="./knowl/example-sets-composition-commute.html" knowl-id="xref-example-sets-composition-commute" alt="Example 1.2.12 " title="Example 1.2.12 ">Example 1.2.12</a>.</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-exponential" id="example-sets-exponential"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.17</span>
+</h6></a></article><div id="hk-example-sets-exponential" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-104">The natural logarithm and the exponential functions, \(f(x) = \ln x\) and \(f^{-1}(x) = e^x\text{,}\) are inverses of each other provided that we are careful about choosing domains.  Observe that</p>
+<div class="displaymath">
+\begin{equation*}
+f(f^{-1}(x)) = f(e^x) = \ln e^x = x
+\end{equation*}
+</div>
+<p>and</p>
+<div class="displaymath">
+\begin{equation*}
+f^{-1}(f(x)) = f^{-1}(\ln x) = e^{\ln x} = x
+\end{equation*}
+</div>
+<p>whenever composition makes sense.</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-inverse-matrix" id="example-sets-inverse-matrix"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.18</span>
+</h6></a></article><div id="hk-example-sets-inverse-matrix" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-105">Suppose that</p>
+<div class="displaymath">
+\begin{equation*}
+A =
+\begin{pmatrix}
+3 &amp; 1 \\
+5 &amp; 2
+\end{pmatrix}.
+\end{equation*}
+</div>
+<p>Then \(A\) defines a map from \({\mathbb R}^2\) to \({\mathbb R}^2\) by</p>
+<div class="displaymath">
+\begin{equation*}
+T_A (x,y) = (3x +  y, 5x + 2y).
+\end{equation*}
+</div>
+<p>We can find an inverse map of \(T_A\) by simply inverting the matrix \(A\text{;}\) that is, \(T_A^{-1} = T_{A^{-1}}\text{.}\) In this example,</p>
+<div class="displaymath">
+\begin{equation*}
+A^{-1} =
+\begin{pmatrix}
+2  &amp; -1 \\
+-5 &amp;  3
+\end{pmatrix};
+\end{equation*}
+</div>
+<p>hence, the inverse map is given by</p>
+<div class="displaymath">
+\begin{equation*}
+T_A^{-1} (x,y) = (2x -  y, -5x + 3y).
+\end{equation*}
+</div>
+<p>It is easy to check that</p>
+<div class="displaymath">
+\begin{equation*}
+T^{-1}_A \circ T_A (x,y) = T_A \circ T_A^{-1} (x,y) = (x,y).
+\end{equation*}
+</div>
+<p>Not every map has an inverse.  If we consider the map</p>
+<div class="displaymath">
+\begin{equation*}
+T_B (x,y) = (3x , 0 )
+\end{equation*}
+</div>
+<p>given by the matrix</p>
+<div class="displaymath">
+\begin{equation*}
+B =
+\begin{pmatrix}
+3 &amp; 0 \\
+0 &amp; 0
+\end{pmatrix},
+\end{equation*}
+</div>
+<p>then an inverse map would have to be of the form</p>
+<div class="displaymath">
+\begin{equation*}
+T_B^{-1} (x,y) = (ax + by, cx +dy)
+\end{equation*}
+</div>
+<p>and</p>
+<div class="displaymath">
+\begin{equation*}
+(x,y) = T \circ T_B^{-1} (x,y) = (3ax + 3by, 0)
+\end{equation*}
+</div>
+<p>for all \(x\) and \(y\text{.}\)  Clearly this is  impossible because \(y\) might not be 0.</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-inverse-permutation" id="example-sets-inverse-permutation"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.19</span>
+</h6></a></article><div id="hk-example-sets-inverse-permutation" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-106">Given the permutation</p>
+<div class="displaymath">
+\begin{equation*}
+\pi =
+\begin{pmatrix}
+1 &amp; 2 &amp; 3 \\
+2 &amp; 3 &amp; 1
+\end{pmatrix}
+\end{equation*}
+</div>
+<p>on \(S = \{ 1,2,3 \}\text{,}\) it is easy to see that the permutation defined by</p>
+<div class="displaymath">
+\begin{equation*}
+\pi^{-1} =
+\begin{pmatrix}
+1 &amp; 2 &amp; 3 \\
+3 &amp; 1 &amp; 2
+\end{pmatrix}
+\end{equation*}
+</div>
+<p>is the inverse of \(\pi\text{.}\)  In fact, any bijective mapping possesses an inverse, as we will see in the next theorem.</p></article></div>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-theorem-3" id="theorem-3"><h6 class="heading">
+<span class="type">Theorem</span><span class="codenumber">1.2.20</span>
+</h6></a></article><div id="hk-theorem-3" class="hidden-content tex2jax_ignore">
+<article class="theorem-like"><p id="p-107">A mapping is invertible if and only if it is both one-to-one and onto.</p></article><article class="hiddenproof"><a knowl="" class="id-ref" refid="hk-proof-4" id="proof-4"><h6 class="heading"><span class="type">Proof</span></h6></a></article><div id="hk-proof-4" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-108">Suppose first that \(f:A \rightarrow B\) is invertible with inverse \(g: B \rightarrow A\text{.}\) Then \(g \circ f = id_A\) is the identity map; that is, \(g(f(a)) = a\text{.}\) If \(a_1, a_2 \in A\) with \(f(a_1) = f(a_2)\text{,}\) then \(a_1 = g(f(a_1)) = g(f(a_2)) = a_2\text{.}\)  Consequently, \(f\) is one-to-one.  Now suppose that \(b \in B\text{.}\) To show that \(f\) is onto, it is necessary to find an \(a \in A\) such that \(f(a) = b\text{,}\) but \(f(g(b)) = b\) with \(g(b) \in A\text{.}\) Let \(a = g(b)\text{.}\)</p>
+<p id="p-109">Conversely, let \(f\) be bijective and let \(b \in B\text{.}\)  Since \(f\) is onto, there exists an \(a \in A\) such that \(f(a) = b\text{.}\)  Because \(f\) is one-to-one, \(a\) must be unique. Define \(g\) by letting \(g(b) = a\text{.}\)  We have now constructed the inverse of \(f\text{.}\)</p></article></div>
+</div></section><section class="subsection" id="subsection-4"><h3 class="heading hide-type" alt="Subsection 1.2.3 Equivalence Relations and Partitions">
+<span class="type">Subsection</span><span class="codenumber">1.2.3</span><span class="title">Equivalence Relations and Partitions</span>
+</h3>
+<p id="p-110">A fundamental notion in mathematics is that of equality.  We can generalize equality with equivalence relations and equivalence classes.  An <dfn class="terminology">equivalence relation</dfn> on a set \(X\) is a relation \(R \subset X \times X\) such that</p>
+<ul class="disc">
+<li id="li-35"><p id="p-111">\((x, x) \in R\) for all \(x \in X\) (<dfn class="terminology">reflexive property</dfn>);</p></li>
+<li id="li-36"><p id="p-112">\((x, y) \in R\) implies \((y, x) \in R\) (<dfn class="terminology">symmetric property</dfn>);</p></li>
+<li id="li-37"><p id="p-113">\((x, y)\) and \((y, z) \in R\) imply \((x, z) \in R\) (<dfn class="terminology">transitive property</dfn>).</p></li>
+</ul>
+<p id="p-114">Given an equivalence relation \(R\)  on a set \(X\text{,}\) we usually write  \(x \sim y\) instead of \((x, y) \in R\text{.}\) If the equivalence relation already has an associated notation such as \(=\text{,}\) \(\equiv\text{,}\) or \(\cong\text{,}\) we will use that notation.</p>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-equivalent-fractions" id="example-sets-equivalent-fractions"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.21</span>
+</h6></a></article><div id="hk-example-sets-equivalent-fractions" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-115">Let \(p\text{,}\) \(q\text{,}\) \(r\text{,}\) and \(s\) be integers, where \(q\) and \(s\) are nonzero.  Define \(p/q \sim r/s\) if \(ps = qr\text{.}\)  Clearly \(\sim\) is reflexive and symmetric.  To show that it is also transitive, suppose that \(p/q \sim r/s\) and \(r/s \sim t/u\text{,}\) with \(q\text{,}\) \(s\text{,}\) and \(u\) all nonzero.  Then \(ps = qr\) and \(ru = st\text{.}\) Therefore,</p>
+<div class="displaymath">
+\begin{equation*}
+psu = qru = qst.
+\end{equation*}
+</div>
+<p>Since \(s \neq 0\text{,}\) \(pu = qt\text{.}\) Consequently, \(p/q \sim t/u\text{.}\)</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-equivalent-derivative" id="example-sets-equivalent-derivative"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.22</span>
+</h6></a></article><div id="hk-example-sets-equivalent-derivative" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-116">Suppose that \(f\) and \(g\) are differentiable functions on \({\mathbb R}\text{.}\)  We can define an equivalence relation on such functions by letting \(f(x) \sim g(x)\) if \(f'(x) = g'(x)\text{.}\) It is clear that \(\sim\) is both reflexive and symmetric.  To demonstrate transitivity, suppose that \(f(x) \sim g(x)\) and  \(g(x) \sim h(x)\text{.}\)  From calculus we know that \(f(x) - g(x) = c_1\) and \(g(x)- h(x) = c_2\text{,}\) where \(c_1\) and \(c_2\) are both constants. Hence,</p>
+<div class="displaymath">
+\begin{equation*}
+f(x) - h(x) = ( f(x) - g(x)) + ( g(x)- h(x))  = c_1 - c_2
+\end{equation*}
+</div>
+<p>and \(f'(x) - h'(x) = 0\text{.}\) Therefore, \(f(x) \sim h(x)\text{.}\)</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-equivalent-circles" id="example-sets-equivalent-circles"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.23</span>
+</h6></a></article><div id="hk-example-sets-equivalent-circles" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-117">For \((x_1, y_1 )\) and \((x_2, y_2)\) in \({\mathbb R}^2\text{,}\) define \((x_1, y_1 ) \sim (x_2, y_2)\) if \(x_1^2 + y_1^2 = x_2^2 + y_2^2\text{.}\)  Then \(\sim\) is an equivalence relation on \({\mathbb R}^2\text{.}\)</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-equivalent-matrices" id="example-sets-equivalent-matrices"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.24</span>
+</h6></a></article><div id="hk-example-sets-equivalent-matrices" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-118">Let \(A\) and \(B\) be \(2 \times 2\) matrices with entries in the real numbers. We can define an equivalence relation on the set of \(2 \times 2\) matrices, by saying \(A \sim B\) if there exists an invertible matrix \(P\) such that \(PAP^{-1} = B\text{.}\)  For example, if</p>
+<div class="displaymath">
+\begin{equation*}
+A =
+\begin{pmatrix}
+1 &amp; 2 \\
+-1 &amp; 1
+\end{pmatrix}
+\quad \text{and} \quad
+B =
+\begin{pmatrix}
+-18 &amp; 33 \\
+-11 &amp; 20
+\end{pmatrix},
+\end{equation*}
+</div>
+<p>then \(A \sim B\) since \(PAP^{-1} = B\) for</p>
+<div class="displaymath">
+\begin{equation*}
+P =
+\begin{pmatrix}
+2 &amp; 5 \\
+1 &amp; 3
+\end{pmatrix}.
+\end{equation*}
+</div>
+<p>Let \(I\) be the \(2 \times 2\) identity matrix; that is,</p>
+<div class="displaymath">
+\begin{equation*}
+I =
+\begin{pmatrix}
+1 &amp; 0 \\
+0 &amp; 1
+\end{pmatrix}.
+\end{equation*}
+</div>
+<p>Then \(IAI^{-1} = IAI = A\text{;}\) therefore, the relation is reflexive.  To show symmetry, suppose that \(A \sim B\text{.}\)  Then there exists an invertible matrix \(P\) such that \(PAP^{-1} = B\text{.}\)  So</p>
+<div class="displaymath">
+\begin{equation*}
+A = P^{-1} B P = P^{-1} B (P^{-1})^{-1}.
+\end{equation*}
+</div>
+<p>Finally, suppose that \(A \sim B\) and \(B \sim C\text{.}\)  Then there exist invertible matrices \(P\) and \(Q\) such that \(PAP^{-1} = B\) and  \(QBQ^{-1} = C\text{.}\)  Since</p>
+<div class="displaymath">
+\begin{equation*}
+C = QBQ^{-1} = QPAP^{-1} Q^{-1} = (QP)A(QP)^{-1},
+\end{equation*}
+</div>
+<p>the relation is transitive.  Two matrices that are equivalent in this manner are said to be <dfn class="terminology">similar</dfn>.</p></article></div>
+<p id="p-119">A <dfn class="terminology">partition</dfn> \({\mathcal P}\) of a set \(X\) is a collection of nonempty sets \(X_1, X_2, \ldots\) such that \(X_i \cap X_j = \emptyset\) for \(i  \neq j\) and \(\bigcup_k X_k = X\text{.}\) Let \(\sim\) be an equivalence relation on a set \(X\) and let \(x \in X\text{.}\)  Then \([x] = \{ y \in X : y \sim x \}\) is called the <dfn class="terminology">equivalence class</dfn> of \(x\text{.}\)  We will see that an equivalence relation gives rise to a partition via equivalence classes.  Also, whenever a partition of a set exists, there is some natural  underlying equivalence relation, as the following theorem demonstrates.</p>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-theorem-4" id="theorem-4"><h6 class="heading">
+<span class="type">Theorem</span><span class="codenumber">1.2.25</span>
+</h6></a></article><div id="hk-theorem-4" class="hidden-content tex2jax_ignore">
+<article class="theorem-like"><p id="p-120">Given an equivalence relation \(\sim\) on a set \(X\text{,}\) the equivalence classes of \(X\) form a partition of \(X\text{.}\)  Conversely, if \({\mathcal P} = \{ X_i\}\) is a partition of a set \(X\text{,}\) then there is an equivalence relation on \(X\) with equivalence classes \(X_i\text{.}\)</p></article><article class="hiddenproof"><a knowl="" class="id-ref" refid="hk-proof-5" id="proof-5"><h6 class="heading"><span class="type">Proof</span></h6></a></article><div id="hk-proof-5" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-121">Suppose there exists an equivalence relation \(\sim\) on the set \(X\text{.}\)  For any \(x \in X\text{,}\) the reflexive property shows that \(x \in [x]\) and so \([x]\) is nonempty.  Clearly \(X = \bigcup_{x \in X} [x]\text{.}\)  Now let \(x, y \in X\text{.}\) We need to show that either \([x] = [y]\) or \([x] \cap [y] = \emptyset\text{.}\)  Suppose that the intersection of \([x]\) and \([y]\) is not empty and that \(z \in [x] \cap [y]\text{.}\) Then \(z \sim x\) and \(z \sim y\text{.}\)  By symmetry and transitivity \(x \sim y\text{;}\) hence, \([x] \subset [y]\text{.}\)  Similarly, \([y] \subset [x]\) and so \([x] = [y]\text{.}\)  Therefore, any two equivalence classes are either disjoint or exactly the same.</p>
+<p id="p-122">Conversely, suppose that \({\mathcal P} = \{X_i\}\) is a partition of a set \(X\text{.}\)  Let two elements be equivalent if they are in the same partition.  Clearly, the relation is reflexive.  If \(x\) is in the same partition as \(y\text{,}\) then \(y\) is in the same partition as \(x\text{,}\) so \(x \sim y\) implies \(y \sim x\text{.}\)  Finally, if \(x\) is in the same partition as \(y\) and \(y\) is in the same partition as \(z\text{,}\) then \(x\) must be in the same partition as \(z\text{,}\) and transitivity holds.</p></article></div>
+</div>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-corollary-1" id="corollary-1"><h6 class="heading">
+<span class="type">Corollary</span><span class="codenumber">1.2.26</span>
+</h6></a></article><div id="hk-corollary-1" class="hidden-content tex2jax_ignore"><article class="theorem-like"><p id="p-123">Two equivalence classes of an equivalence relation are either disjoint or equal.</p></article></div>
+<p id="p-124">Let us examine some of the partitions given by the equivalence classes in the last set of examples.</p>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-fraction-partition" id="example-sets-fraction-partition"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.27</span>
+</h6></a></article><div id="hk-example-sets-fraction-partition" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-125">In the equivalence relation in Example <a knowl="./knowl/example-sets-equivalent-fractions.html" knowl-id="xref-example-sets-equivalent-fractions" alt="Example 1.2.21 " title="Example 1.2.21 ">Example 1.2.21</a>, two pairs of integers, \((p,q)\) and \((r,s)\text{,}\) are in the same equivalence class when they reduce to the same fraction in its lowest terms.</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-matrix-partition" id="example-sets-matrix-partition"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.28</span>
+</h6></a></article><div id="hk-example-sets-matrix-partition" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-126">In the equivalence relation in Example <a knowl="./knowl/example-sets-equivalent-derivative.html" knowl-id="xref-example-sets-equivalent-derivative" alt="Example 1.2.22 " title="Example 1.2.22 ">Example 1.2.22</a>, two functions \(f(x)\) and \(g(x)\) are in the same partition when they differ by a constant.</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-circle-partition" id="example-sets-circle-partition"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.29</span>
+</h6></a></article><div id="hk-example-sets-circle-partition" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-127">We defined an equivalence class on \({\mathbb R}^2\) by \((x_1, y_1 ) \sim (x_2, y_2)\) if \(x_1^2 + y_1^2 = x_2^2 + y_2^2\text{.}\)  Two pairs of real numbers are in the same partition when they lie on the same circle about the origin.</p></article></div>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-sets-congruent-integers" id="example-sets-congruent-integers"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">1.2.30</span>
+</h6></a></article><div id="hk-example-sets-congruent-integers" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-128">Let \(r\) and \(s\) be two integers and suppose that \(n \in {\mathbb N}\text{.}\)  We say that \(r\) is <dfn class="terminology">congruent</dfn> to \(s\) <dfn class="terminology">modulo</dfn> \(n\text{,}\) or \(r\) is congruent to \(s\) mod \(n\text{,}\) if \(r - s\) is evenly divisible by \(n\text{;}\) that is, \(r - s = nk\)  for some \(k \in {\mathbb Z}\text{.}\)  In this case we write \(r \equiv s \pmod{n}\text{.}\)    For example, \(41 \equiv 17 \pmod{ 8}\) since \(41 - 17=24\) is divisible by 8.  We claim that congruence modulo \(n\) forms an equivalence relation of \({\mathbb Z}\text{.}\)  Certainly any integer \(r\) is equivalent to itself since \(r - r = 0\) is divisible by \(n\text{.}\)  We will now show that the relation is symmetric.  If \(r \equiv s \pmod{ n}\text{,}\) then \(r - s = -(s -r)\) is divisible by \(n\text{.}\) So \(s - r\) is divisible by \(n\) and \(s \equiv r \pmod{ n}\text{.}\)  Now suppose that \(r \equiv s \pmod{ n}\) and \(s \equiv t \pmod{ n}\text{.}\)  Then there exist integers \(k\) and \(l\) such that \(r -s = kn\) and \(s - t = ln\text{.}\)  To show transitivity, it is necessary to prove that \(r - t\) is divisible by \(n\text{.}\)  However,</p>
+<div class="displaymath">
+\begin{equation*}
+r - t = r - s + s - t = kn + ln = (k + l)n,
+\end{equation*}
+</div>
+<p>and so \(r - t\) is divisible by \(n\text{.}\)</p>
+<p id="p-129">If we consider the equivalence relation established by the integers modulo 3, then</p>
+<div class="displaymath">
+\begin{align*}
+{[0]} &amp; = \{ \ldots, -3, 0, 3, 6, \ldots \},\\
+{[1]} &amp; = \{ \ldots, -2, 1, 4, 7, \ldots \},\\
+{[2]} &amp; = \{ \ldots, -1, 2, 5, 8, \ldots \}.
+\end{align*}
+</div>
+<p id="p-130">Notice that \([0] \cup [1] \cup [2] = {\mathbb Z}\) and also that the sets are disjoint.  The sets \([0]\text{,}\) \([1]\text{,}\) and \([2]\) form a partition of the integers.</p>
+<p id="p-131">The integers modulo \(n\) are a very important example in the study of abstract algebra and will become quite useful in our investigation of various algebraic structures such as groups and rings.  In our discussion of the integers modulo \(n\) we have actually assumed a result known as the division algorithm, which will be stated and proved in Chapter <a href="integers.html" class="xref" alt="Chapter 2 The Integers" title="Chapter 2 The Integers">Chapter 2</a>.</p></article></div></section></section></div></main>
+</div>
+</body>
+</html>

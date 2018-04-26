@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<!--**************************************-->
+<!--*    Generated from PreTeXt source   *-->
+<!--*    on 2018-04-25T21:37:17Z    *-->
+<!--*                                    *-->
+<!--*   http://mathbook.pugetsound.edu   *-->
+<!--*                                    *-->
+<!--**************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AATA Notation</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<script type="text/javascript" src="https://sagecell.sagemath.org/static/jquery.min.js"></script><script type="text/javascript" src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['\\(','\\)']],
+    },
+    TeX: {
+        extensions: ["extpfeil.js", "autobold.js", "https://aimath.org/mathbook/mathjaxknowl.js", ],
+        // scrolling to fragment identifiers is controlled by other Javascript
+        positionToHash: false,
+        equationNumbers: { autoNumber: "none", useLabelIds: true, },
+        TagSide: "right",
+        TagIndent: ".8em",
+    },
+    // HTML-CSS output Jax to be dropped for MathJax 3.0
+    "HTML-CSS": {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+    CommonHTML: {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML-full"></script><script type="text/javascript" src="https://aimath.org/knowl.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.sticky.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.espy.min.js"></script><script src="https://aimath.org/mathbook/js/Mathbook.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link href="https://aimath.org/mathbook/stylesheets/mathbook-3.css" rel="stylesheet" type="text/css">
+<link href="https://aimath.org/mathbook/mathbook-add-on.css" rel="stylesheet" type="text/css">
+</head>
+<body class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div class="hidden-content">\(\newcommand{\identity}{\mathrm{id}}
+\newcommand{\notdivide}{{\not{\mid}}}
+\newcommand{\notsubset}{\not\subset}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\gf}{\operatorname{GF}}
+\newcommand{\inn}{\operatorname{Inn}}
+\newcommand{\aut}{\operatorname{Aut}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\cis}{\operatorname{cis}}
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Null}{\operatorname{Null}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://abstract.pugetsound.edu" target="_blank"><img src="images/cover_aata_2014.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="sample-book.html"><span class="title">Abstract Algebra</span><span class="subtitle">MATHBOOK XML SAMPLE ONLY</span></a></h1>
+<p class="byline">Thomas W. Judson</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index" alt="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="backmatter.html" title="Previous" alt="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="backmatter.html" title="Up" alt="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="appendix-2.html" title="Next" alt="Next">Next</a></span>
+</div>
+<button class="sidebar-right-toggle-button button active">Annotations</button>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="backmatter.html" title="Previous" alt="Previous">Prev</a><a class="up-button button toolbar-item" href="backmatter.html" title="Up" alt="Up">Up</a><a class="next-button button toolbar-item" href="appendix-2.html" title="Next" alt="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<aside id="sidebar-left" class="sidebar"><div class="sidebar-content">
+<nav id="toc"><h2 class="link"><a href="index.html" data-scroll="index"><span class="title">Front Matter</span></a></h2>
+<ul>
+<li><a href="front-colophon.html" data-scroll="front-colophon">Colophon</a></li>
+<li><a href="author-bio-TWJ.html" data-scroll="author-bio-TWJ">Author Biography</a></li>
+<li><a href="author-bio-RAB.html" data-scroll="author-bio-RAB">About Robert A. Beezer</a></li>
+<li><a href="dedication.html" data-scroll="dedication">Dedication</a></li>
+<li><a href="acknowledgement.html" data-scroll="acknowledgement">Acknowledgements</a></li>
+<li><a href="preface.html" data-scroll="preface">Preface</a></li>
+<li><a href="contributors.html" data-scroll="contributors">Contributors to the 4\(^\mathrm{th}\) Edition</a></li>
+</ul>
+<h2 class="link"><a href="part-basics.html" data-scroll="part-basics"><span class="codenumber">I</span><span class="title">Basics</span></a></h2>
+<h2 class="link"><a href="sets.html" data-scroll="sets"><span class="codenumber">1</span><span class="title">Preliminaries</span></a></h2>
+<ul>
+<li><a href="section-note-on-proofs.html" data-scroll="section-note-on-proofs">A Short Note on Proofs</a></li>
+<li><a href="section-sets-and-equivalence-relations.html" data-scroll="section-sets-and-equivalence-relations">Sets and Equivalence Relations</a></li>
+<li><a href="sets-sage.html" data-scroll="sets-sage">Sage</a></li>
+<li><a href="exercises-sets.html" data-scroll="exercises-sets">Exercises</a></li>
+<li><a href="sets-sage-exercises.html" data-scroll="sets-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-1.html" data-scroll="references-1">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="integers.html" data-scroll="integers"><span class="codenumber">2</span><span class="title">The Integers</span></a></h2>
+<ul>
+<li><a href="section-math-induction.html" data-scroll="section-math-induction">Mathematical Induction</a></li>
+<li><a href="section-division-algorithm.html" data-scroll="section-division-algorithm">The Division Algorithm</a></li>
+<li><a href="integers-sage.html" data-scroll="integers-sage">Sage</a></li>
+<li><a href="exercises-integers.html" data-scroll="exercises-integers">Exercises</a></li>
+<li><a href="exercises-4.html" data-scroll="exercises-4">Programming Exercises</a></li>
+<li><a href="integers-sage-exercises.html" data-scroll="integers-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-2.html" data-scroll="references-2">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="part-algebra.html" data-scroll="part-algebra"><span class="codenumber">II</span><span class="title">Algebra</span></a></h2>
+<h2 class="link"><a href="groups.html" data-scroll="groups"><span class="codenumber">3</span><span class="title">Groups</span></a></h2>
+<ul>
+<li><a href="section-mod-n-sym.html" data-scroll="section-mod-n-sym">Integer Equivalence Classes and Symmetries</a></li>
+<li><a href="section-groups-define.html" data-scroll="section-groups-define">Definitions and Examples</a></li>
+<li><a href="section-subgroups.html" data-scroll="section-subgroups">Subgroups</a></li>
+<li><a href="groups-sage.html" data-scroll="groups-sage">Sage</a></li>
+<li><a href="exercises-groups.html" data-scroll="exercises-groups">Exercises</a></li>
+<li><a href="exercises-7.html" data-scroll="exercises-7">Additional Exercises: Detecting Errors</a></li>
+<li><a href="groups-sage-exercises.html" data-scroll="groups-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-3.html" data-scroll="references-3">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="cyclic.html" data-scroll="cyclic"><span class="codenumber">4</span><span class="title">Cyclic Groups</span></a></h2>
+<ul>
+<li><a href="section-11.html" data-scroll="section-11">Cyclic groups</a></li>
+<li><a href="section-12.html" data-scroll="section-12">Subgroups of a Cyclic Group</a></li>
+<li><a href="section-13.html" data-scroll="section-13">Cyclic Groups of Complex Numbers</a></li>
+<li><a href="section-14.html" data-scroll="section-14">Large Powers of Integers</a></li>
+<li><a href="exercises-cyclic.html" data-scroll="exercises-cyclic">Exercises</a></li>
+<li><a href="exercises-10.html" data-scroll="exercises-10">Programming Exercises</a></li>
+<li><a href="cyclic-sage-exercises.html" data-scroll="cyclic-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-4.html" data-scroll="references-4">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></h2>
+<ul>
+<li><a href="appendix-1.html" data-scroll="appendix-1" class="active">Notation</a></li>
+<li><a href="appendix-2.html" data-scroll="appendix-2">Hints and Solutions to Selected Exercises</a></li>
+<li><a href="appendix-3.html" data-scroll="appendix-3">A Structured Appendix</a></li>
+<li><a href="appendix-gfdl.html" data-scroll="appendix-gfdl">GNU Free Documentation License</a></li>
+<li><a href="index-1.html" data-scroll="index-1">Index</a></li>
+<li><a href="back-colophon.html" data-scroll="back-colophon">Colophon</a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://mathbook.pugetsound.edu">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax"></a></nav></div>
+</div></aside><main class="main"><div id="content" class="mathbook-content"><section class="appendix" id="appendix-1"><h1 class="heading hide-type" alt="Appendix A Notation">
+<span class="type">Appendix</span><span class="codenumber">A</span><span class="title">Notation</span>
+</h1>
+<p id="p-789">The following table defines the notation used in this book. Page numbers or references refer to the first appearance of each symbol.</p>
+<table>
+<tr>
+<th style="text-align:left;">Symbol</th>
+<th style="text-align:left;">Description</th>
+<th style="text-align:left;">Location</th>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(a \in A\)</td>
+<td style="text-align:left; vertical-align:top;">\(a\) is in the set \(A\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-50.html" knowl-id="xref-p-50" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\({\mathbb N}\)</td>
+<td style="text-align:left; vertical-align:top;">the natural numbers</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-52.html" knowl-id="xref-p-52" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\({\mathbb Z}\)</td>
+<td style="text-align:left; vertical-align:top;">the integers</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-52.html" knowl-id="xref-p-52" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\({\mathbb Q}\)</td>
+<td style="text-align:left; vertical-align:top;">the rational numbers</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-52.html" knowl-id="xref-p-52" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\({\mathbb R}\)</td>
+<td style="text-align:left; vertical-align:top;">the real numbers</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-52.html" knowl-id="xref-p-52" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\({\mathbb C}\)</td>
+<td style="text-align:left; vertical-align:top;">the complex numbers</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-52.html" knowl-id="xref-p-52" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(A \subset B\)</td>
+<td style="text-align:left; vertical-align:top;">\(A\) is a subset of \(B\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-53.html" knowl-id="xref-p-53" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\emptyset\)</td>
+<td style="text-align:left; vertical-align:top;">the empty set</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-54.html" knowl-id="xref-p-54" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(A \cup B\)</td>
+<td style="text-align:left; vertical-align:top;">the union of sets \(A\) and \(B\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-55.html" knowl-id="xref-p-55" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(A \cap B\)</td>
+<td style="text-align:left; vertical-align:top;">the intersection of sets \(A\) and \(B\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-55.html" knowl-id="xref-p-55" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(A'\)</td>
+<td style="text-align:left; vertical-align:top;">complement of the set \(A\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-57.html" knowl-id="xref-p-57" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(A \setminus B\)</td>
+<td style="text-align:left; vertical-align:top;">difference between sets \(A\) and \(B\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-58.html" knowl-id="xref-p-58" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(A \times B\)</td>
+<td style="text-align:left; vertical-align:top;">Cartesian product of sets \(A\) and \(B\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-79.html" knowl-id="xref-p-79" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(A^n\)</td>
+<td style="text-align:left; vertical-align:top;">\(A \times \cdots \times A\) (\(n\) times)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-81.html" knowl-id="xref-p-81" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(id\)</td>
+<td style="text-align:left; vertical-align:top;">identity mapping</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-102.html" knowl-id="xref-p-102" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(f^{-1}\)</td>
+<td style="text-align:left; vertical-align:top;">inverse of the function \(f\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-102.html" knowl-id="xref-p-102" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(a \equiv b \pmod{n}\)</td>
+<td style="text-align:left; vertical-align:top;">\(a\) is congruent to \(b\) modulo \(n\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/example-sets-congruent-integers.html" knowl-id="xref-example-sets-congruent-integers" alt="Example 1.2.30 " title="Example 1.2.30 ">Example 1.2.30</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(n!\)</td>
+<td style="text-align:left; vertical-align:top;">\(n\) factorial</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/example-integers-binomial-theorem.html" knowl-id="xref-example-integers-binomial-theorem" alt="Example 2.1.4 The binomial theorem" title="Example 2.1.4 The binomial theorem">Example 2.1.4</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\binom{n}{k}\)</td>
+<td style="text-align:left; vertical-align:top;">binomial coefficient \(n!/(k!(n-k)!)\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/example-integers-binomial-theorem.html" knowl-id="xref-example-integers-binomial-theorem" alt="Example 2.1.4 The binomial theorem" title="Example 2.1.4 The binomial theorem">Example 2.1.4</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(a \mid b\)</td>
+<td style="text-align:left; vertical-align:top;">\(a\) divides \(b\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-273.html" knowl-id="xref-p-273" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\gcd(a, b)\)</td>
+<td style="text-align:left; vertical-align:top;">greatest common divisor of \(a\) and \(b\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-273.html" knowl-id="xref-p-273" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\mathcal P(X)\)</td>
+<td style="text-align:left; vertical-align:top;">power set of \(X\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/exercise-42.html" knowl-id="xref-exercise-42" alt="Exercise 2.4.12 Power Sets" title="Exercise 2.4.12 Power Sets">Exercise 2.4.12</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\lcm(m,n)\)</td>
+<td style="text-align:left; vertical-align:top;">the least common multiple of \(m\) and \(n\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/exercise-53.html" knowl-id="xref-exercise-53" alt="Exercise 2.4.23 " title="Exercise 2.4.23 ">Exercise 2.4.23</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\mathbb Z_n\)</td>
+<td style="text-align:left; vertical-align:top;">the integers modulo \(n\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-386.html" knowl-id="xref-p-386" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(U(n)\)</td>
+<td style="text-align:left; vertical-align:top;">group of units in \(\mathbb Z_n\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/example-groups-z6-mult.html" knowl-id="xref-example-groups-z6-mult" alt="Example 3.2.4 " title="Example 3.2.4 ">Example 3.2.4</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\mathbb M_n(\mathbb R)\)</td>
+<td style="text-align:left; vertical-align:top;">the \(n \times n\) matrices with entries in \(\mathbb R\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/example-groups-gl2.html" knowl-id="xref-example-groups-gl2" alt="Example 3.2.7 " title="Example 3.2.7 ">Example 3.2.7</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\det A\)</td>
+<td style="text-align:left; vertical-align:top;">the determinant of \(A\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/example-groups-gl2.html" knowl-id="xref-example-groups-gl2" alt="Example 3.2.7 " title="Example 3.2.7 ">Example 3.2.7</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(GL_n(\mathbb R)\)</td>
+<td style="text-align:left; vertical-align:top;">the general linear group</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/example-groups-gl2.html" knowl-id="xref-example-groups-gl2" alt="Example 3.2.7 " title="Example 3.2.7 ">Example 3.2.7</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(Q_8\)</td>
+<td style="text-align:left; vertical-align:top;">the group of quaternions</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/example-groups-quaterions.html" knowl-id="xref-example-groups-quaterions" alt="Example 3.2.8 " title="Example 3.2.8 ">Example 3.2.8</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\mathbb C^*\)</td>
+<td style="text-align:left; vertical-align:top;">the multiplicative group of complex numbers</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/example-groups-c-star.html" knowl-id="xref-example-groups-c-star" alt="Example 3.2.9 " title="Example 3.2.9 ">Example 3.2.9</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(|G|\)</td>
+<td style="text-align:left; vertical-align:top;">the order of a group</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-426.html" knowl-id="xref-p-426" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\mathbb R^*\)</td>
+<td style="text-align:left; vertical-align:top;">the multiplicative group of real numbers</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/example-groups-multiplicative-subgroup.html" knowl-id="xref-example-groups-multiplicative-subgroup" alt="Example 3.3.1 " title="Example 3.3.1 ">Example 3.3.1</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\mathbb Q^*\)</td>
+<td style="text-align:left; vertical-align:top;">the multiplicative group of rational numbers</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/example-groups-multiplicative-subgroup.html" knowl-id="xref-example-groups-multiplicative-subgroup" alt="Example 3.3.1 " title="Example 3.3.1 ">Example 3.3.1</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(SL_n(\mathbb R)\)</td>
+<td style="text-align:left; vertical-align:top;">the special linear group</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/example-groups-sl2.html" knowl-id="xref-example-groups-sl2" alt="Example 3.3.3 " title="Example 3.3.3 ">Example 3.3.3</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(Z(G)\)</td>
+<td style="text-align:left; vertical-align:top;">the center of a group</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/exercise-118.html" knowl-id="xref-exercise-118" alt="Exercise 3.5.48 " title="Exercise 3.5.48 ">Exercise 3.5.48</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\langle a \rangle\)</td>
+<td style="text-align:left; vertical-align:top;">cyclic group generated by \(a\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/theorem-cyclic-subgroup.html" knowl-id="xref-theorem-cyclic-subgroup" alt="Theorem 4.1.3 " title="Theorem 4.1.3 ">Theorem 4.1.3</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(|a|\)</td>
+<td style="text-align:left; vertical-align:top;">the order of an element \(a\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-603.html" knowl-id="xref-p-603" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\cis \theta\)</td>
+<td style="text-align:left; vertical-align:top;">\(\cos \theta + i \sin \theta\)</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-627.html" knowl-id="xref-p-627" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+<tr>
+<td style="text-align:left; vertical-align:top;">\(\mathbb T\)</td>
+<td style="text-align:left; vertical-align:top;">the circle group</td>
+<td style="text-align:left; vertical-align:top;"><a knowl="./knowl/p-636.html" knowl-id="xref-p-636" alt="Paragraph  " title="Paragraph  ">Paragraph</a></td>
+</tr>
+</table></section></div></main>
+</div>
+</body>
+</html>

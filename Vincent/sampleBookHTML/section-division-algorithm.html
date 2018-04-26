@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!--**************************************-->
+<!--*    Generated from PreTeXt source   *-->
+<!--*    on 2018-04-25T21:37:11Z    *-->
+<!--*                                    *-->
+<!--*   http://mathbook.pugetsound.edu   *-->
+<!--*                                    *-->
+<!--**************************************-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AATA The Division Algorithm</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<script type="text/javascript" src="https://sagecell.sagemath.org/static/jquery.min.js"></script><script type="text/javascript" src="https://sagecell.sagemath.org/embedded_sagecell.js"></script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['\\(','\\)']],
+    },
+    TeX: {
+        extensions: ["extpfeil.js", "autobold.js", "https://aimath.org/mathbook/mathjaxknowl.js", ],
+        // scrolling to fragment identifiers is controlled by other Javascript
+        positionToHash: false,
+        equationNumbers: { autoNumber: "none", useLabelIds: true, },
+        TagSide: "right",
+        TagIndent: ".8em",
+    },
+    // HTML-CSS output Jax to be dropped for MathJax 3.0
+    "HTML-CSS": {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+    CommonHTML: {
+        scale: 88,
+        mtextFontInherit: true,
+    },
+});
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML-full"></script><script type="text/javascript" src="https://aimath.org/knowl.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.sticky.js"></script><script src="https://aimath.org/mathbook/js/lib/jquery.espy.min.js"></script><script src="https://aimath.org/mathbook/js/Mathbook.js"></script><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link href="https://aimath.org/mathbook/stylesheets/mathbook-3.css" rel="stylesheet" type="text/css">
+<link href="https://aimath.org/mathbook/mathbook-add-on.css" rel="stylesheet" type="text/css">
+</head>
+<body class="mathbook-book has-toc has-sidebar-left">
+<a class="assistive" href="#content">Skip to main content</a><div class="hidden-content">\(\newcommand{\identity}{\mathrm{id}}
+\newcommand{\notdivide}{{\not{\mid}}}
+\newcommand{\notsubset}{\not\subset}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\gf}{\operatorname{GF}}
+\newcommand{\inn}{\operatorname{Inn}}
+\newcommand{\aut}{\operatorname{Aut}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\cis}{\operatorname{cis}}
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Null}{\operatorname{Null}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\)</div>
+<header id="masthead" class="smallbuttons"><div class="banner"><div class="container">
+<a id="logo-link" href="http://abstract.pugetsound.edu" target="_blank"><img src="images/cover_aata_2014.png" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="sample-book.html"><span class="title">Abstract Algebra</span><span class="subtitle">MATHBOOK XML SAMPLE ONLY</span></a></h1>
+<p class="byline">Thomas W. Judson</p>
+</div>
+</div></div>
+<nav id="primary-navbar" class="navbar"><div class="container">
+<div class="navbar-top-buttons">
+<button class="sidebar-left-toggle-button button active">Contents</button><div class="tree-nav toolbar toolbar-divisor-3">
+<a class="index-button toolbar-item button" href="index-1.html" title="Index" alt="Index">Index</a><span class="threebuttons"><a id="previousbutton" class="previous-button toolbar-item button" href="section-math-induction.html" title="Previous" alt="Previous">Prev</a><a id="upbutton" class="up-button button toolbar-item" href="integers.html" title="Up" alt="Up">Up</a><a id="nextbutton" class="next-button button toolbar-item" href="integers-sage.html" title="Next" alt="Next">Next</a></span>
+</div>
+<button class="sidebar-right-toggle-button button active">Annotations</button>
+</div>
+<div class="navbar-bottom-buttons toolbar toolbar-divisor-4">
+<button class="sidebar-left-toggle-button button toolbar-item active">Contents</button><a class="previous-button toolbar-item button" href="section-math-induction.html" title="Previous" alt="Previous">Prev</a><a class="up-button button toolbar-item" href="integers.html" title="Up" alt="Up">Up</a><a class="next-button button toolbar-item" href="integers-sage.html" title="Next" alt="Next">Next</a>
+</div>
+</div></nav></header><div class="page">
+<aside id="sidebar-left" class="sidebar"><div class="sidebar-content">
+<nav id="toc"><h2 class="link"><a href="index.html" data-scroll="index"><span class="title">Front Matter</span></a></h2>
+<ul>
+<li><a href="front-colophon.html" data-scroll="front-colophon">Colophon</a></li>
+<li><a href="author-bio-TWJ.html" data-scroll="author-bio-TWJ">Author Biography</a></li>
+<li><a href="author-bio-RAB.html" data-scroll="author-bio-RAB">About Robert A. Beezer</a></li>
+<li><a href="dedication.html" data-scroll="dedication">Dedication</a></li>
+<li><a href="acknowledgement.html" data-scroll="acknowledgement">Acknowledgements</a></li>
+<li><a href="preface.html" data-scroll="preface">Preface</a></li>
+<li><a href="contributors.html" data-scroll="contributors">Contributors to the 4\(^\mathrm{th}\) Edition</a></li>
+</ul>
+<h2 class="link"><a href="part-basics.html" data-scroll="part-basics"><span class="codenumber">I</span><span class="title">Basics</span></a></h2>
+<h2 class="link"><a href="sets.html" data-scroll="sets"><span class="codenumber">1</span><span class="title">Preliminaries</span></a></h2>
+<ul>
+<li><a href="section-note-on-proofs.html" data-scroll="section-note-on-proofs">A Short Note on Proofs</a></li>
+<li><a href="section-sets-and-equivalence-relations.html" data-scroll="section-sets-and-equivalence-relations">Sets and Equivalence Relations</a></li>
+<li><a href="sets-sage.html" data-scroll="sets-sage">Sage</a></li>
+<li><a href="exercises-sets.html" data-scroll="exercises-sets">Exercises</a></li>
+<li><a href="sets-sage-exercises.html" data-scroll="sets-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-1.html" data-scroll="references-1">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="integers.html" data-scroll="integers"><span class="codenumber">2</span><span class="title">The Integers</span></a></h2>
+<ul>
+<li><a href="section-math-induction.html" data-scroll="section-math-induction">Mathematical Induction</a></li>
+<li><a href="section-division-algorithm.html" data-scroll="section-division-algorithm" class="active">The Division Algorithm</a></li>
+<li><a href="integers-sage.html" data-scroll="integers-sage">Sage</a></li>
+<li><a href="exercises-integers.html" data-scroll="exercises-integers">Exercises</a></li>
+<li><a href="exercises-4.html" data-scroll="exercises-4">Programming Exercises</a></li>
+<li><a href="integers-sage-exercises.html" data-scroll="integers-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-2.html" data-scroll="references-2">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="part-algebra.html" data-scroll="part-algebra"><span class="codenumber">II</span><span class="title">Algebra</span></a></h2>
+<h2 class="link"><a href="groups.html" data-scroll="groups"><span class="codenumber">3</span><span class="title">Groups</span></a></h2>
+<ul>
+<li><a href="section-mod-n-sym.html" data-scroll="section-mod-n-sym">Integer Equivalence Classes and Symmetries</a></li>
+<li><a href="section-groups-define.html" data-scroll="section-groups-define">Definitions and Examples</a></li>
+<li><a href="section-subgroups.html" data-scroll="section-subgroups">Subgroups</a></li>
+<li><a href="groups-sage.html" data-scroll="groups-sage">Sage</a></li>
+<li><a href="exercises-groups.html" data-scroll="exercises-groups">Exercises</a></li>
+<li><a href="exercises-7.html" data-scroll="exercises-7">Additional Exercises: Detecting Errors</a></li>
+<li><a href="groups-sage-exercises.html" data-scroll="groups-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-3.html" data-scroll="references-3">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="cyclic.html" data-scroll="cyclic"><span class="codenumber">4</span><span class="title">Cyclic Groups</span></a></h2>
+<ul>
+<li><a href="section-11.html" data-scroll="section-11">Cyclic groups</a></li>
+<li><a href="section-12.html" data-scroll="section-12">Subgroups of a Cyclic Group</a></li>
+<li><a href="section-13.html" data-scroll="section-13">Cyclic Groups of Complex Numbers</a></li>
+<li><a href="section-14.html" data-scroll="section-14">Large Powers of Integers</a></li>
+<li><a href="exercises-cyclic.html" data-scroll="exercises-cyclic">Exercises</a></li>
+<li><a href="exercises-10.html" data-scroll="exercises-10">Programming Exercises</a></li>
+<li><a href="cyclic-sage-exercises.html" data-scroll="cyclic-sage-exercises">Sage Exercises</a></li>
+<li><a href="references-4.html" data-scroll="references-4">References and Suggested Readings</a></li>
+</ul>
+<h2 class="link"><a href="backmatter.html" data-scroll="backmatter"><span class="title">Back Matter</span></a></h2>
+<ul>
+<li><a href="appendix-1.html" data-scroll="appendix-1">Notation</a></li>
+<li><a href="appendix-2.html" data-scroll="appendix-2">Hints and Solutions to Selected Exercises</a></li>
+<li><a href="appendix-3.html" data-scroll="appendix-3">A Structured Appendix</a></li>
+<li><a href="appendix-gfdl.html" data-scroll="appendix-gfdl">GNU Free Documentation License</a></li>
+<li><a href="index-1.html" data-scroll="index-1">Index</a></li>
+<li><a href="back-colophon.html" data-scroll="back-colophon">Colophon</a></li>
+</ul></nav><div class="extras"><nav><a class="mathbook-link" href="https://mathbook.pugetsound.edu">Authored in PreTeXt</a><a href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax"></a></nav></div>
+</div></aside><main class="main"><div id="content" class="mathbook-content"><section class="section" id="section-division-algorithm"><h2 class="heading hide-type" alt="Section 2.2 The Division Algorithm">
+<span class="type">Section</span><span class="codenumber">2.2</span><span class="title">The Division Algorithm</span>
+</h2>
+<a href="section-division-algorithm.html" class="permalink">¶</a><section class="introduction" id="introduction-5"><p id="p-268">An application of the Principle of Well-Ordering that we will use often is the division algorithm.</p>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-theorem-integers-division_algorithm" id="theorem-integers-division_algorithm"><h6 class="heading">
+<span class="type">Theorem</span><span class="codenumber">2.2.1</span><span class="title">Division Algorithm</span>
+</h6></a></article><div id="hk-theorem-integers-division_algorithm" class="hidden-content tex2jax_ignore">
+<article class="theorem-like"><p id="p-269">Let \(a\) and \(b\) be integers, with \(b \gt 0\text{.}\)  Then there exist unique integers \(q\) and \(r\) such that</p>
+<div class="displaymath">
+\begin{equation*}
+a = bq + r
+\end{equation*}
+</div>
+<p>where \(0 \leq r \lt b\text{.}\)</p></article><article class="hiddenproof"><a knowl="" class="id-ref" refid="hk-proof-8" id="proof-8"><h6 class="heading"><span class="type">Proof</span></h6></a></article><div id="hk-proof-8" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-270">This is a perfect example of the existence-and-uniqueness type of proof.  We must first prove that the numbers \(q\) and \(r\) actually  exist. Then we must show that if  \(q'\) and \(r'\) are two other such numbers, then \(q = q'\) and \(r = r'\text{.}\)</p>
+<p id="p-271"><em class="emphasis">Existence of \(q\) and \(r\text{.}\)</em> Let</p>
+<div class="displaymath">
+\begin{equation*}
+S = \{ a - bk : k \in {\mathbb Z} \text{ and } a - bk \geq 0 \}.
+\end{equation*}
+</div>
+<p>If \(0 \in S\text{,}\) then \(b\) divides \(a\text{,}\) and  we can let \(q = a/b\) and \(r = 0\text{.}\)  If \(0 \notin S\text{,}\) we can use the Well-Ordering Principle.  We must first show that \(S\) is nonempty.  If \(a \gt 0\text{,}\) then \(a - b \cdot 0 \in S\text{.}\) If \(a \lt 0\text{,}\) then \(a - b(2a) = a(1 - 2b) \in S\text{.}\)  In either case \(S \neq \emptyset\text{.}\)  By the Well-Ordering Principle, \(S\) must have a smallest member, say \(r = a - bq\text{.}\) Therefore, \(a = bq + r\text{,}\) \(r \geq 0\text{.}\) We now show that \(r \lt b\text{.}\) Suppose that \(r \gt b\text{.}\) Then</p>
+<div class="displaymath">
+\begin{equation*}
+a - b(q + 1)= a - bq - b = r - b \gt 0.
+\end{equation*}
+</div>
+<p>In this case we would have \(a - b(q + 1)\) in the set \(S\text{.}\) But then \(a - b(q + 1) \lt a - bq\text{,}\) which would contradict the fact that \(r = a - bq\) is the smallest member  of \(S\text{.}\) So \(r \leq b\text{.}\)  Since \(0 \notin S\text{,}\) \(r \neq b\) and so \(r \lt b\text{.}\)</p>
+<p id="p-272"><em class="emphasis">Uniqueness of \(q\) and \(r\text{.}\)</em> Suppose there exist integers \(r\text{,}\) \(r'\text{,}\) \(q\text{,}\) and \(q'\) such that</p>
+<div class="displaymath">
+\begin{equation*}
+a = bq + r, 0 \leq r \lt b \quad \text{and}\quad a = bq' + r', 0 \leq r' \lt b.
+\end{equation*}
+</div>
+<p>Then \(bq + r =  bq' + r'\text{.}\)  Assume that \(r' \geq r\text{.}\)  From the last equation we have \(b(q - q') = r' - r\text{;}\) therefore, \(b\) must divide \(r' - r\) and \(0 \leq r'- r \leq r' \lt b\text{.}\)  This is possible only if \(r' - r = 0\text{.}\)  Hence, \(r = r'\) and  \(q = q'\text{.}\)</p></article></div>
+</div>
+<p id="p-273">Let \(a\) and \(b\) be integers.  If \(b = ak\) for some integer \(k\text{,}\) we write \(a \mid b\text{.}\)  An integer \(d\) is called a <dfn class="terminology">common divisor</dfn> of \(a\) and \(b\) if \(d \mid a\) and \(d \mid b\text{.}\)  The <dfn class="terminology">greatest common divisor</dfn> of integers \(a\) and \(b\) is a positive integer \(d\) such that \(d\) is a common divisor  of \(a\) and \(b\) and if \(d'\) is any other common divisor of \(a\) and \(b\text{,}\) then \(d' \mid d\text{.}\)   We write \(d = \gcd(a, b)\text{;}\) for example, \(\gcd( 24, 36) = 12\) and \(\gcd(120, 102) = 6\text{.}\)  We say that two integers \(a\) and \(b\) are <dfn class="terminology">relatively prime</dfn> if \(\gcd( a, b ) = 1\text{.}\)</p>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-theorem-integers-gcd" id="theorem-integers-gcd"><h6 class="heading">
+<span class="type">Theorem</span><span class="codenumber">2.2.2</span>
+</h6></a></article><div id="hk-theorem-integers-gcd" class="hidden-content tex2jax_ignore">
+<article class="theorem-like"><p id="p-274">Let \(a\) and \(b\) be nonzero integers. Then there exist integers \(r\) and \(s\) such that</p>
+<div class="displaymath">
+\begin{equation*}
+\gcd( a, b) = ar + bs.
+\end{equation*}
+</div>
+<p>Furthermore, the greatest common divisor of \(a\) and \(b\) is unique.</p></article><article class="hiddenproof"><a knowl="" class="id-ref" refid="hk-proof-9" id="proof-9"><h6 class="heading"><span class="type">Proof</span></h6></a></article><div id="hk-proof-9" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-275">Let</p>
+<div class="displaymath">
+\begin{equation*}
+S = \{ am + bn : m, n \in {\mathbb Z} \text{ and } am + bn \gt 0 \}.
+\end{equation*}
+</div>
+<p>Clearly, the set \(S\) is nonempty; hence, by the Well-Ordering Principle \(S\) must have a smallest member, say \(d = ar + bs\text{.}\)  We claim that \(d = \gcd( a, b)\text{.}\)  Write \(a = dq + r'\) where \(0 \leq r' \lt d\text{.}\) If \(r' \gt 0\text{,}\) then</p>
+<div class="displaymath">
+\begin{align*}
+r'&amp; = a - dq\\
+&amp; = a - (ar + bs)q\\
+&amp; = a - arq - bsq\\
+&amp; = a( 1 - rq ) + b( -sq ),
+\end{align*}
+</div>
+<p id="p-276">which is in \(S\text{.}\)  But this would contradict the fact that \(d\) is the smallest member of \(S\text{.}\)  Hence, \(r' = 0\) and \(d\) divides \(a\text{.}\)  A similar argument shows that \(d\) divides \(b\text{.}\)  Therefore, \(d\) is a common divisor of \(a\) and \(b\text{.}\)</p>
+<p id="p-277">Suppose that \(d'\) is another common divisor of \(a\) and \(b\text{,}\) and we want to show that \(d' \mid d\text{.}\) If we let \(a = d'h\) and \(b = d'k\text{,}\) then</p>
+<div class="displaymath">
+\begin{equation*}
+d = ar + bs = d'hr + d'ks = d'(hr + ks).
+\end{equation*}
+</div>
+<p>So \(d'\) must divide \(d\text{.}\) Hence, \(d\) must be the unique greatest common divisor of \(a\) and \(b\text{.}\)</p></article></div>
+</div>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-corollary-integers-coprime" id="corollary-integers-coprime"><h6 class="heading">
+<span class="type">Corollary</span><span class="codenumber">2.2.3</span>
+</h6></a></article><div id="hk-corollary-integers-coprime" class="hidden-content tex2jax_ignore"><article class="theorem-like"><p id="p-278">Let \(a\) and \(b\) be two integers that are relatively prime. Then there exist  integers \(r\) and \(s\) such that \(ar + bs = 1\text{.}\)</p></article></div></section><section class="subsection" id="subsection-11"><h3 class="heading hide-type" alt="Subsection 2.2.1 The Euclidean Algorithm">
+<span class="type">Subsection</span><span class="codenumber">2.2.1</span><span class="title">The Euclidean Algorithm</span>
+</h3>
+<p id="p-279">Among other things, Theorem <a knowl="./knowl/theorem-integers-gcd.html" knowl-id="xref-theorem-integers-gcd" alt="Theorem 2.2.2 " title="Theorem 2.2.2 ">Theorem 2.2.2</a> allows us to compute the greatest common divisor of two integers.</p>
+<article class="example-like"><a knowl="" class="id-ref" refid="hk-example-integers-gcd" id="example-integers-gcd"><h6 class="heading">
+<span class="type">Example</span><span class="codenumber">2.2.4</span>
+</h6></a></article><div id="hk-example-integers-gcd" class="hidden-content tex2jax_ignore"><article class="example-like"><p id="p-280">Let us compute the greatest common divisor of \(945\) and \(2415\text{.}\)  First observe that</p>
+<div class="displaymath">
+\begin{align*}
+2415 &amp; = 945 \cdot 2 + 525\\
+945 &amp; = 525 \cdot 1 + 420\\
+525 &amp; = 420 \cdot 1 + 105\\
+420 &amp; = 105 \cdot 4 + 0.
+\end{align*}
+</div>
+<p id="p-281">Reversing our steps, 105 divides 420, 105 divides 525, 105 divides 945, and 105 divides 2415.  Hence, 105 divides both 945 and 2415.  If \(d\) were another common divisor of 945 and 2415, then \(d\) would also have to divide 105.  Therefore, \(\gcd( 945, 2415 ) = 105\text{.}\)</p>
+<p id="p-282">If we work backward through the above sequence of equations, we can also obtain numbers \(r\) and \(s\) such that \(945 r + 2415 s = 105\text{.}\)  Observe that</p>
+<div class="displaymath">
+\begin{align*}
+105 &amp; = 525 + (-1) \cdot 420\\
+&amp; = 525 + (-1) \cdot [945 + (-1) \cdot 525]\\
+&amp; = 2 \cdot 525 + (-1) \cdot 945\\
+&amp; = 2 \cdot [2415 + (-2) \cdot 945] + (-1) \cdot 945\\
+&amp; = 2 \cdot 2415 + (-5) \cdot 945.
+\end{align*}
+</div>
+<p id="p-283">So \(r = -5\) and \(s= 2\text{.}\)  Notice that \(r\) and \(s\) are not unique, since \(r = 41\) and \(s = -16\) would also work.</p></article></div>
+<p id="p-284">To compute \(\gcd(a,b) = d\text{,}\) we are using repeated divisions to obtain a decreasing sequence of positive integers \(r_1 \gt r_2 \gt \cdots \gt r_n = d\text{;}\) that is,</p>
+<div class="displaymath">
+\begin{align*}
+b &amp; = a q_1 + r_1\\
+a &amp; = r_1 q_2 + r_2\\
+r_1 &amp; = r_2 q_3 + r_3\\
+&amp; \vdots \\
+r_{n - 2} &amp; = r_{n - 1} q_{n} + r_{n}\\
+r_{n - 1} &amp; = r_n q_{n + 1}.
+\end{align*}
+</div>
+<p id="p-285">To find \(r\) and \(s\) such that \(ar + bs = d\text{,}\) we begin with this last equation and substitute results obtained from the previous equations:</p>
+<div class="displaymath">
+\begin{align*}
+d &amp; = r_n\\
+&amp; = r_{n - 2} - r_{n - 1} q_n\\
+&amp; = r_{n - 2} - q_n( r_{n - 3} - q_{n - 1} r_{n - 2} )\\
+&amp; = -q_n r_{n - 3} + ( 1+ q_n q_{n-1} ) r_{n - 2} \\
+&amp; \vdots \\
+&amp; = ra + sb.
+\end{align*}
+</div>
+<p id="p-286">The algorithm that we have just used to find the greatest common divisor \(d\) of two integers \(a\) and \(b\) and to write \(d\) as the linear combination of \(a\) and \(b\) is known as the <dfn class="terminology">Euclidean algorithm</dfn>.</p></section><section class="subsection" id="subsection-12"><h3 class="heading hide-type" alt="Subsection 2.2.2 Prime Numbers">
+<span class="type">Subsection</span><span class="codenumber">2.2.2</span><span class="title">Prime Numbers</span>
+</h3>
+<p id="p-287">Let \(p\) be an integer such that \(p \gt 1\text{.}\)  We say that \(p\) is a <dfn class="terminology">prime number</dfn>, or simply \(p\) is <dfn class="terminology">prime</dfn>, if the only positive numbers that divide \(p\) are 1 and \(p\) itself.  An integer \(n \gt 1\) that is not prime is said to be <dfn class="terminology">composite</dfn>.</p>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-theorem-integers-prime-divisor" id="theorem-integers-prime-divisor"><h6 class="heading">
+<span class="type">Lemma</span><span class="codenumber">2.2.5</span><span class="title">Euclid</span>
+</h6></a></article><div id="hk-theorem-integers-prime-divisor" class="hidden-content tex2jax_ignore">
+<article class="theorem-like"><p id="p-288">Let \(a\) and \(b\) be integers and \(p\) be a prime number.  If \(p \mid ab\text{,}\) then either \(p \mid a\) or \(p \mid b\text{.}\)</p></article><article class="hiddenproof"><a knowl="" class="id-ref" refid="hk-proof-10" id="proof-10"><h6 class="heading"><span class="type">Proof</span></h6></a></article><div id="hk-proof-10" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-289">Suppose that \(p\) does not divide \(a\text{.}\)  We must show that \(p \mid b\text{.}\) Since \(\gcd( a, p ) = 1\text{,}\) there exist integers \(r\) and \(s\) such that \(ar + ps = 1\text{.}\)  So</p>
+<div class="displaymath">
+\begin{equation*}
+b = b(ar + ps) = (ab)r + p(bs).
+\end{equation*}
+</div>
+<p>Since \(p\) divides both \(ab\) and itself, \(p\) must divide \(b = (ab)r + p(bs)\text{.}\)</p></article></div>
+</div>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-theorem-integers-infinite-primes" id="theorem-integers-infinite-primes"><h6 class="heading">
+<span class="type">Theorem</span><span class="codenumber">2.2.6</span><span class="title">Euclid</span>
+</h6></a></article><div id="hk-theorem-integers-infinite-primes" class="hidden-content tex2jax_ignore">
+<article class="theorem-like"><p id="p-290">There exist an infinite number of primes.</p></article><article class="hiddenproof"><a knowl="" class="id-ref" refid="hk-proof-11" id="proof-11"><h6 class="heading"><span class="type">Proof</span></h6></a></article><div id="hk-proof-11" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-291">We will prove this theorem by contradiction.  Suppose that there are only a finite number of primes, say \(p_1, p_2, \ldots, p_n\text{.}\)  Let \(P = p_1  p_2  \cdots  p_n + 1\text{.}\)    Then \(P\) must be divisible by some \(p_i\) for \(1 \leq i \leq n\text{.}\) In this  case, \(p_i\) must divide \(P - p_1 p_2 \cdots p_n = 1\text{,}\) which is a contradiction.  Hence, either \(P\) is prime or there exists an additional prime number \(p \neq p_i\) that divides \(P\text{.}\)</p></article></div>
+</div>
+<article class="theorem-like"><a knowl="" class="id-ref" refid="hk-theorem-fund-theorem-arithmetic" id="theorem-fund-theorem-arithmetic"><h6 class="heading">
+<span class="type">Theorem</span><span class="codenumber">2.2.7</span><span class="title">Fundamental Theorem of Arithmetic</span>
+</h6></a></article><div id="hk-theorem-fund-theorem-arithmetic" class="hidden-content tex2jax_ignore">
+<article class="theorem-like"><p id="p-292">Let \(n\) be an integer such that \(n \gt 1\text{.}\) Then</p>
+<div class="displaymath">
+\begin{equation*}
+n = p_1 p_2 \cdots p_k,
+\end{equation*}
+</div>
+<p>where \(p_1, \ldots, p_k\) are  primes (not necessarily distinct).  Furthermore, this factorization is unique; that is, if</p>
+<div class="displaymath">
+\begin{equation*}
+n = q_1 q_2 \cdots q_l,
+\end{equation*}
+</div>
+<p>then \(k = l\) and the \(q_i\)'s are just the \(p_i\)'s rearranged.</p></article><article class="hiddenproof"><a knowl="" class="id-ref" refid="hk-proof-12" id="proof-12"><h6 class="heading"><span class="type">Proof</span></h6></a></article><div id="hk-proof-12" class="hidden-content tex2jax_ignore"><article class="hiddenproof"><p id="p-293"><em class="emphasis">Uniqueness.</em>  To show uniqueness we will use induction on \(n\text{.}\) The theorem is certainly true for \(n = 2\) since in this case \(n\) is prime.  Now assume that the result holds for all integers \(m\) such that \(1 \leq m \lt n\text{,}\) and</p>
+<div class="displaymath">
+\begin{equation*}
+n = p_1 p_2 \cdots p_k = q_1 q_2 \cdots q_l,
+\end{equation*}
+</div>
+<p>where \(p_1 \leq p_2 \leq \cdots \leq p_k\) and \(q_1 \leq q_2 \leq \cdots \leq q_l\text{.}\) By Lemma <a knowl="./knowl/theorem-integers-prime-divisor.html" knowl-id="xref-theorem-integers-prime-divisor" alt="Lemma 2.2.5 Euclid" title="Lemma 2.2.5 Euclid">Lemma 2.2.5</a>, \(p_1  \mid  q_i\) for some \(i = 1, \ldots, l\) and \(q_1  \mid  p_j\) for some \(j = 1, \ldots, k\text{.}\)  Since all of the \(p_i\)'s and \(q_i\)'s are prime, \(p_1 = q_i\) and  \(q_1 = p_j\text{.}\) Hence, \(p_1 = q_1\) since \(p_1 \leq p_j = q_1 \leq q_i = p_1\text{.}\)  By the induction hypothesis,</p>
+<div class="displaymath">
+\begin{equation*}
+n' = p_2 \cdots p_k = q_2 \cdots q_l
+\end{equation*}
+</div>
+<p>has a unique factorization.  Hence, \(k = l\) and \(q_i = p_i\) for \(i = 1, \ldots, k\text{.}\)</p>
+<p id="p-294"><em class="emphasis">Existence.</em> To show existence, suppose that there is some integer that cannot be written as the product of primes.  Let \(S\) be the set of all such numbers.  By the Principle of Well-Ordering, \(S\) has a smallest number, say \(a\text{.}\)  If the only positive factors of \(a\) are \(a\) and 1, then \(a\) is prime, which is a contradiction.  Hence, \(a = a_1 a_2\) where \(1 \lt a_1 \lt a\) and \(1 \lt a_2 \lt a\text{.}\)  Neither \(a_1\in S\) nor \(a_2 \in S\text{,}\) since \(a\) is the smallest element in \(S\text{.}\)  So</p>
+<div class="displaymath">
+\begin{align*}
+a_1 &amp; = p_1 \cdots p_r\\
+a_2 &amp; = q_1 \cdots q_s.
+\end{align*}
+</div>
+<p id="p-295">Therefore,</p>
+<div class="displaymath">
+\begin{equation*}
+a = a_1 a_2 = p_1 \cdots p_r q_1 \cdots q_s.
+\end{equation*}
+</div>
+<p>So \(a \notin S\text{,}\) which is a contradiction.</p></article></div>
+</div></section><section class="subsection" id="subsection-13"><h3 class="heading hide-type" alt="Subsection 2.2.3 Historical Note">
+<span class="type">Subsection</span><span class="codenumber">2.2.3</span><span class="title">Historical Note</span>
+</h3>
+<p id="p-296">Prime numbers were first studied by the ancient Greeks.  Two important results from antiquity are Euclid's proof that an infinite number of primes exist and the Sieve of Eratosthenes, a method of computing all of the prime numbers less than a fixed positive integer \(n\text{.}\)  One problem in number theory is to find a function \(f\) such that \(f(n)\) is prime for each integer \(n\text{.}\) Pierre Fermat (1601?–1665) conjectured that \(2^{2^n} + 1\) was prime for all \(n\text{,}\) but later it was shown by Leonhard Euler (1707–1783) that</p>
+<div class="displaymath">
+\begin{equation*}
+2^{2^5} + 1 = \text{4,294,967,297}
+\end{equation*}
+</div>
+<p>is a composite number. One of the many unproven conjectures about prime numbers is Goldbach's Conjecture.  In a letter to Euler in 1742, Christian Goldbach stated the conjecture that every even integer with the exception of 2 seemed to be the sum of two primes:  \(4 = 2 + 2\text{,}\) \(6 = 3 + 3\text{,}\) \(8 =3 + 5\text{,}\) \(\ldots\text{.}\)  Although the conjecture has been verified for the numbers up through \(4 \times 10^{18}\text{,}\) it has yet to be proven in general.  Since prime numbers play an important role in public key cryptography, there is currently a great deal of interest in determining whether or not a large number is prime.</p>
+<article class="remark-like" id="remark-1"><h6 class="heading">
+<span class="type">Remark</span><span class="codenumber">2.2.8</span><span class="title">Sage</span>
+</h6>
+<p id="p-297">Sage's original purpose was to support research in number theory, so it is perfect for the types of computations with the integers that we have in this chapter.</p></article></section></section></div></main>
+</div>
+</body>
+</html>
