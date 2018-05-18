@@ -1,3 +1,5 @@
+import requests
+from bs4 import BeautifulSoup as bs
 from pickle_to_txt import read_stations, get_station_attr
 
 class KElementHeap():
@@ -44,7 +46,9 @@ def station_find(Stations, Popups, pos, k=1):
     for index in best:
         if Popups[index].value == '--':
             name = get_station_attr(Stations[index], 'name')
-            Popups[index].value = name
+            station_id = get_station_attr(Stations[index], 'station_id')
+            msg = '<p>' + name + '</p><p>' + get_mean_temp(station_id) + '</p>'
+            Popups[index].value = msg
     
         
 def dec_to_deg(num):
@@ -54,3 +58,24 @@ def dec_to_deg(num):
     seconds = leftover * 60
     
     return (int(num), int(minutes), seconds)
+
+def get_mean_temp(station_id):
+    url = 'http://climate.weather.gc.ca/climate_data/daily_data_e.html?StationID={}'.format(station_id)
+    EMPTY = '\xa0'
+
+    content = requests.get(url).content
+    soup = bs(content, 'lxml')
+    table = soup.find('tbody')
+    days = table.find_all('tr')[1:]
+
+    data = days[0].find_all('td')[2].contents[0]
+    if data == EMPTY or data.name is not None:
+        return 'Sorry I could not find the teperature'
+
+    for i in range(len(days)-5, 0, -1):
+        entries = days[i].find_all('td')
+        data = entries[3].contents[0]
+        if data != EMPTY and data.name is None:
+            return "The last recorded temp was on {} and it was a mean tempurature of {}&deg;C".format(entries[0].contents[0].attrs['title'],
+                                                                            entries[3].contents[0])
+    return 'Sorry I could not find the teperature'
