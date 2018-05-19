@@ -1,4 +1,6 @@
 import requests
+from ipywidgets import HTML
+from scipy.spatial import cKDTree
 from bs4 import BeautifulSoup as bs
 from pickle_to_txt import read_stations, get_station_attr
 
@@ -29,13 +31,47 @@ class KElementHeap():
     def get_best(self):
         return self.index
 
+    
+def init_kdtree(Stations):
+#    dim = 2
+#    data = [[None]*len(Stations)] * dim
+#    for i, station in enumerate(Stations):
+#        lat = float(get_station_attr(station, 'lat'))
+#        lon = float(get_station_attr(station, 'lon'))
+#        data[0][i] = lat
+#        data[1][i] = lon
+    data = [None] * len(Stations)
+    for i, station in enumerate(Stations):
+        lat = float(get_station_attr(station, 'lat'))
+        lon = float(get_station_attr(station, 'lon'))
+        data[i] = (lat, lon)
+    
+    return cKDTree(data)
+
+# This is a log(n) search for a station
+#     pos = (lat, lon)
+def kdtree_station_find(kdtree, Stations, Markers, Popups, pos):
+    query = kdtree.query(pos)
+    index = query[1]
+    
+    if Popups[index] is None:
+            name = get_station_attr(Stations[index], 'name')
+            station_id = get_station_attr(Stations[index], 'station_id')
+            lat = get_station_attr(Stations[index], 'lat')[:6]
+            lon = get_station_attr(Stations[index], 'lon')[:6]
+            #msg = '<p>' + name + '</p><p>' + get_mean_temp(station_id) + '</p>'
+            Popups[index] = HTML(value='<p>'+name+'</p>\n<p>Latitude: '+lat+'<br>Longitude: '+lon+'</p>',
+                                 placeholder='',
+                                 description='')
+            Markers[index].popup = Popups[index]
+    
 
 # This is a slow implementation, if to slow make a quad-tree
 #     pos is (lat, lon)
 #     k is the how many to find
-def station_find(Stations, Popups, pos, k=1):
-    top = KElementHeap(k)
+def linear_station_find(Stations, Markers, Popups, pos, k=1):
     
+    top = KElementHeap(k)
     for i, station in enumerate(Stations):
         lat = float(get_station_attr(station, 'lat'))
         lon = float(get_station_attr(station, 'lon'))
@@ -44,11 +80,17 @@ def station_find(Stations, Popups, pos, k=1):
      
     best = top.get_best()
     for index in best:
-        if Popups[index].value == '--':
+        if Popups[index] == None:
             name = get_station_attr(Stations[index], 'name')
-            station_id = get_station_attr(Stations[index], 'station_id')
+            lat = get_station_attr(Stations[index], 'lat')
+            lon = get_station_attr(Stations[index], 'lon')
+            #station_id = get_station_attr(Stations[index], 'station_id')
             msg = '<p>' + name + '</p><p>' + get_mean_temp(station_id) + '</p>'
-            Popups[index].value = msg
+            Popups[index] = HTML(value=msg,
+                                 placeholder='',
+                                 description='')
+
+            Markers[index].popup = Popups[index]
     
         
 def dec_to_deg(num):
