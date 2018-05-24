@@ -4,6 +4,36 @@ from scipy.spatial import cKDTree
 from bs4 import BeautifulSoup as bs
 from pickle_to_txt import read_stations, get_station_attr
 
+STRING_CHECKBOX='''<html>
+<body>
+<p>Display some text when the checkbox is checked:</p>
+Checkbox: <input type="checkbox" id="myCheck"  onclick="myFunction()">
+<p id="text" style="display:block">Checkbox is CHECKED!</p>
+
+<script>
+function myFunction() {
+    var checkBox = document.getElementById("myCheck");
+    var text = document.getElementById("text");
+    alert('Goodbye World!');
+    if (checkBox.checked == true){
+        text.style.display = "block";
+        alert('Hello World!');
+    } else {
+       text.style.display = "none";
+    }
+}
+</script>
+</body>
+</html>'''
+
+STRING_BUTTON='''<html>
+<body>
+<p id="show_in_table" hidden>no</p>
+<button type="button" onclick="document.getElementById('show_in_table').innerHTML = 'yes'">Show in table</button>
+ 
+</body>
+</html>'''
+
 class KElementHeap():
     def __init__(self, k):
         self.k = k
@@ -59,11 +89,14 @@ def kdtree_station_find(kdtree, Stations, Markers, Popups, pos):
             station_id = get_station_attr(Stations[index], 'station_id')
             lat = get_station_attr(Stations[index], 'lat')[:6]
             lon = get_station_attr(Stations[index], 'lon')[:6]
+            end = get_station_attr(Stations[index], 'end_date')
             #msg = '<p>' + name + '</p><p>' + get_mean_temp(station_id) + '</p>'
-            Popups[index] = HTML(value='<p>'+name+'</p>\n<p>Latitude: '+lat+'<br>Longitude: '+lon+'</p>',
+            Popups[index] = HTML(value='<p>'+name+'</p>\n<p>Latitude: '+lat+'<br>Longitude: '+lon+'<br>End Date: '+end+'</p>'+STRING_BUTTON,
                                  placeholder='',
                                  description='')
+#            Popups[index] = HTML_HIDE
             Markers[index].popup = Popups[index]
+#            print(Markers[index].options)
     
 
 # This is a slow implementation, if to slow make a quad-tree
@@ -85,7 +118,7 @@ def linear_station_find(Stations, Markers, Popups, pos, k=1):
             lat = get_station_attr(Stations[index], 'lat')
             lon = get_station_attr(Stations[index], 'lon')
             #station_id = get_station_attr(Stations[index], 'station_id')
-            msg = '<p>' + name + '</p><p>' + get_mean_temp(station_id) + '</p>'
+            msg = '<p>' + name + '</p><p>' + get_mean_temp(station_id) + '</p>' + HTML_CHECKBOX
             Popups[index] = HTML(value=msg,
                                  placeholder='',
                                  description='')
