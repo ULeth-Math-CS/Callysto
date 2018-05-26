@@ -1,7 +1,9 @@
 #import requests
+import shared
 from tqdm import tqdm
 from constants import *
 from ipywidgets import HTML
+#from IPython.display import HTML
 from scipy.spatial import cKDTree
 #from bs4 import BeautifulSoup as bs
 from ipyleaflet import Marker, Map, Popup, MarkerCluster
@@ -15,6 +17,10 @@ class WeatherMap():
         self.stations = []
         self.popups = []
         self.markers = []
+        self.current_station = None
+        
+    def f():
+        print("Hello")
         
         
     def build(self, fileName):
@@ -62,15 +68,20 @@ class WeatherMap():
             lat = get_station_attr(self.stations[index], 'lat')[:6]
             lon = get_station_attr(self.stations[index], 'lon')[:6]
             end = get_station_attr(self.stations[index], 'end_date')
-            self.popups[index] = HTML(value='<p>'+name+'</p>\n<p>Latitude: '+lat+\
-                                      '<br>Longitude: '+lon+'<br>End Date: '+end+\
-                                      '</p>'+HTML_BUTTON,
-                                 placeholder='',
-                                 description='')
+            #self.popups[index] = HTML(value='<p>'+name+'</p>\n<p>Latitude: '+lat+\
+            #                          '<br>Longitude: '+lon+'<br>End Date: '+end+\
+            #                          '</p>'+HTML_BUTTON,
+            #                     placeholder='',
+            #                     description='')
+            #self.popups[index] = HTML(HTML_POPUP % (name, lat, lon, index))
+            self.popups[index] = HTML(HTML_TEMP % (name, lat, lon, index))
             self.markers[index].popup = self.popups[index]
+            
+    def set_value():
+        print("HELLO")
 
 
-
+    '''
     def update_table(self, pos):
         query = self.kdTree.query(pos)
         index = query[1]
@@ -82,3 +93,9 @@ class WeatherMap():
             self.table.value = (HTML_TABLE % (name, lat, lon))
         else:
             pass#print(self.popups[index].value)
+    '''
+    def update_table(self, index):
+        name = get_station_attr(self.stations[index], 'name')
+        lat = get_station_attr(self.stations[index], 'lat')[:6]
+        lon = get_station_attr(self.stations[index], 'lon')[:6]
+        self.table.value = (HTML_TABLE % (name, lat, lon))
