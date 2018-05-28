@@ -4,15 +4,16 @@ var startX = 0;
 var startY = 0;
 var draggedCircleIndex = 0;
 
-var drag_handler = d3.drag()
+var drag_handler = d3.behavior.drag()
   .on("drag", function(d) {
         d3.select(this)
           .attr("cx", d3.event.x  )
           .attr("cy", d3.event.y  );
   })
-  .on("start", function(d) {
-    startX = d3.event.x;
-    startY = d3.event.y;
+  .on("dragstart", function(d) {
+    startX = d.x
+    startY = d.y;
+    console.log(startX);
     draggedCircleIndex = 0;
     for(var i = 1; i < numberOfCircles*2; i=i+2) {
       if(startX == drivingData[i].x && startY == drivingData[i].y) {
@@ -21,7 +22,7 @@ var drag_handler = d3.drag()
       }
     }
   })
-  .on("end", function(d) {
+  .on("dragend", function(d) {
       var circle = d3.select(this);
       var endX = Number(circle.attr("cx"));
       var endY = Number(circle.attr("cy"));
@@ -120,11 +121,12 @@ function createCircles(d) {
             .attr("cy", function(d) { return d.y; })
             .attr("r", radius)
             .attr("fill", function(d) { return d.color;})
-            .style("stroke", function(d) { return d.border; });
+            .style("stroke", function(d) { return d.border; })
+            .call(drag_handler);
 
-    var draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < numberOfCircles*2; });
-
-    drag_handler(draggableCircles);
+    // d3.v4
+    //var draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < numberOfCircles*2; });
+    //drag_handler(draggableCircles);
 }
 
 function updateCircles() {
@@ -195,11 +197,12 @@ function addCircle() {
                       .attr("cy", function(d) { return d.y; })
                       .attr("r", radius)
                       .attr("fill", function(d) { return d.color; })
-                      .style("stroke", function(d) { return d.border});
+                      .style("stroke", function(d) { return d.border})
+                      .call(drag_handler);
 
-  var draggableCircles = svg.selectAll("circle").filter(function(d,i) { return i % 2 == 1 && i < numberOfCircles*2; })
-
-  drag_handler(draggableCircles);
+  // d3.v4
+  //var draggableCircles = svg.selectAll("circle").filter(function(d,i) { return i % 2 == 1 && i < numberOfCircles*2; });
+  //drag_handler(draggableCircles);
 }
 
 function removeCircle() {
@@ -237,7 +240,10 @@ function d3transitionTo(obj, objIndex, toIndex) {
   obj.transition()
     .attr("cx", function() { return drivingData[objIndex].x = drivingData[toIndex].x; })
     .attr("cy", function() { return drivingData[objIndex].y = drivingData[toIndex].y; })
-    .on("end", function() { updateCircles(); })
+    .each("end", function(d, i) { 
+      console.log(objIndex);
+      updateCircles(); 
+    });
 }
 
 function areFull() {
