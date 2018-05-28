@@ -90,7 +90,7 @@ output.innerHTML = slider.value; // Display the default slider value
 // Create svg
 var svg = d3.select("#experiment-full")
   .append("svg")
-    .attr("width", "100%")
+    .attr("width", "80%")
     .attr("height", 300)
   .append("g");
 
@@ -121,11 +121,12 @@ function createCircles(d) {
             .attr("cy", function(d) { return d.y; })
             .attr("r", radius)
             .attr("fill", function(d) { return d.color;})
-            .style("stroke", function(d) { return d.border; })
-            .call(drag_handler);
+            .style("stroke", function(d) { return d.border; });
+
+  var draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < numberOfCircles*2; }).call(drag_handler);
 
     // d3.v4
-    //var draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < numberOfCircles*2; });
+    // draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < numberOfCircles*2; });
     //drag_handler(draggableCircles);
 }
 
@@ -139,14 +140,17 @@ function updateCircles() {
   circles.style("stroke", function(d) { return d.border; });
   if(areFull()) {
     console.log("Complete!");
+    var answer = d3.select("#circles1-answer");
     if(isPermutation()) {
-      console.log("That is a permutation.")
+      answer.text("Correct!");
+      answer.style("background-color", "green");
     }
     else {
-      console.log("That is not a permuation.");
+      answer.text("Incorrect.");
+      answer.style("background-color", "red");
     }
-
-    d3.select("#reset-circles").style("display", "block");
+    slider.disabled = true;
+    d3.select("#circles1-answer-container").style("display", "block");
   }
 }
 
@@ -272,7 +276,7 @@ function resetCircles() {
     drivingData[i].y = drivingData[i-1].y;
   }
 
-  document.getElementById("reset-circles").style.display = "none";
-
+  d3.select("#circles1-answer-container").style("display", "none");
+  slider.disabled = false;
   updateCircles();
 }

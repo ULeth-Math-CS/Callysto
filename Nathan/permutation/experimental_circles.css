@@ -11,19 +11,42 @@ hr {
 }
 
 #reset-circles {
-    display: none;
+    margin-left: 30%;
 }
 
 #slider-output {
-    display: inline-block;
+    margin-left: 10px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 #perm-range-container {
+    padding-left: 17%;
     width: 50%
+}
+
+#perm-range-slider {
+    float: left;
+    width: 75%;
 }
 
 #slider-output-container {
     padding-top: 10px;
+}
+
+#circles1-answer-container {
+    width: 50%;
+    margin-left: 17%;
+    margin-top: 50px;
+    display: none;
+}
+
+#circles1-answer {
+    width: 80px;
+    float: left;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 1.2em
 }
 
 .slider {
