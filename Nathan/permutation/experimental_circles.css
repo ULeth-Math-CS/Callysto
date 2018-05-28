@@ -49,6 +49,21 @@ hr {
     font-size: 1.2em
 }
 
+#circles1-diff-permutations {
+    margin-top: 50px;
+}
+
+#diff-perm {
+    margin-top: 3px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    float: left;
+}
+
+#diff-perm-input {
+    width: 50px;
+    margin-left: 10px;
+}
+
 .slider {
     display: inline-block;
     -webkit-appearance: none;

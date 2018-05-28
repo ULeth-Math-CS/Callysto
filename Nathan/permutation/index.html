@@ -20,11 +20,14 @@
   <div id="experiment-full">
   </div>
   <div id="perm-range-container">
-    <input class="slider" name="circle-slider" id="perm-range-slider" type="range" min="2" max="10" value="5" oninput="perm-range-output.value = perm-range-slider.value"><span id="slider-output"></span><br>
+    <input class="slider" name="circle-slider" id="perm-range-slider" type="range" min="2" max="10" value="5"><span id="slider-output"></span><br>
   </div>
   <div id="circles1-answer-container">
     <p id="circles1-answer"></p>
     <input id="reset-circles" type="button" value="Reset" onclick="resetCircles(this)">
+  </div>
+  <div id="circles1-diff-permutations"> 
+    <p id="diff-perm">How many different permutations can you make with the above circles? Think about it.</p>
   </div>
   <script src="circles.js"></script>
 </body>
