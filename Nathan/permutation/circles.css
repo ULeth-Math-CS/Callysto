@@ -1,0 +1,61 @@
+h1 {
+    text-align: center;
+  }
+
+  body {
+    background-color: #0099cc;
+  }
+
+  hr {
+    border-color: #007399;
+  }
+
+  #slider-output {
+    display: inline-block;
+  }
+
+  #perm-range-container {
+    width: 50%
+  }
+
+  #slider-output-container {
+    padding-top: 10px;
+  }
+
+  .slider {
+    display: inline-block;
+    -webkit-appearance: none;
+    /* Override default CSS styles */
+    appearance: none;
+    width: 100%;
+    /* Full-width */
+    height: 15px;
+    /* Specified height */
+    background: #d3d3d3;
+    /* Grey background */
+    outline: none;
+    /* Remove outline */
+    opacity: 0.7;
+    /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s;
+    /* 0.2 seconds transition on hover */
+    transition: opacity .2 border-radius: 5px;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+  }
+
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+  }
