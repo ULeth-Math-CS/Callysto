@@ -201,9 +201,10 @@ function addCircle() {
                       .attr("cy", function(d) { return d.y; })
                       .attr("r", radius)
                       .attr("fill", function(d) { return d.color; })
-                      .style("stroke", function(d) { return d.border})
-                      .call(drag_handler);
+                      .style("stroke", function(d) { return d.border});
 
+
+  svg.selectAll("circle").filter(function(d,i) { return i % 2 == 1 && i < numberOfCircles*2; }).call(drag_handler);
   // d3.v4
   //var draggableCircles = svg.selectAll("circle").filter(function(d,i) { return i % 2 == 1 && i < numberOfCircles*2; });
   //drag_handler(draggableCircles);

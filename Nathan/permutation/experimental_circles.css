@@ -20,7 +20,25 @@ hr {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+#slider-full-output {
+    margin-left: 10px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#slider-fill-output {
+    margin-left: 10px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
 #perm-range-container {
+    padding-left: 17%;
+    width: 50%
+}
+
+#perm-subset-range-container {
     padding-left: 17%;
     width: 50%
 }
@@ -30,8 +48,16 @@ hr {
     width: 75%;
 }
 
-#slider-output-container {
-    padding-top: 10px;
+#perm-fillsubset-range-slider {
+    margin-top: 20px;
+    float: left;
+    width: 75%;
+}
+
+#perm-fullsubset-range-slider {
+    float: left;
+    width: 75%;
+    margin-top: 20px;
 }
 
 #circles1-answer-container {
@@ -59,10 +85,6 @@ hr {
     float: left;
 }
 
-#diff-perm-input {
-    width: 50px;
-    margin-left: 10px;
-}
 
 .slider {
     display: inline-block;
