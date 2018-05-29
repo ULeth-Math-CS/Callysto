@@ -14,6 +14,12 @@ hr {
     margin-left: 30%;
 }
 
+#reset-circles-subset {
+    margin-left: 30%;
+    float: left;
+}
+
+
 #slider-output {
     margin-left: 10px;
     font-weight: bold;
@@ -76,7 +82,7 @@ hr {
     float: left;
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
-    font-size: 1.2em
+    font-size: 1.2em;
 }
 
 #circles1-diff-permutations {
@@ -89,6 +95,24 @@ hr {
     float: left;
 }
 
+#circles-subset-answer-container {
+    width: 50%;
+    margin-left: 17%;
+    margin-top: 50px;
+    display: none;
+}
+
+#circles-subset-answer {
+    width: 80px;
+    float: left;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.clear-float {
+    clear: both;
+}
 
 .slider {
     display: inline-block;

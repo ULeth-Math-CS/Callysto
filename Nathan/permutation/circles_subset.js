@@ -161,17 +161,17 @@ function updateCircles_subset() {
     
     if(areFull_subset()) {
         console.log("Complete!");
-        var answer = d3.select("#circles1-answer");
+        var answer = d3.select("#circles-subset-answer");
         if(isPermutation_subset()) {
-        answer.text("Correct!");
-        answer.style("background-color", "green");
+            answer.text("Correct!");
+            answer.style("background-color", "green");
         }
         else {
-        answer.text("Incorrect.");
-        answer.style("background-color", "red");
+            answer.text("Incorrect.");
+            answer.style("background-color", "red");
         }
         slider.disabled = true;
-        d3.select("#circles1-answer-container").style("display", "block");
+        d3.select("#circles-subset-answer-container").style("display", "block");
     }
 }
 
@@ -364,13 +364,16 @@ function isOccupied_subset(d) {
   }
   
   function areFull_subset() {
+    var count = 0;
     for(var i = 1; i < numberOfFullCircles*2; i = i + 2) {
-      if(drivingSubsetData[i].y < circleLineHeight) {
-        return false;
+      if(drivingSubsetData[i].y > circleLineHeight) {
+        ++count;
+        if(count == numberOfFillCircles)
+            return true;
       }
     }
   
-    return true;
+    return false;
   }
   
   function isPermutation_subset() {
