@@ -69,8 +69,8 @@ var startingXNode = 40;
 var circleLineHeight = 150;
 var sliderFull = document.getElementById("perm-fullsubset-range-slider");
 var sliderFill = document.getElementById("perm-fillsubset-range-slider");
-var outputFull = document.getElementById("slider-fulloutput");
-var outputFill = document.getElementById("slider-filloutput");
+var outputFull = document.getElementById("slider-full-output");
+var outputFill = document.getElementById("slider-fill-output");
 
 console.log(sliderFill.value);
 d3.select("#perm-fillsubset-range-slider").attr("max", Number(sliderFull.value)-1);
