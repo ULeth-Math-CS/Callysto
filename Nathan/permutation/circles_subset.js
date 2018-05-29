@@ -170,7 +170,8 @@ function updateCircles_subset() {
             answer.text("Incorrect.");
             answer.style("background-color", "red");
         }
-        slider.disabled = true;
+        sliderFull.disabled = true;
+        sliderFill.disabled = false;
         d3.select("#circles-subset-answer-container").style("display", "block");
     }
 }
@@ -392,7 +393,8 @@ function isOccupied_subset(d) {
       drivingSubsetData[i].y = drivingSubsetData[i-1].y;
     }
   
-    d3.select("#circles1-answer-container").style("display", "none");
-    slider.disabled = false;
+    d3.select("#circles-subset-answer-container").style("display", "none");
+    sliderFull.disabled = false;
+    sliderFill.disabled = false;
     updateCircles_subset();
   }
