@@ -1,11 +1,12 @@
 #import requests
-import shared
+from shared import *
 from tqdm import tqdm
 from constants import *
 from ipywidgets import HTML
-#from IPython.display import HTML
+from ipykernel.comm import Comm
 from scipy.spatial import cKDTree
 #from bs4 import BeautifulSoup as bs
+from IPython.display import HTML as HTML_DISPLAY
 from ipyleaflet import Marker, Map, Popup, MarkerCluster
 from pickle_to_txt import read_stations, get_station_attr
 
@@ -18,6 +19,7 @@ class WeatherMap():
         self.popups = []
         self.markers = []
         self.current_station = None
+        self.comm = None
         
     def f():
         print("Hello")
@@ -32,6 +34,19 @@ class WeatherMap():
         self.init_kdTree()
         self.table = HTML(HTML_TABLE)
         self.table.hold_sync
+        self.open_comm('_button_')
+        
+        
+    def open_comm(self, label):
+        get_ipython().kernel.comm_manager.register_target(label, self.comm_handler)
+    
+    
+    def comm_handler(self, comm, msg):
+        #### TODO: Find out what this does
+        @comm.on_msg
+        def _recv(msg):
+            self.comm = msg
+            self.update_table(msg['content']['data']['index'])
         
         
     def load_data(self):
@@ -74,7 +89,8 @@ class WeatherMap():
             #                     placeholder='',
             #                     description='')
             #self.popups[index] = HTML(HTML_POPUP % (name, lat, lon, index))
-            self.popups[index] = HTML(HTML_TEMP % (name, lat, lon, index))
+            self.popups[index] = HTML(HTML_COMM % (name, lat, lon, index))
+            #self.popups[index] = HTML_DISPLAY(HTML_RANGE_SLIDER)
             self.markers[index].popup = self.popups[index]
             
     def set_value():
@@ -95,6 +111,11 @@ class WeatherMap():
             pass#print(self.popups[index].value)
     '''
     def update_table(self, index):
+        if self.comm is not None:
+            print("IndexME: " + str(self.comm['content']['data']['index']))
+        #print("INDEX: " + str(index))
+        #print("SHARED: " + str(GET_GLOBAL_SHOW_STATION()))
+        #print(globals().keys())
         name = get_station_attr(self.stations[index], 'name')
         lat = get_station_attr(self.stations[index], 'lat')[:6]
         lon = get_station_attr(self.stations[index], 'lon')[:6]
