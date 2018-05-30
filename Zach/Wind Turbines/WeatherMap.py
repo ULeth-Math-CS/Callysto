@@ -1,7 +1,9 @@
 #import requests
 from shared import *
 from tqdm import tqdm
+from time import sleep
 from constants import *
+from threading import Timer
 from ipywidgets import HTML
 from ipykernel.comm import Comm
 from scipy.spatial import cKDTree
@@ -45,9 +47,9 @@ class WeatherMap():
         #### TODO: Find out what this does
         @comm.on_msg
         def _recv(msg):
-            self.comm = msg
-            self.update_table(msg['content']['data']['index'])
-        
+            self.comm = msg            
+            self.update_table()
+
         
     def load_data(self):
         # Put a marker on the map for each station
@@ -110,13 +112,14 @@ class WeatherMap():
         else:
             pass#print(self.popups[index].value)
     '''
-    def update_table(self, index):
-        if self.comm is not None:
-            print("IndexME: " + str(self.comm['content']['data']['index']))
+    def update_table(self):
+        if self.comm is None:
+            return
+        index = int(self.comm['content']['data']['index'])
         #print("INDEX: " + str(index))
         #print("SHARED: " + str(GET_GLOBAL_SHOW_STATION()))
         #print(globals().keys())
-        name = get_station_attr(self.stations[index], 'name')
+        name = get_station_attr(self.stations[index], 'name').title()
         lat = get_station_attr(self.stations[index], 'lat')[:6]
         lon = get_station_attr(self.stations[index], 'lon')[:6]
         self.table.value = (HTML_TABLE % (name, lat, lon))
