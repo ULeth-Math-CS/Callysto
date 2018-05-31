@@ -1,32 +1,43 @@
 #import requests
+import sys
+import time
+import ipyleaflet
 from shared import *
 from tqdm import tqdm
-from time import sleep
 from constants import *
 from threading import Timer
 from ipywidgets import HTML
 from ipykernel.comm import Comm
+from MapEvents import MapEvents
 from scipy.spatial import cKDTree
 #from bs4 import BeautifulSoup as bs
 from IPython.display import HTML as HTML_DISPLAY
-from ipyleaflet import Marker, Map, Popup, MarkerCluster
+from ipyleaflet import Marker, Popup, MarkerCluster
 from pickle_to_txt import read_stations, get_station_attr
 
-class WeatherMap():
-    def __init__(self):
-        self.center = (52.585538631877306, 245.45105824782084)
-        self.zoom = 6
-        self.map = Map(center=self.center, zoom=self.zoom, close_popup_on_click=False)
+
+class WeatherMap(MapEvents):
+    def __init__(self, Map=None):
+        if Map is None:
+            self.center = (52.585538631877306, 245.45105824782084)
+            self.zoom = 6
+            self.map = ipyleaflet.Map(center=self.center, zoom=self.zoom, close_popup_on_click=False)
+        else:
+            self.map = Map
+        super().__init__(self.map)
+        
         self.stations = []
         self.popups = []
         self.markers = []
         self.current_station = None
         self.comm = None
+        #self.mousemove = self.mouse_move
+
         
-    def f():
-        print("Hello")
-        
-        
+    def mousemove(self, type, event, coordinates):
+        self.station_find(coordinates)
+
+    
     def build(self, fileName):
         self.stations = read_stations(fileName)
         self.num_of_stations = len(self.stations)
@@ -37,6 +48,7 @@ class WeatherMap():
         self.table = HTML(HTML_TABLE)
         self.table.hold_sync
         self.open_comm('_button_')
+        #self.map.on_interaction(self.callback)
         
         
     def open_comm(self, label):
@@ -94,24 +106,8 @@ class WeatherMap():
             self.popups[index] = HTML(HTML_COMM % (name, lat, lon, index))
             #self.popups[index] = HTML_DISPLAY(HTML_RANGE_SLIDER)
             self.markers[index].popup = self.popups[index]
+
             
-    def set_value():
-        print("HELLO")
-
-
-    '''
-    def update_table(self, pos):
-        query = self.kdTree.query(pos)
-        index = query[1]
-
-        if '<p id="show_in_table" hidden>yes</p>' in self.popups[index].value:
-            name = get_station_attr(self.stations[index], 'name')
-            lat = get_station_attr(self.stations[index], 'lat')[:6]
-            lon = get_station_attr(self.stations[index], 'lon')[:6]
-            self.table.value = (HTML_TABLE % (name, lat, lon))
-        else:
-            pass#print(self.popups[index].value)
-    '''
     def update_table(self):
         if self.comm is None:
             return
