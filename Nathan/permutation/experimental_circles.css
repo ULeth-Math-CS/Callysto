@@ -12,13 +12,13 @@ hr {
 
 #reset-circles {
     margin-left: 30%;
+    display: none;
 }
 
 #reset-circles-subset {
     margin-left: 30%;
     float: left;
 }
-
 
 #slider-output {
     margin-left: 10px;

@@ -1,0 +1,37 @@
+table {
+    width: 50%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-collapse: collapse;
+}
+
+thead, th, td {
+    height: 25px;
+    text-align: center;
+}
+
+tr {
+    padding: 10px;
+    margin-left: 15px;
+    text-align: left;
+}
+
+table, thead, td, th {
+    border: 1px solid black;
+}
+
+input {
+    background-color: none;
+    text-align: center;
+}
+
+.correct {
+    background-color: green;
+}
+
+.incorrect {
+    background-color: red;
+}
+
+.hidden {
+    display: none;
+}

@@ -74,6 +74,7 @@ var startingXNode = 40;
 var circleLineHeight = 150;
 var slider = document.getElementById("perm-range-slider");
 var output = document.getElementById("slider-output");
+var answeringTimeout;
 
 var drivingData = [];
 var numberOfCircles = Number(slider.value);
@@ -139,18 +140,39 @@ function updateCircles() {
   circles.attr("fill", function(d) { return d.color; });
   circles.style("stroke", function(d) { return d.border; });
   if(areFull()) {
-    console.log("Complete!");
     var answer = d3.select("#circles1-answer");
     if(isPermutation()) {
-      answer.text("Correct!");
+      if(answeringTimeout)
+        clearTimeout(answeringTimeout);
+      
       answer.style("background-color", "green");
+      answer.text("Correct.");
     }
     else {
       answer.text("Incorrect.");
       answer.style("background-color", "red");
     }
     slider.disabled = true;
-    d3.select("#circles1-answer-container").style("display", "block");
+  }
+
+  else {
+    if(answeringTimeout)
+      clearTimeout(answeringTimeout);
+      
+    var answer = d3.select("#circles1-answer");
+    if(!isEmpty()) { 
+      answer.text("Permutting...");
+      answer.style("background-color", "transparent");
+      answeringTimeout = setTimeout(function() {
+          answer.text("Incorrect.");
+          answer.style("background-color", "red");
+      }, 5000);
+    }
+
+    else {
+      answer.text("");
+      answer.style("background-color", "transparent");
+    }
   }
 }
 
@@ -254,6 +276,16 @@ function d3transitionTo(obj, objIndex, toIndex) {
 function areFull() {
   for(var i = 1; i < numberOfCircles*2; i = i + 2) {
     if(drivingData[i].y < circleLineHeight) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function isEmpty() {
+  for(var i = 1; i < numberOfCircles*2; i = i + 2) {
+    if(drivingData[i].y > circleLineHeight) {
       return false;
     }
   }

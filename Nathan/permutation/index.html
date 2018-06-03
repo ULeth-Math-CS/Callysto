@@ -6,6 +6,7 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="experimental_circles.css">
+  <link rel="stylesheet" type="text/css" href="perm_table.css"
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -33,16 +34,22 @@
   
   </div>
   <div id="perm-subset-range-container">
-      <input class="slider"  id="perm-fullsubset-range-slider" type="range" min="4" max="10" value="5"><p id="slider-full-output"></p><br>
+      <input class="slider"  id="perm-fullsubset-range-slider" type="range" min="4" max="7" value="5"><p id="slider-full-output"></p><br>
       <input class="slider"  id="perm-fillsubset-range-slider" type="range" min="2" max="4" value="3"><p id="slider-fill-output"></p><br>
   </div>
   <div class="clear-float"></div>
   <div id="circles-subset-answer-container">
       <p id="circles-subset-answer"></p>
       <input id="reset-circles-subset" type="button" value="Reset" onclick="resetCircles_subset(this)">
-    </div>
-  <script src="circles.js"></script>
-  <script src="circles_subset.js"></script>
+  </div>
+  <div id="table-container">
+    <table id="permutation-table">
+    </table>
+    <input id="submit-table" type="button" value="Submit Answers" onclick="showFeedback()">
+  </div>
+  <script src="./circles.js"></script>
+  <script src="./circles_subset.js"></script>
+  <script src="./table_nchooser.js"></script>
 </body>
 
 </html>
