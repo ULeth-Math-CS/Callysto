@@ -16,6 +16,7 @@ from ipyleaflet import Marker, Popup, MarkerCluster
 from pickle_to_txt import read_stations, get_station_attr
 
 
+#### TODO: Encasulated the markers and the comms
 class WeatherMap(MapEvents):
     def __init__(self, Map=None):
         if Map is None:
