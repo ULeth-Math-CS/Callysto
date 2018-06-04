@@ -9,7 +9,7 @@ var subset_drag_handler = d3.behavior.drag()
     startY = d.y;
     console.log(startX);
     draggedCircleIndex = 0;
-    for(var i = 1; i < numberOfCircles*2; i=i+2) {
+    for(var i = 1; i < numberOfFullCircles*2; i=i+2) {
       if(startX == drivingSubsetData[i].x && startY == drivingSubsetData[i].y) {
         draggedCircleIndex = i;
         break;
@@ -21,40 +21,40 @@ var subset_drag_handler = d3.behavior.drag()
       var endX = Number(circle.attr("cx"));
       var endY = Number(circle.attr("cy"));
       if(endY < circleLineHeight || (startY > circleLineHeight && endY < circleLineHeight)) {
-        d3transtionBack_subset(circle, draggedCircleIndex);
+        d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
       }
       else {
         var startingIndex = numberOfCircles*2;
         for(var i = startingIndex; i < drivingSubsetData.length; ++i) {
           if(endX <= drivingSubsetData[i].x && Math.abs(drivingSubsetData[i].x-endX) < (distanceBetweenCircles/2)) {
-            if(isOccupied_subset(drivingSubsetData[i])) {
-              d3transtionBack_subset(circle, draggedCircleIndex);
+            if(isOccupied(drivingSubsetData[i], drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
+              d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
             }
 
             else {
-              d3transitionTo_subset(circle, draggedCircleIndex, i);
+              d3transitionTo(drivingSubsetData, circle, draggedCircleIndex, i, checkForSubsetEnd);
             }
             break;
           }
 
           else if(endX > drivingSubsetData[i].x && Math.abs(drivingSubsetData[i].x-endX) < (distanceBetweenCircles/2)) {
-            if(isOccupied_subset(drivingSubsetData[i])) {
-              d3transtionBack_subset(circle, draggedCircleIndex);
+            if(isOccupied(drivingSubsetData[i], drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
+              d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
             }
 
             else {
-              d3transitionTo_subset(circle, draggedCircleIndex, i);
+              d3transitionTo(drivingSubsetData, circle, draggedCircleIndex, i, checkForSubsetEnd)
             }
             break;
           }
 
           else if(endX > drivingSubsetData[i].x && i == drivingSubsetData.length-1) {
-            if(isOccupied_subset(drivingSubsetData[i])) {
-              d3transtionBack_subset(circle, draggedCircleIndex);
+            if(isOccupied(drivingSubsetData[i], drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
+              d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
             }
 
             else {
-              d3transitionTo_subset(circle, draggedCircleIndex, i);
+              d3transitionTo(drivingSubsetData, circle, draggedCircleIndex, i, checkForSubsetEnd)
             }
             break;
           }
@@ -71,12 +71,14 @@ var sliderFull = document.getElementById("perm-fullsubset-range-slider");
 var sliderFill = document.getElementById("perm-fillsubset-range-slider");
 var outputFull = document.getElementById("slider-full-output");
 var outputFill = document.getElementById("slider-fill-output");
+var subsetAnsweringTimeout;
 
 console.log(sliderFill.value);
 d3.select("#perm-fillsubset-range-slider").attr("max", Number(sliderFull.value)-1);
 d3.select("#perm-fullsubset-range-slider").attr("min", Number(sliderFill.value)+1);
 
 var drivingSubsetData = [];
+var draggedCircles_subset = [];
 var numberOfFullCircles = Number(sliderFull.value);
 var numberOfFillCircles = Number(sliderFill.value);
 for(var i = 0; i < numberOfFullCircles; ++i) {
@@ -100,7 +102,7 @@ var subsetSvg = d3.select("#experiment-subset")
   .append("g");
 
 // Create original circles
-createCircles_subset(drivingSubsetData);
+createCircles(drivingSubsetData, subsetSvg, subset_drag_handler);
 
 // Update the current slider value (each time you drag the slider handle)
 sliderFull.oninput = function() {
@@ -111,7 +113,6 @@ sliderFull.oninput = function() {
 
     else {
       removeFullCircle();
-      // Put this in removeCircles!
     }
 
     d3.select("#perm-fillsubset-range-slider").attr("max", Number(sliderFull.value)-1);
@@ -131,107 +132,6 @@ sliderFill.oninput = function() {
     d3.select("#perm-fullsubset-range-slider").attr("min", Number(sliderFill.value)+1);
 }
 
-function createCircles_subset(d) {
-    var circles = subsetSvg.selectAll("circle")
-      .data(d)
-        .enter()
-          .append("circle")
-            .attr("cx", function(d) { return d.x; })
-            .attr("cy", function(d) { return d.y; })
-            .attr("r", radius)
-            .attr("fill", function(d) { return d.color;})
-            .style("stroke", function(d) { return d.border; });
-
-    subsetSvg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < numberOfFullCircles*2; }).call(subset_drag_handler);
-
-    // d3.v4
-    // draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < numberOfCircles*2; });
-    //drag_handler(draggableCircles);
-}
-
-function updateCircles_subset() {
-    var circles = subsetSvg.selectAll("circle")
-        .data(drivingSubsetData)
-            .attr("cx", function(d) { return d.x; })
-            .attr("cy", function(d) { return d.y; })
-            .attr("fill", function(d) { return d.color; })
-            .style("stroke", function(d) { return d.border; });
-
-    
-    
-    if(areFull_subset()) {
-        console.log("Complete!");
-        var answer = d3.select("#circles-subset-answer");
-        if(isPermutation_subset()) {
-            answer.text("Correct!");
-            answer.style("background-color", "green");
-        }
-        else {
-            answer.text("Incorrect.");
-            answer.style("background-color", "red");
-        }
-        sliderFull.disabled = true;
-        sliderFill.disabled = false;
-        d3.select("#circles-subset-answer-container").style("display", "block");
-    }
-}
-
-function addCircle_subset() {
-    var match;
-    var newColor;
-    var i = 0;
-    do {
-    match = drivingSubsetData.find(function(d) { return d.color == colors[i]});
-    if(!match) {
-        newColor = colors[i];
-    }
-    ++i;
-    } while(match)
-
-    var indexOfLastFull = (numberOfCircles*2) + 2;
-    var indexOfLastCircle = indexOfLastFull + (numberOfCircles+1);
-    for(var k = numberOfCircles*2; k < indexOfLastFull; ++k) {
-        if(k == drivingSubsetData.length) {
-        drivingSubsetData.push({ x: (numberOfCircles*distanceBetweenCircles) + startingXNode, y: circleLineHeight - 50, color: newColor, border: "none"});
-        }
-        else {
-        drivingSubsetData[k] ={ x: (numberOfCircles*distanceBetweenCircles) + startingXNode, y: circleLineHeight - 50, color: newColor, border: "none"};
-        }
-    }
-
-    var index = indexOfLastFull;
-    for(var k = 0; k < numberOfCircles+1; ++k, ++index) {
-        if(index == drivingSubsetData.length) {
-            drivingSubsetData.push({ x:(k*distanceBetweenCircles) + startingXNode, y: circleLineHeight + 50, color: "none", border: "black"});
-        }
-
-        else {
-            drivingSubsetData[index] = { x: (k*distanceBetweenCircles) + startingXNode, y: circleLineHeight + 50, color: "none", border: "black"};
-        }
-    }
-
-    console.log(drivingSubsetData);
-
-    updateCircles_subset();
-
-    ++numberOfCircles;
-    var circles = subsetSvg.selectAll("circle")
-                .data(drivingSubsetData)
-                    .enter()
-                    .append("circle")
-                        .attr("cx", function(d) { return d.x; })
-                        .attr("cy", function(d) { return d.y; })
-                        .attr("r", radius)
-                        .attr("fill", function(d) { return d.color; })
-                        .style("stroke", function(d) { return d.border});
-
-
-    subsetSvg.selectAll("circle").filter(function(d,i) { return i % 2 == 1 && i < numberOfFullCircles*2; }).call(subset_drag_handler);
-  // d3.v4
-  //var draggableCircles = svg.selectAll("circle").filter(function(d,i) { return i % 2 == 1 && i < numberOfCircles*2; });
-  //drag_handler(draggableCircles);
-}
-
 function addFullCircle() {
     var match;
     var newColor;
@@ -244,9 +144,14 @@ function addFullCircle() {
       ++i;
     } while(match)
   
+    var draggedCircles = [];
+    var draggedCircleIndex = (numberOfFullCircles*2)+numberOfFillCircles;
+    console.log(draggedCircleIndex);
+    if(draggedCircleIndex < drivingSubsetData.length)
+       draggedCircles = drivingSubsetData.slice(draggedCircleIndex, drivingSubsetData.length);
+
     var indexOfLastFull = (numberOfFullCircles*2) + 2;
     for(var k = numberOfFullCircles*2; k < indexOfLastFull; ++k) {
-        console.log(drivingSubsetData[k]);
         if(k == drivingSubsetData.length) {
           drivingSubsetData.push({ x: (numberOfFullCircles*distanceBetweenCircles) + startingXNode, y: circleLineHeight - 50, color: newColor, border: "none"});
         }
@@ -266,8 +171,12 @@ function addFullCircle() {
         }
         console.log(drivingSubsetData[index]);
     }
+    
+    for(var i = 0; i < draggedCircles.length; ++i) {
+      drivingSubsetData.push(draggedCircles[i]);
+    }
 
-    updateCircles_subset();
+    updateCircles(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
 
     ++numberOfFullCircles;
     var circles = subsetSvg.selectAll("circle")
@@ -282,119 +191,141 @@ function addFullCircle() {
 
 
     subsetSvg.selectAll("circle").filter(function(d,i) { return i % 2 == 1 && i < numberOfFullCircles*2; }).call(subset_drag_handler);
+    subsetSvg.selectAll("circle").filter(function(d, i) {
+      if(i >= numberOfFullCircles*2+numberOfFillCircles) {
+        console.log(i);
+      }
+      return i >= numberOfFullCircles*2+numberOfFillCircles;
+    })
+    .on("click", function(d) { destroyElement(drivingSubsetData, subsetSvg, d, numberOfFullCircles, numberOfFillCircles); });
 }
 
 function addFillCircle() {
-    drivingSubsetData.push({ x:(numberOfFillCircles*distanceBetweenCircles) + startingXNode, y: circleLineHeight + 50, color: "none", border: "black"});
+    var draggedCircleIndex = numberOfCircles*2+numberOfFillCircles;
+    var draggedCircles = drivingSubsetData.slice(draggedCircleIndex, drivingSubsetData.length);
+    if(draggedCircles.length == 0) {
+      drivingSubsetData.push({ x:(numberOfFillCircles*distanceBetweenCircles) + startingXNode, y: circleLineHeight + 50, color: "none", border: "black"});
+    }
+    else {
+      drivingSubsetData[draggedCircleIndex++] =  { x:(numberOfFillCircles*distanceBetweenCircles) + startingXNode, y: circleLineHeight + 50, color: "none", border: "black"};
+      for(var i = 0; i < draggedCircles.length; ++i) {
+        if(i == drivingSubsetData.length) {
+          drivingSubsetData.push(draggedCircles[i])
+        }
+        else {
+          drivingSubsetData[draggedCircleIndex++] = draggedCircles[i];
+        }
+      }
+    }
     ++numberOfFillCircles;
+    updateCircles(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
     var circles = subsetSvg.selectAll("circle")
-    .data(drivingSubsetData)
-        .enter()
-        .append("circle")
-            .attr("cx", function(d) { return d.x; })
-            .attr("cy", function(d) { return d.y; })
-            .attr("r", radius)
-            .attr("fill", function(d) { return d.color; })
-            .style("stroke", function(d) { return d.border});
-}
+      .data(drivingSubsetData)
+          .enter()
+          .append("circle")
+              .attr("cx", function(d) { return d.x; })
+              .attr("cy", function(d) { return d.y; })
+              .attr("r", radius)
+              .attr("fill", function(d) { return d.color; })
+              .style("stroke", function(d) { return d.border});
 
-function removeCircle_subset() {
-  var indexToRemove = (numberOfCircles-1) * 2;
-  var numberOfCirclesToRemove = 3;
-  for(var i = indexToRemove; i < drivingSubsetData.length - numberOfCirclesToRemove; ++i) {
-    drivingSubsetData[i] = drivingSubsetData[i+2];
-  }
-
-  for(var i = 0; i < numberOfCirclesToRemove; ++i) {
-    drivingSubsetData.pop();
-  }
-
-  updateCircles_subset();
-  subsetSvg.selectAll("circle").data(drivingSubsetData).exit().remove();
+    subsetSvg.selectAll("circle").filter(function(d, i) {
+      if(i >= numberOfFullCircles*2+numberOfFillCircles) {
+        console.log(i);
+      }
+      return i >= numberOfFullCircles*2+numberOfFillCircles;
+    })
+    .on("click", function(d) { destroyElement(drivingSubsetData, subsetSvg, d, numberOfFullCircles, numberOfFillCircles); });
 }
 
 function removeFullCircle() {
-    var indexToRemove = (numberOfFullCircles-1) * 2;
+    var indexToRemove = (numberOfFullCircles*2) - 2;
     var numberOfCirclesToRemove = 2;
-    for(var i = indexToRemove; i < drivingSubsetData.length - numberOfCirclesToRemove; ++i) {
-      drivingSubsetData[i] = drivingSubsetData[i+2];
-    }
-  
-    for(var i = 0; i < numberOfCirclesToRemove; ++i) {
-      drivingSubsetData.pop();
-    }
-  
-    console.log(drivingSubsetData);
+    var colorToRemove = drivingSubsetData[indexToRemove].color;
 
-    updateCircles_subset();
-    subsetSvg.selectAll("circle").data(drivingSubsetData).exit().remove();
+    drivingSubsetData.splice(indexToRemove, 2);
+    console.log(drivingSubsetData);
     --numberOfFullCircles;
+    draggedCircleIndex = numberOfFullCircles*2+numberOfFillCircles;
+    console.log(draggedCircleIndex);
+    if(draggedCircleIndex < drivingSubsetData.length) {
+      for(var i = draggedCircleIndex; i < drivingSubsetData.length; ++i) {
+        if(drivingSubsetData[i].color == colorToRemove) {
+          drivingSubsetData.splice(i--, 1);
+        }
+      }
+    }
+
+    subsetSvg.selectAll("circle").data(drivingSubsetData).exit().remove();
+    updateCircles(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
 }
 
 function removeFillCircle() {
-    drivingSubsetData.pop();
-    --numberOfFillCircles;
-    updateCircles_subset();
+    var indexToRemove = (numberOfFullCircles*2+numberOfFillCircles) - 1;
+    for(var i = numberOfFullCircles*2+numberOfFillCircles; i < drivingSubsetData.length; ++i) {
+        if(drivingSubsetData[indexToRemove].x == drivingSubsetData[i].x && drivingSubsetData[indexToRemove].y == drivingSubsetData[i].y) {
+            drivingSubsetData.splice(i, 1);
+            break;
+        }
+    }
+    drivingSubsetData.splice((numberOfFullCircles*2+numberOfFillCircles) - 1, 1);
+    updateCircles(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
     subsetSvg.selectAll("circle").data(drivingSubsetData).exit().remove();
 }
 
-function isOccupied_subset(d) {
-    for(var i = 1; i < numberOfFullCircles*2; i = i + 2) {
-      if(d.x == drivingSubsetData[i].x && d.y == drivingSubsetData[i].y) {
-        console.log("returning true");
-        return true;
+  
+function resetCircles_subset() {
+  draggedCircleIndex = numberOfFullCircles*2+numberOfFillCircles;
+  drivingSubsetData.splice(draggedCircleIndex, numberOfFillCircles);
+  subsetSvg.selectAll("circle").data(drivingSubsetData).exit().remove();
+  clearTimeout(subsetAnsweringTimeout);
+
+  d3.select("#reset-circles-subset").style("display", "none");
+  d3.select("#circles-subset-answer").text("")
+                              .style("background-color", "transparent");
+  sliderFull.disabled = false;
+  sliderFill.disabled = false;
+  updateCircles(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
+}
+
+function checkForSubsetEnd() {
+  addDraggedCircle(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
+  var answer = d3.select("#circles-subset-answer");
+  if(areFull(drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
+    var resetButton = d3.select("#reset-circles-subset").style("display", "block");
+    if(isPermutation(drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
+      if(subsetAnsweringTimeout)
+        clearTimeout(subsetAnsweringTimeout);
+      
+        answer.style("background-color", "green");
+        answer.text("Correct.");
       }
-    }
-    return false;
-  }
-  
-  function d3transtionBack_subset(obj, objIndex) {
-    obj.transition()
-     .attr("cx", function() { return drivingSubsetData[objIndex].x; })
-     .attr("cy", function() { return drivingSubsetData[objIndex].y; });
-  }
-  
-  function d3transitionTo_subset(obj, objIndex, toIndex) {
-    obj.transition()
-      .attr("cx", function() { return drivingSubsetData[objIndex].x = drivingSubsetData[toIndex].x; })
-      .attr("cy", function() { return drivingSubsetData[objIndex].y = drivingSubsetData[toIndex].y; })
-      .each("end", function(d, i) { 
-        console.log(objIndex);
-        updateCircles_subset(); 
-      });
-  }
-  
-  function areFull_subset() {
-    var count = 0;
-    for(var i = 1; i < numberOfFullCircles*2; i = i + 2) {
-      if(drivingSubsetData[i].y > circleLineHeight) {
-        ++count;
-        if(count == numberOfFillCircles)
-            return true;
+      else {
+        answer.text("Incorrect.");
+        answer.style("background-color", "red");
       }
-    }
-  
-    return false;
+
+      sliderFull.disabled = true;
+      sliderFill.disabled = true;
   }
   
-  function isPermutation_subset() {
-    for(var i = 0; i < numberOfFullCircles*2; i=i+2) {
-      if(drivingSubsetData[i].x != drivingSubsetData[i+1].x) {
-        return true;
-      }
+
+  else {
+    if(subsetAnsweringTimeout)
+      clearTimeout(subsetAnsweringTimeout);
+
+    if(!isEmpty(drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
+      answer.text("Permutting...");
+      answer.style("background-color", "transparent");
+      subsetAnsweringTimeout = setTimeout(function() {
+        answer.style("background-color", "red");
+        answer.text("Incorrect.");
+      }, 5000);
     }
-  
-    return false;
-  }
-  
-  function resetCircles_subset() {
-    for(var i = 1; i < numberOfFullCircles*2; i = i + 2) {
-      drivingSubsetData[i].x = drivingSubsetData[i-1].x;
-      drivingSubsetData[i].y = drivingSubsetData[i-1].y;
+
+    else {
+      answer.text("");
+      answer.style("background-color", "transparent");
     }
-  
-    d3.select("#circles-subset-answer-container").style("display", "none");
-    sliderFull.disabled = false;
-    sliderFill.disabled = false;
-    updateCircles_subset();
   }
+}

@@ -3,6 +3,7 @@ var colors = ["red", "green", "blue", "gray", "yellow", "teal", "aqua", "purple"
 var startX = 0;
 var startY = 0;
 var draggedCircleIndex = 0;
+var draggedCircleColors = [];
 
 var drag_handler = d3.behavior.drag()
   .on("drag", function(d) {
@@ -27,40 +28,40 @@ var drag_handler = d3.behavior.drag()
       var endX = Number(circle.attr("cx"));
       var endY = Number(circle.attr("cy"));
       if(endY < circleLineHeight || (startY > circleLineHeight && endY < circleLineHeight)) {
-        d3transtionBack(circle, draggedCircleIndex);
+        d3transtionBack(drivingData, circle, draggedCircleIndex);
       }
       else {
         var startingIndex = numberOfCircles*2;
         for(var i = startingIndex; i < drivingData.length; ++i) {
           if(endX <= drivingData[i].x && Math.abs(drivingData[i].x-endX) < (distanceBetweenCircles/2)) {
             if(isOccupied(drivingData[i])) {
-              d3transtionBack(circle, draggedCircleIndex);
+              d3transtionBack(drivingData, circle, draggedCircleIndex);
             }
 
             else {
-              d3transitionTo(circle, draggedCircleIndex, i);
+              d3transitionTo(drivingData, circle, draggedCircleIndex, i, checkForEnd);
             }
             break;
           }
 
           else if(endX > drivingData[i].x && Math.abs(drivingData[i].x-endX) < (distanceBetweenCircles/2)) {
             if(isOccupied(drivingData[i])) {
-              d3transtionBack(circle, draggedCircleIndex);
+              d3transtionBack(drivingData, circle, draggedCircleIndex);
             }
 
             else {
-              d3transitionTo(circle, draggedCircleIndex, i);
+              d3transitionTo(drivingData, circle, draggedCircleIndex, i, checkForEnd);
             }
             break;
           }
 
           else if(endX > drivingData[i].x && i == drivingData.length-1) {
             if(isOccupied(drivingData[i])) {
-              d3transtionBack(circle, draggedCircleIndex);
+              d3transtionBack(drivingData, circle, draggedCircleIndex);
             }
 
             else {
-              d3transitionTo(circle, draggedCircleIndex, i);
+              d3transitionTo(drivingData, circle, draggedCircleIndex, i, checkForEnd);
             }
             break;
           }
@@ -96,7 +97,7 @@ var svg = d3.select("#experiment-full")
   .append("g");
 
 // Create original circles
-createCircles(drivingData);
+createCircles(drivingData, svg, drag_handler);
 
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
@@ -107,15 +108,13 @@ slider.oninput = function() {
 
     else {
       removeCircle();
-      // Put this in removeCircles!
-      --numberOfCircles;
     }
 }
 
 
-function createCircles(d) {
+function createCircles(data, svg, dragFunc) {
     var circles = svg.selectAll("circle")
-      .data(d)
+      .data(data)
         .enter()
           .append("circle")
             .attr("cx", function(d) { return d.x; })
@@ -124,56 +123,22 @@ function createCircles(d) {
             .attr("fill", function(d) { return d.color;})
             .style("stroke", function(d) { return d.border; });
 
-  var draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < numberOfCircles*2; }).call(drag_handler);
+  var draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < numberOfCircles*2; }).call(dragFunc);
 
     // d3.v4
     // draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < numberOfCircles*2; });
     //drag_handler(draggableCircles);
 }
 
-function updateCircles() {
-  var circles = svg.selectAll("circle")
-    .data(drivingData);
+function updateCircles(data, d3obj, nCircles, subset) {
+  var circles = d3obj.selectAll("circle")
+    .data(data)
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; })
+        .attr("fill", function(d) { return d.color; })
+        .style("stroke", function(d) { return d.border; });
 
-  circles.attr("cx", function(d) { return d.x; });
-  circles.attr("cy", function(d) { return d.y; });
-  circles.attr("fill", function(d) { return d.color; });
-  circles.style("stroke", function(d) { return d.border; });
-  if(areFull()) {
-    var answer = d3.select("#circles1-answer");
-    if(isPermutation()) {
-      if(answeringTimeout)
-        clearTimeout(answeringTimeout);
-      
-      answer.style("background-color", "green");
-      answer.text("Correct.");
-    }
-    else {
-      answer.text("Incorrect.");
-      answer.style("background-color", "red");
-    }
-    slider.disabled = true;
-  }
-
-  else {
-    if(answeringTimeout)
-      clearTimeout(answeringTimeout);
-      
-    var answer = d3.select("#circles1-answer");
-    if(!isEmpty()) { 
-      answer.text("Permutting...");
-      answer.style("background-color", "transparent");
-      answeringTimeout = setTimeout(function() {
-          answer.text("Incorrect.");
-          answer.style("background-color", "red");
-      }, 5000);
-    }
-
-    else {
-      answer.text("");
-      answer.style("background-color", "transparent");
-    }
-  }
+  console.log(data);
 }
 
 function addCircle() {
@@ -188,6 +153,12 @@ function addCircle() {
     ++i;
   } while(match)
 
+  var draggedCircles = [];
+  if(numberOfCircles*3 < drivingData.length)
+     draggedCircles = drivingData.slice(numberOfCircles*3, drivingData.length);
+
+  console.log(draggedCircles);
+
   var indexOfLastFull = (numberOfCircles*2) + 2;
   var indexOfLastCircle = indexOfLastFull + (numberOfCircles+1);
   for(var k = numberOfCircles*2; k < indexOfLastFull; ++k) {
@@ -199,8 +170,9 @@ function addCircle() {
       }
   }
 
+  ++numberOfCircles;
   var index = indexOfLastFull;
-  for(var k = 0; k < numberOfCircles+1; ++k, ++index) {
+  for(var k = 0; k < numberOfCircles; ++k, ++index) {
     if(index == drivingData.length) {
       drivingData.push({ x:(k*distanceBetweenCircles) + startingXNode, y: circleLineHeight + 50, color: "none", border: "black"});
     }
@@ -210,11 +182,13 @@ function addCircle() {
     }
   }
 
+  for(var i = 0; i < draggedCircles.length; ++i) {
+    drivingData.push(draggedCircles[i]);
+  }
+
   console.log(drivingData);
-
-  updateCircles();
-
-  ++numberOfCircles;
+  var answerText = d3.select("#circle1-answer");
+  updateCircles(drivingData, svg, numberOfCircles);
   var circles = svg.selectAll("circle")
                 .data(drivingData)
                   .enter()
@@ -227,75 +201,137 @@ function addCircle() {
 
 
   svg.selectAll("circle").filter(function(d,i) { return i % 2 == 1 && i < numberOfCircles*2; }).call(drag_handler);
-  // d3.v4
-  //var draggableCircles = svg.selectAll("circle").filter(function(d,i) { return i % 2 == 1 && i < numberOfCircles*2; });
-  //drag_handler(draggableCircles);
+  svg.selectAll("circle").filter(function(d, i) {
+    if(i >= numberOfCircles*3) {
+      console.log(i);
+    }
+    return i >= numberOfCircles*3;
+  })
+  .on("click", function(d) { destroyElement(drivingData, svg, d, numberOfCircles); });
+}
+
+function addDraggedCircle(data, d3obj, nCircles, subset) {
+  updateCircles(data, d3obj, nCircles, subset);
+  var circles = d3obj.selectAll("circle")
+  .data(data)
+    .enter()
+      .append("circle")
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; })
+        .attr("r", radius)
+        .attr("fill", function(d) { return d.color; })
+        .style("stroke", function(d) { return d.border});
+
+  var draggableIndex = 0;
+  if(subset) {
+    draggableIndex = nCircles*2+subset;
+  }
+
+  else {
+    draggableIndex = nCircles*3;
+  }
+
+  //svg.selectAll("circle").filter(function(d,i) { return i % 2 == 1 && i < draggableIndex; }).call(drag_handler);
+  d3obj.selectAll("circle").filter(function(d, i) {
+    if(i >= draggableIndex) {
+      console.log(i);
+    }
+    return i >= draggableIndex;
+  })
+  .on("click", function(d) { destroyElement(data, d3obj, d, nCircles, subset); });
 }
 
 function removeCircle() {
-  var indexToRemove = (numberOfCircles-1) * 2;
-  var numberOfCirclesToRemove = 3;
-  for(var i = indexToRemove; i < drivingData.length - numberOfCirclesToRemove; ++i) {
-    drivingData[i] = drivingData[i+2];
+  removeDraggedCircles();
+  var indexToRemove = (numberOfCircles * 2) - 2;
+  var circlesToRemove = 2;
+  console.log(indexToRemove);
+  for(var i = 0; i < circlesToRemove; ++i) {
+    drivingData.splice(indexToRemove, 1);
   }
 
-  for(var i = 0; i < numberOfCirclesToRemove; ++i) {
-    drivingData.pop();
-  }
+  --numberOfCircles;
 
-  updateCircles();
+  drivingData.splice(numberOfCircles*3, 1);
+
+
+  var answerText = d3.select("#circle1-answer");
+  updateCircles(drivingData, svg, numberOfCircles);
   svg.selectAll("circle").data(drivingData).exit().remove();
 }
 
-function isOccupied(d) {
-  for(var i = 1; i < numberOfCircles*2; i = i + 2) {
-    if(d.x == drivingData[i].x && d.y == drivingData[i].y) {
-      console.log("returning true");
-      return true;
+function removeDraggedCircles() {
+  var indexToRemove = numberOfCircles * 3;
+  var colorToRemove = drivingData[(numberOfCircles*2) - 1].color;
+  if(indexToRemove < drivingData.length) {
+    var i;
+    console.log(colorToRemove);
+    for(i = indexToRemove; i < drivingData.length; ++i) {
+      if(drivingData[i].color == colorToRemove) {
+          drivingData.splice(i, 1);
+      }
     }
   }
+
+  else {
+    console.log("Nothing to remove!");
+  }
+}
+
+function isOccupied(obj, data, nCircles, subset) {
+  var draggedCircleIndex = 0;
+  if(subset) {
+    draggedCircleIndex = nCircles*2+subset;
+  }
+
+  else {
+    draggedCircleIndex = nCircles*3;
+  }
+  if(draggedCircleIndex < data.length) {
+      for(var i = draggedCircleIndex; i < data.length; ++i) {
+        if(obj.x == data[i].x && obj.y == data[i].y) {
+          return true;
+        }
+      }
+  }
+
   return false;
 }
 
-function d3transtionBack(obj, objIndex) {
+function d3transtionBack(data, obj, objIndex) {
   obj.transition()
-   .attr("cx", function() { return drivingData[objIndex].x; })
-   .attr("cy", function() { return drivingData[objIndex].y; });
+   .attr("cx", function() { return data[objIndex].x; })
+   .attr("cy", function() { return data[objIndex].y; });
 }
 
-function d3transitionTo(obj, objIndex, toIndex) {
+function d3transitionTo(data, obj, objIndex, toIndex, callback) {
   obj.transition()
-    .attr("cx", function() { return drivingData[objIndex].x = drivingData[toIndex].x; })
-    .attr("cy", function() { return drivingData[objIndex].y = drivingData[toIndex].y; })
+    .attr("cx", function() { return data[objIndex].x = data[toIndex].x; })
+    .attr("cy", function() { return data[objIndex].y = data[toIndex].y; })
     .each("end", function(d, i) { 
       console.log(objIndex);
-      updateCircles(); 
+      moveTo(data, objIndex, objIndex-1);
+      createCopy(data, obj, data[toIndex].x, data[toIndex].y);
+      callback();
     });
 }
 
-function areFull() {
-  for(var i = 1; i < numberOfCircles*2; i = i + 2) {
-    if(drivingData[i].y < circleLineHeight) {
-      return false;
-    }
+function areFull(data, nCircles, subset) {
+  var draggableIndex;
+  var fullThreshold;
+  if(subset) {
+    draggableIndex = (nCircles*2) + subset;
+    fullThreshold = subset;
   }
 
-  return true;
-}
-
-function isEmpty() {
-  for(var i = 1; i < numberOfCircles*2; i = i + 2) {
-    if(drivingData[i].y > circleLineHeight) {
-      return false;
-    }
+  else {
+    draggableIndex = nCircles*3;
+    fullThreshold = nCircles;
   }
 
-  return true;
-}
 
-function isPermutation() {
-  for(var i = 0; i < numberOfCircles*2; i=i+2) {
-    if(drivingData[i].x != drivingData[i+1].x) {
+  if(draggableIndex < data.length) {
+    if((data.length - draggableIndex) == fullThreshold) {
       return true;
     }
   }
@@ -303,13 +339,115 @@ function isPermutation() {
   return false;
 }
 
-function resetCircles() {
-  for(var i = 1; i < numberOfCircles*2; i = i + 2) {
-    drivingData[i].x = drivingData[i-1].x;
-    drivingData[i].y = drivingData[i-1].y;
+function isEmpty(data, nCircles, subset) {
+  var draggableIndex = 0;
+  if(subset) {
+    draggableIndex = nCircles*2 + subset;
+  }
+  else {
+    draggableIndex = nCircles*3;
+  }
+  if(draggableIndex < drivingData.length) 
+    return false;
+
+  return true;
+}
+
+function isPermutation(data, nCircles, subset) {
+  var i;
+  if(subset) {
+    i = (nCircles*2) + subset
+  }
+  else {
+    i = nCircles*3;
   }
 
-  d3.select("#circles1-answer-container").style("display", "none");
+  for(; i < data.length-1; ++i) {
+    for(var j = i+1; j < data.length; ++j) {
+      if(data[i].color == data[j].color) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+function moveTo(data, objIndex, toIndex) {
+  data[objIndex].x = data[toIndex].x;
+  data[objIndex].y = data[toIndex].y;
+}
+
+function resetCircles() {
+  drivingData.splice(numberOfCircles*3, numberOfCircles);
+  svg.selectAll("circle").data(drivingData).exit().remove();
+  d3.select("#reset-circles").style("display", "none");
+  d3.select("#circles1-answer").text("")
+                              .style("background-color", "transparent");
   slider.disabled = false;
-  updateCircles();
+  updateCircles(drivingData, svg, numberOfCircles);
+  clearTimeout(answeringTimeout);
+}
+
+function createCopy(data, obj, atX, atY) {
+  data.push({x: atX, y: atY, color: obj.data()[0].color, border: "none"});
+}
+
+function destroyElement(data, d3obj, obj, nCircles, subset) {
+  var draggableIndex = 0;
+  if(subset) {
+    draggableIndex = nCircles*2+subset;
+  }
+
+  else {
+    draggableIndex = nCircles*3;
+  }
+  for(var i = draggableIndex; i < data.length; ++i) {
+    if(obj.x == data[i].x && obj.y == data[i].y) {
+      data.splice(i, 1);
+      break;
+    }
+  }
+
+  updateCircles(data, d3obj, nCircles, subset);
+  d3obj.selectAll("circle").data(data).exit().remove();
+}
+
+function checkForEnd() {
+  addDraggedCircle(drivingData, svg, numberOfCircles);
+  var answer = d3.select("#circles1-answer");
+  if(areFull(drivingData, numberOfCircles)) {
+    var resetButton = d3.select("#reset-circles").style("display", "block");
+    if(isPermutation(drivingData, numberOfCircles)) {
+      clearTimeout(answeringTimeout);
+      
+      answer.style("background-color", "green");
+      answer.text("Correct.");
+    }
+    else {
+      answer.text("Incorrect.");
+      answer.style("background-color", "red");
+    }
+    slider.disabled = true;
+  }
+
+
+  else {
+      if(answeringTimeout)
+        clearTimeout(answeringTimeout);
+
+      if(!isEmpty(drivingData, numberOfCircles)){ 
+        answer.text("Permutting...");
+        answer.style("background-color", "transparent");
+        answeringTimeout = setTimeout(function() {
+          answer.style("background-color", "red");
+          answer.text("Incorrect.");
+        }, 5000);
+      }
+
+    else {
+      answer.text("");
+      answer.style("background-color", "transparent");
+    }
+  }
 }

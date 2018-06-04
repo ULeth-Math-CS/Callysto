@@ -10,14 +10,24 @@ hr {
     border-color: #007399;
 }
 
+input[type=range] {
+    pointer-events: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    pointer-events:auto;
+}
+
 #reset-circles {
-    margin-left: 30%;
+    margin-left: 100px;
+    float: left;
     display: none;
 }
 
 #reset-circles-subset {
-    margin-left: 30%;
+    margin-left: 100px;
     float: left;
+    display: none;
 }
 
 #slider-output {
@@ -44,7 +54,7 @@ hr {
 
 
 #perm-range-container {
-    padding-left: 17%;
+    padding-left: 10%;
     width: 50%
 }
 
@@ -55,7 +65,7 @@ hr {
 
 #perm-range-slider {
     float: left;
-    width: 75%;
+    width: 50%;
 }
 
 #perm-fillsubset-range-slider {
@@ -74,7 +84,6 @@ hr {
     width: 50%;
     margin-left: 17%;
     margin-top: 50px;
-    display: none;
 }
 
 #circles1-answer {
@@ -99,7 +108,6 @@ hr {
     width: 50%;
     margin-left: 17%;
     margin-top: 50px;
-    display: none;
 }
 
 #circles-subset-answer {
