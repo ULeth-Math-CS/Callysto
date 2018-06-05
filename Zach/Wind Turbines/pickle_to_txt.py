@@ -1,3 +1,4 @@
+import re
 import pickle as pk
 
 # Constants
@@ -16,6 +17,9 @@ ATTRS = {
     'wmo_id': 9,
     'tc_id': 10
 }
+
+ATTRS_LIST = ['Station Name', 'Province', 'Latitude', 'Longitude', 'Elevation',
+              'Station ID', 'Start Date', 'End Date', 'Climate ID', 'WMO ID', 'TC ID']
 
 # Information template for every individual station
 class station(object):
@@ -102,9 +106,28 @@ def get_station_attr(station, attr):
         print(station)
         return None
 
+def to_csv(file_name):
+    with open(file_name, 'r') as f:
+        string = f.read()
+        lst = string.split(STATION_DELIM)
+        
+    with open('alberta_stations_data.csv', 'w') as f:
+        keep = []
+        for element in lst:
+            #keep.append(','.join(element.split(ATTR_DELIM)[:11]))
+            attrs = element.split(ATTR_DELIM)
+            for i in range(len(attrs)):
+                attrs[i] = ''.join(attrs[i].split(','))
+                #if attrs[i] == '     ':
+                if re.match(r'^\W+', attrs[i]):
+                    attrs[i] = ''
+            keep.append(','.join(attrs[:11]))
+        #print(keep[:5])
+        f.write(','.join(ATTRS_LIST))
+        f.write('\n')
+        f.write('\n'.join(keep))
+                    
+                    
 # Default if run not as a library
 if __name__ == '__main__':
-    lst = []
-    for i in range(15):
-        lst.append('alberta_stations_data.{}.pk'.format(i))
-    to_txt(lst, 'alberta_stations.txt')
+    to_csv('alberta_stations.txt')
