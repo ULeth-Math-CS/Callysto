@@ -13,6 +13,12 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
 </head>
 
 <body>
@@ -46,8 +52,12 @@
   <div id="table-container">
     <table id="permutation-table">
     </table>
-    <input id="submit-table" type="button" value="Submit Answers" onclick="showFeedback()">
+    <div id="table-button-container">
+      <input id="submit-table-button" type="button" value="Submit Answers" onclick="showFeedback()">
+      <input id="show-solutions-button" class="hidden" type="button" value="Show Solution" onclick="showTableSolution()">
+    </div>
   </div>
+  <div class="clear-float"></div>
   <script src="./circles.js"></script>
   <script src="./circles_subset.js"></script>
   <script src="./table_nchooser.js"></script>

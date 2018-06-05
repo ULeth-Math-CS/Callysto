@@ -31,14 +31,16 @@ d3.json("./pchoosenData.json", function(data) {
 
         rows.append("td")
                 .append("input")
-                .attr("class", "table-answers")
+                .classed("table-answers", true)
                     .style("width", "100%");
 
         rows.append("td")
                 .classed("table-feedback", true)
                 .classed("hidden", true);
-                
 
+        rows.append("td")
+            .classed("table-solution", true)
+            .classed("hidden", true);
 
         return table;
     }
@@ -47,17 +49,66 @@ d3.json("./pchoosenData.json", function(data) {
 })
 
 function showFeedback() {
-    var feebackCells = d3.selectAll(".table-feedback")
-        .style("display", "block");
-    console.log(feebackCells);
-    var answerCells = d3.selectAll(".table-answers");
-    for(var i = 0; i < answers.length; ++i) {
-        var num = Number(answerCells[0][i].value);
-        console.log(num + " " + answers[i]);
-        if(num == answers[i]) {
-            console.log("Correct!");
-            
+    var correctIndexes = [];
 
-        }
-    }
+    var correctAnswers = d3.selectAll(".table-answers")
+        .filter(function(d, i) {
+            if(checkAnswer(this, i)) {
+                correctIndexes.push(i);
+                return true;
+            }
+        });
+    
+    var correctFeedback = d3.selectAll(".table-feedback")
+        .filter(function(d, i) {
+            for(var j = 0; j < correctIndexes.length; ++j) {
+                if(i == correctIndexes[j]) {
+                    return true;
+                }
+            }
+        })
+        .classed("correct", true)
+        .classed("hidden", false)
+        .text("Correct!");
+
+        var incorrectFeedback = d3.selectAll(".table-feedback")
+        .filter(function(d, i) {
+            for(var j = 0; j < correctIndexes.length; ++j) {
+                if(i != correctIndexes[j]) {
+                    return true;
+                }
+            }
+        })
+        .classed("incorrect", true)
+        .classed("hidden", false)
+        .text("Incorrect!");
+
+        d3.select("show-solutions-button").classed("hidden", false);
+}
+
+function checkAnswer(obj, i, indexes) {
+    return obj.value == answers[i];
+}
+
+function showTableSolution() {
+    d3.json("pchoosenData.json", function(data) {
+        d3.selectAll(".table-solution")
+            .classed("hidden", false)
+                .data(data)
+                    .append("p")
+                        .text(function(d) {
+                            var numerator = d.available.toString();
+                            var denominator = (d.available - d.selected).toString();
+                            for(var i = d.available-1; i >= 1; --i) {
+                                numerator += " * " + i;
+                            }
+
+                            for(var i = (d.available-d.selected)-1; i >= 1; --i) {
+                                denominator += " * " + i;
+                            }
+                            return "$$_" + d.available + "P_" + d.selected + " = \\frac{" + d.available + "}{(" + d.available + "-" + d.selected + ")} = \\frac{" + numerator + "}{" + denominator + "} = " + d.answer + "$$";
+                        });
+
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    });
 }

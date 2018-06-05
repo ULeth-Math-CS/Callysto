@@ -5,7 +5,7 @@ table {
 }
 
 thead, th, td {
-    height: 25px;
+    height: 70px;
     text-align: center;
 }
 
@@ -36,7 +36,30 @@ input {
     display: none;
 }
 
+.table-answers {
+    height: 100%;
+}
+
+.table-solution {
+    width: 50%;
+}
+
 #table-container {
     margin-top: 50px;
     padding-top: 50px;
 }
+
+#table-button-container {
+    padding-top: 20px;
+    margin-left: 10%;
+    width: 25%;
+}
+
+#submit-table-button {
+    float: left;
+}
+
+#show-solutions {
+    margin-left: 20px;
+}
+
