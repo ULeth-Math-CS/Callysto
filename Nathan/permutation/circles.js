@@ -34,7 +34,7 @@ var drag_handler = d3.behavior.drag()
         var startingIndex = numberOfCircles*2;
         for(var i = startingIndex; i < drivingData.length; ++i) {
           if(endX <= drivingData[i].x && Math.abs(drivingData[i].x-endX) < (distanceBetweenCircles/2)) {
-            if(isOccupied(drivingData[i])) {
+            if(isOccupied(drivingData[i], drivingData, numberOfCircles)) {
               d3transtionBack(drivingData, circle, draggedCircleIndex);
             }
 
@@ -45,7 +45,7 @@ var drag_handler = d3.behavior.drag()
           }
 
           else if(endX > drivingData[i].x && Math.abs(drivingData[i].x-endX) < (distanceBetweenCircles/2)) {
-            if(isOccupied(drivingData[i])) {
+            if(isOccupied(drivingData[i], drivingData, numberOfCircles)) {
               d3transtionBack(drivingData, circle, draggedCircleIndex);
             }
 
@@ -56,7 +56,7 @@ var drag_handler = d3.behavior.drag()
           }
 
           else if(endX > drivingData[i].x && i == drivingData.length-1) {
-            if(isOccupied(drivingData[i])) {
+            if(isOccupied(drivingData[i], drivingData, numberOfCircles)) {
               d3transtionBack(drivingData, circle, draggedCircleIndex);
             }
 
