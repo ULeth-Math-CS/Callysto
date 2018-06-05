@@ -5,8 +5,9 @@ table {
 }
 
 thead, th, td {
-    height: 70px;
+    height: 40px;
     text-align: center;
+    width: 25%;
 }
 
 tr {
@@ -59,7 +60,11 @@ input {
     float: left;
 }
 
-#show-solutions {
+#show-solutions-button {
+    margin-left: 20px;
+}
+
+#unshow-solutions-button {
     margin-left: 20px;
 }
 
