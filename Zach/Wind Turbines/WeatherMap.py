@@ -1,4 +1,3 @@
-#import requests
 import sys
 import time
 import ipyleaflet
@@ -10,7 +9,6 @@ from ipywidgets import HTML
 from ipykernel.comm import Comm
 from MapEvents import MapEvents
 from scipy.spatial import cKDTree
-#from bs4 import BeautifulSoup as bs
 from IPython.display import HTML as HTML_DISPLAY
 from ipyleaflet import Marker, Popup, MarkerCluster
 from pickle_to_txt import read_stations, get_station_attr
@@ -18,10 +16,16 @@ from pickle_to_txt import read_stations, get_station_attr
 
 #### TODO: Encasulated the markers and the comms
 class WeatherMap(MapEvents):
-    def __init__(self, Map=None):
+    def __init__(self, Map=None, center=None, zoom=None):
         if Map is None:
-            self.center = (52.585538631877306, 245.45105824782084)
-            self.zoom = 6
+            self.center = center
+            if not center:
+                self.center = (52.585538631877306, 245.45105824782084)
+                
+            self.zoom = zoom
+            if not zoom:
+                self.zoom = 6
+                
             self.map = ipyleaflet.Map(center=self.center, zoom=self.zoom, close_popup_on_click=False)
         else:
             self.map = Map
@@ -32,7 +36,6 @@ class WeatherMap(MapEvents):
         self.markers = []
         self.current_station = None
         self.comm = None
-        #self.mousemove = self.mouse_move
 
         
     def mousemove(self, type, event, coordinates):
@@ -57,7 +60,6 @@ class WeatherMap(MapEvents):
     
     
     def comm_handler(self, comm, msg):
-        #### TODO: Find out what this does
         @comm.on_msg
         def _recv(msg):
             self.comm = msg            
