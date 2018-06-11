@@ -1,7 +1,7 @@
 {
     "1": {
         "answer" : 36,
-        "solution" : "$$\frac{5!}{2!} - 4! = 60 - 24 = 36$$",
+        "solution" : "$$\\frac{5!}{2!} - 4! = 60 - 24 = 36$$",
         "explaination" : "First we look at how many ways to rearrage APPLE. Since apply has 5 letters, we know it's 5!. However, there are two P's so we must divide by 2!. So we have $$\frac{5!}{2!} = 60$$. Now we subtract the number of ways we can arrange APPLE where two P's ARE togther. If we consider the P's as one letter we get $$4!$$ since there would 4 letters (A{PP}LE). $$4! = 24. Therefore we have:"
     },
 
