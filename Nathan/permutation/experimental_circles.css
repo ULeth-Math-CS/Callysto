@@ -18,15 +18,44 @@ input[type=range]::-webkit-slider-thumb {
     pointer-events:auto;
 }
 
+
 #reset-circles {
-    margin-left: 100px;
-    float: left;
+    float: right;
     display: none;
 }
 
+#correct-permutations {
+    margin-top: 50px;
+}
+
+#correct-permutations-table {
+    width: 50%;
+    border: 1px solid black;
+}
+
+#correct-permutations-table td {
+    border-top: 1px solid black;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#correct-subset-permutations {
+    margin-top: 50px;
+}
+
+#correct-subset-permutations-table {
+    width: 50%;
+    border: 1px solid black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+#correct-subset-permutations-table td {
+    border-top: 1px solid black;
+}
+
 #reset-circles-subset {
-    margin-left: 100px;
-    float: left;
+    float: right;
     display: none;
 }
 
@@ -52,14 +81,11 @@ input[type=range]::-webkit-slider-thumb {
     float: left;
 }
 
-
 #perm-range-container {
-    padding-left: 10%;
     width: 50%
 }
 
 #perm-subset-range-container {
-    padding-left: 17%;
     width: 50%
 }
 
@@ -71,23 +97,22 @@ input[type=range]::-webkit-slider-thumb {
 #perm-fillsubset-range-slider {
     margin-top: 20px;
     float: left;
-    width: 75%;
+    width: 50%;
 }
 
 #perm-fullsubset-range-slider {
     float: left;
-    width: 75%;
+    width: 50%;
     margin-top: 20px;
 }
 
 #circles1-answer-container {
-    width: 50%;
-    margin-left: 17%;
+    width: 25%;
     margin-top: 50px;
 }
 
 #circles1-answer {
-    width: 80px;
+    width: 75%;
     float: left;
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
@@ -105,13 +130,12 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 #circles-subset-answer-container {
-    width: 50%;
-    margin-left: 17%;
+    width: 25%;
     margin-top: 50px;
 }
 
 #circles-subset-answer {
-    width: 80px;
+    width: 75%;
     float: left;
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
@@ -158,4 +182,8 @@ input[type=range]::-webkit-slider-thumb {
     border-radius: 50%;
     background: #4CAF50;
     cursor: pointer;
+}
+
+.align-container {
+    margin-left: 20px;
 }

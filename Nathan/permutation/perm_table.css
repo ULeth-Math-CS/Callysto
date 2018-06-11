@@ -1,23 +1,31 @@
-table {
+#table-container table {
     width: 100%;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border-collapse: collapse;
 }
 
-thead, th, td {
-    height: 40px;
-    text-align: center;
-    width: 25%;
-}
-
-tr {
+#table-container tr {
     padding: 10px;
     margin-left: 15px;
     text-align: left;
 }
 
-table, thead, td, th {
+#permutation-table {
     border: 1px solid black;
+}
+
+#table-container thead, th {
+    border: 1px solid black;
+    height: 40px;
+    text-align: center;
+    width: 25%;
+}
+
+#table-container td {
+    border: 1px solid black;
+    height: 40px;
+    text-align: center;
+    width: 25%;
 }
 
 input {
@@ -43,6 +51,10 @@ input {
 
 .table-solution {
     width: 50%;
+}
+
+.width-15 {
+    width: 15%;
 }
 
 #table-container {

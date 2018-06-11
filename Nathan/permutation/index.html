@@ -26,28 +26,39 @@
   <hr>
   <div id="experiment-full">
   </div>
-  <div id="perm-range-container">
+  <div id="perm-range-container" class="align-container">
     <input class="slider" id="perm-range-slider" type="range" min="2" max="10" value="5"><span id="slider-output"></span><br>
   </div>
-  <div id="circles1-answer-container">
+  <div id="circles1-answer-container" class="align-container">
     <p id="circles1-answer"></p>
     <input id="reset-circles" type="button" value="Reset" onclick="resetCircles(this)">
+  </div>
+  <div class="clear-float"></div>
+  <div id="correct-permutations" class="align-container">
+    <table id="correct-permutations-table">
+
+    </table>
   </div>
   <div class="clear-float"></div>
   <div id="circles1-diff-permutations"> 
     <p id="diff-perm">How many different permutations can you make with the above circles? Think about it.</p>
   </div>
   <div id="experiment-subset">
-  
   </div>
-  <div id="perm-subset-range-container">
+  <div id="perm-subset-range-container" class="align-container">
       <input class="slider"  id="perm-fullsubset-range-slider" type="range" min="4" max="7" value="5"><p id="slider-full-output"></p><br>
       <input class="slider"  id="perm-fillsubset-range-slider" type="range" min="2" max="4" value="3"><p id="slider-fill-output"></p><br>
   </div>
   <div class="clear-float"></div>
-  <div id="circles-subset-answer-container">
+  <div id="circles-subset-answer-container" class="align-container">
       <p id="circles-subset-answer"></p>
       <input id="reset-circles-subset" type="button" value="Reset" onclick="resetCircles_subset(this)">
+  </div>
+  <div class="clear-float"></div>
+  <div id="correct-subset-permutations" class="align-container">
+    <table id="correct-subset-permutations-table">
+
+    </table>
   </div>
   <div id="table-container">
     <table id="permutation-table">
@@ -57,6 +68,8 @@
       <input id="show-solutions-button" class="hidden" type="button" value="Show Solution" onclick="showTableSolution()">
       <input id="unshow-solutions-button" class="hidden" type="button" value="Unshow Solutions" onclick="unshowTableSolution()">
     </div>
+  </div>
+
   </div>
   <div class="clear-float"></div>
   <script src="./circles.js"></script>

@@ -71,6 +71,7 @@ var sliderFull = document.getElementById("perm-fullsubset-range-slider");
 var sliderFill = document.getElementById("perm-fillsubset-range-slider");
 var outputFull = document.getElementById("slider-full-output");
 var outputFill = document.getElementById("slider-fill-output");
+var permutedSetsTableBody_subset = d3.select("#correct-subset-permutations-table").append("tbody");
 var subsetAnsweringTimeout;
 
 console.log(sliderFill.value);
@@ -79,6 +80,7 @@ d3.select("#perm-fullsubset-range-slider").attr("min", Number(sliderFill.value)+
 
 var drivingSubsetData = [];
 var draggedCircles_subset = [];
+var permutedSets_subset = [];
 var numberOfFullCircles = Number(sliderFull.value);
 var numberOfFillCircles = Number(sliderFill.value);
 for(var i = 0; i < numberOfFullCircles; ++i) {
@@ -297,16 +299,29 @@ function checkForSubsetEnd() {
       if(subsetAnsweringTimeout)
         clearTimeout(subsetAnsweringTimeout);
       
+      var set = getSet(drivingSubsetData, numberOfFullCircles, numberOfFillCircles);
+      var indexOfSet = setMade(permutedSets_subset, set);
+      if(indexOfSet < 0) {
+        permutedSets_subset.push(set);
+        updateTable(permutedSetsTableBody_subset, permutedSets_subset);
+
         answer.style("background-color", "green");
         answer.text("Correct.");
       }
+
       else {
-        answer.text("Incorrect.");
-        answer.style("background-color", "red");
+        displaySet(permutedSetsTableBody_subset, permutedSets_subset, indexOfSet)
+        answer.text("Permutation has already been made. Try again.");
       }
 
-      sliderFull.disabled = true;
-      sliderFill.disabled = true;
+    }
+    else {
+      answer.text("Incorrect.");
+      answer.style("background-color", "red");
+    }
+
+    sliderFull.disabled = true;
+    sliderFill.disabled = true;
   }
   
 

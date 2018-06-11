@@ -4,6 +4,7 @@ var startX = 0;
 var startY = 0;
 var draggedCircleIndex = 0;
 var draggedCircleColors = [];
+var permutedSets = [];
 
 var drag_handler = d3.behavior.drag()
   .on("drag", function(d) {
@@ -14,7 +15,6 @@ var drag_handler = d3.behavior.drag()
   .on("dragstart", function(d) {
     startX = d.x
     startY = d.y;
-    console.log(startX);
     draggedCircleIndex = 0;
     for(var i = 1; i < numberOfCircles*2; i=i+2) {
       if(startX == drivingData[i].x && startY == drivingData[i].y) {
@@ -75,6 +75,9 @@ var startingXNode = 40;
 var circleLineHeight = 150;
 var slider = document.getElementById("perm-range-slider");
 var output = document.getElementById("slider-output");
+var permutedSetsTable = d3.select("#correct-permutations").select("table");
+var permutedSetsTableHead = permutedSetsTable.append("thead");
+var permutedSetsTableBody = permutedSetsTable.append("tbody");
 var answeringTimeout;
 
 var drivingData = [];
@@ -103,10 +106,14 @@ createCircles(drivingData, svg, drag_handler);
 slider.oninput = function() {
     output.innerHTML = this.value;
     if(this.value > numberOfCircles) {
+      resetSets(permutedSetsTable, permutedSets);
+      permutedSets = [];
       addCircle();
     }
 
     else {
+      resetSets(permutedSetsTable, permutedSets);
+      permutedSets = [];
       removeCircle();
     }
 }
@@ -137,8 +144,6 @@ function updateCircles(data, d3obj, nCircles, subset) {
         .attr("cy", function(d) { return d.y; })
         .attr("fill", function(d) { return d.color; })
         .style("stroke", function(d) { return d.border; });
-
-  console.log(data);
 }
 
 function addCircle() {
@@ -156,8 +161,6 @@ function addCircle() {
   var draggedCircles = [];
   if(numberOfCircles*3 < drivingData.length)
      draggedCircles = drivingData.slice(numberOfCircles*3, drivingData.length);
-
-  console.log(draggedCircles);
 
   var indexOfLastFull = (numberOfCircles*2) + 2;
   var indexOfLastCircle = indexOfLastFull + (numberOfCircles+1);
@@ -211,6 +214,22 @@ function addCircle() {
 }
 
 function addDraggedCircle(data, d3obj, nCircles, subset) {
+  var draggableIndex = 0;
+  if(subset) {
+    draggableIndex = nCircles*2+subset;
+  }
+
+  else {
+    draggableIndex = nCircles*3;
+  }
+
+  var dCircles = data.slice(draggableIndex, data.length);
+  dCircles.sort(function(a, b) { return a.x-b.x; });
+
+  for(var i = draggableIndex; i < data.length; ++i) {
+    data[i] = dCircles[i - draggableIndex];
+  }
+
   updateCircles(data, d3obj, nCircles, subset);
   var circles = d3obj.selectAll("circle")
   .data(data)
@@ -222,20 +241,9 @@ function addDraggedCircle(data, d3obj, nCircles, subset) {
         .attr("fill", function(d) { return d.color; })
         .style("stroke", function(d) { return d.border});
 
-  var draggableIndex = 0;
-  if(subset) {
-    draggableIndex = nCircles*2+subset;
-  }
-
-  else {
-    draggableIndex = nCircles*3;
-  }
 
   //svg.selectAll("circle").filter(function(d,i) { return i % 2 == 1 && i < draggableIndex; }).call(drag_handler);
   d3obj.selectAll("circle").filter(function(d, i) {
-    if(i >= draggableIndex) {
-      console.log(i);
-    }
     return i >= draggableIndex;
   })
   .on("click", function(d) { destroyElement(data, d3obj, d, nCircles, subset); });
@@ -309,7 +317,6 @@ function d3transitionTo(data, obj, objIndex, toIndex, callback) {
     .attr("cx", function() { return data[objIndex].x = data[toIndex].x; })
     .attr("cy", function() { return data[objIndex].y = data[toIndex].y; })
     .each("end", function(d, i) { 
-      console.log(objIndex);
       moveTo(data, objIndex, objIndex-1);
       createCopy(data, obj, data[toIndex].x, data[toIndex].y);
       callback();
@@ -420,9 +427,27 @@ function checkForEnd() {
     var resetButton = d3.select("#reset-circles").style("display", "block");
     if(isPermutation(drivingData, numberOfCircles)) {
       clearTimeout(answeringTimeout);
-      
-      answer.style("background-color", "green");
-      answer.text("Correct.");
+
+      if(permutedSets.length == 0) {
+        permutedSetsTable.append("caption").text("Permuted Sets Made")
+                                    .style("color", "black");
+      }
+
+      var set = getSet(drivingData, numberOfCircles);
+      var indexOfSet = setMade(permutedSets, set);
+      if(indexOfSet < 0) {
+        permutedSets.push(set);
+        updateTable(permutedSetsTableBody, permutedSets);
+
+        answer.style("background-color", "green");
+        answer.text("Correct.");
+      }
+
+      else {
+
+        displaySet(permutedSetsTableBody, permutedSets, indexOfSet);
+        answer.text("Permutation has already been made. Try again.");
+      }
     }
     else {
       answer.text("Incorrect.");
@@ -450,4 +475,87 @@ function checkForEnd() {
       answer.style("background-color", "transparent");
     }
   }
+}
+
+function getSet(data, nCircles, subset) {
+    var draggableIndex = 0;
+    var set = [];
+    if(subset) {
+      draggableIndex = nCircles*2 + subset;
+    }
+    else {
+      draggableIndex = nCircles*3;
+    }
+
+    for(var i = draggableIndex; i < data.length; ++i) {
+      set.push(data[i].color);
+    }
+
+    return set;
+}
+
+function updateTable(tableBody, data) {
+  tableBody.selectAll("tr")
+          .data(data)
+            .enter()
+              .append("tr")
+                .style("background-color", "white")
+                  .selectAll("td")
+                    .data(function(d) { return d; })
+                      .enter()
+                        .append("td")
+                          .text(function(d) { return d; })
+                          .style("width", "100px")
+                            .style("height", "50px");
+}
+
+function resetSets(table, data) {
+  data = [];
+  table.select("caption").remove();
+
+  var tableBody = table.select("tbody");
+
+  tableBody.selectAll("tr")
+    .data(data)
+      .selectAll("td")
+        .data(function(d) { return d; })
+          .text(function(d) { return d; })
+  
+  tableBody.selectAll("tr")
+    .data(data)
+      .exit()
+        .remove();
+}
+
+function setMade(data, set) {
+  var checkCount = 0;
+  for(var i = 0; i < data.length; ++i) {
+    for(var j = 0; j < data[i].length; ++j) {
+      if(data[i][j] == set[j]) { 
+        checkCount += 1;
+        if(checkCount == data[i].length) {
+          return i;
+        }
+      }
+    }
+  }
+  return -1
+}
+
+function displaySet(svgObject, data, index) {
+  console.log(index);
+  var setToTransition = svgObject.selectAll("tr")
+  .data(data)
+    .filter(function(d,i) {
+      return i == index;
+    });
+
+  setToTransition.transition()
+    .duration(1500)
+    .style("background-color", "green")
+    .each("end", function() {
+    setToTransition.transition()
+              .duration(1000)
+              .style("background-color", "white"); 
+  })
 }
