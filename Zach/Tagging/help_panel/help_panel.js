@@ -183,8 +183,39 @@ define([
     };
 
     var populate_side_panel = function(side_panel) {
-        var side_panel_inner = side_panel.find('.side_panel_inner')
-        var add_to = $('<div id="form_testing"><form>Subject: <input type="text" name="Subject" value=""><br>Grade &nbsp;: <input type="text" name="Grade" value=""><br></form></div>')
+        var side_panel_inner = side_panel.find('.side_panel_inner');
+        var add_to = $(`<div id="form_testing">
+                            <p id="StoreGrade" hidden></p>
+                            <p id="StoreSubject" hidden></p>
+                            <p id="StoreSummary" hidden></p>
+                            <form>
+                                Grade &nbsp;: <input type="text" id="Grade" value="`+Jupyter.notebook.metadata['info']['Grade']+`"><br>
+                                Subject: <input type="text" id="Subject" value="`+Jupyter.notebook.metadata['info']['Subject']+`"><br>
+                                Subject: <textarea id="Summary" cols="50" rows="10">`+Jupyter.notebook.metadata['info']['Summary']+`</textarea><br>
+                                <input type="button" value="Apply" onclick="UpdateMeta();"/>
+                            </form>
+                        </div>`);
+        
+        //var button = $('<button type="button" onclick="UpdateMeta">Apply Changes</button>');
+        var script = $(function () {
+                        $('<script>')
+                            .attr('type', 'text/javascript')
+                            .text(`function UpdateMeta()
+                                   {
+                                       var grade = document.getElementById("Grade").value;
+                                       var subject = document.getElementById("Subject").value;
+                                       var summary = document.getElementById("Summary").value;
+                                       
+                                       document.getElementById("StoreGrade").value = grade;
+                                       document.getElementById("StoreSubject").value = subject;
+                                       document.getElementById("StoreSummary").value = summary;
+                                       
+                                       //alert(document.getElementById("StoreGrade").value);
+                                       //alert(document.getElementById("StoreSubject").value);
+                                       //alert(document.getElementById("StoreSummary").value);
+                                   }`)
+                            .appendTo(side_panel_inner);
+                     });
         side_panel_inner.append( '<p>Test</p>' ).append(add_to);
         //var form = $('<form></form>');
         //$form.append('<input type="button" value="button">').appendTo(side_panel.find('.side_panel_inner'));
@@ -225,14 +256,32 @@ define([
         var main_panel = $('#notebook_panel');
         var side_panel = $('#side_panel');
 
+        var side_panel_inner = side_panel.find('.side_panel_inner');
+        //Jupyter.notebook.metadata['info'] = {'Grade': '', 'Subject': '', 'Summary': ''};
+        //Jupyter.notebook.metadata['info']['Grade'] = $('input[name=Grade]');
+        //Jupyter.notebook.metadata['info']['Subject'] = $('input[name=Subject]');
+        //Jupyter.notebook.metadata['info']['Summary'] = $('textarea[name=Summary]');
+        
         Jupyter.notebook.keyboard_manager.disable();
-        console.log(Jupyter.notebook.services.contents);
+        //Jupyter.notebook.metadata['info'] = {'Grade': '', 'Subject': '', 'Summary': ''};
+        console.log(Jupyter.notebook.metadata);
         
         if (side_panel.length < 1) {
+            //Jupyter.notebook.metadata['info'] = {'Grade': '', 'Subject': '', 'Summary': ''};
             side_panel = $('<div id="side_panel"/>');
             build_side_panel(main_panel, side_panel,
                 side_panel_min_rel_width, side_panel_max_rel_width);
             populate_side_panel(side_panel);
+        }
+        else
+        {
+            //alert("Saving");
+            //Jupyter.notebook.metadata['info']['Grade'] = $('p#StoreGrade').val();
+            //Jupyter.notebook.metadata['info']['Subject'] = $('p#StoreSubject').val();
+            //Jupyter.notebook.metadata['info']['Summary'] = $('p#StoreSummary').val();
+            Jupyter.notebook.metadata['info']['Grade'] = $('input#Grade').val();
+            Jupyter.notebook.metadata['info']['Subject'] = $('input#Subject').val();
+            Jupyter.notebook.metadata['info']['Summary'] = $('textarea#Summary').val();
         }
 
         var visible = slide_side_panel(main_panel, side_panel);
