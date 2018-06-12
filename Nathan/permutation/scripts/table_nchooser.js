@@ -1,6 +1,6 @@
 var answers = [];
 var solutionsShowed = false;
-d3.json("./pchoosenData.json", function(data) {
+d3.json("./data/pchoosenData.json", function(data) {
     for(var i = 0; i < data.length; ++i) {
         answers.push(data[i].answer);
     }
@@ -144,7 +144,7 @@ function checkAnswer(obj, i, indexes) {
 function showTableSolution() {
     if(!solutionsShowed) {
         solutionsShowed = true;
-        d3.json("pchoosenData.json", function(data) {
+        d3.json("./data/pchoosenData.json", function(data) {
             d3.selectAll(".table-solution")
                 .classed("hidden", false)
                     .data(data)

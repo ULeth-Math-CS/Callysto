@@ -57,7 +57,7 @@ function isAPermutation() {
 }
 
 function submitRestrictions() {
-   d3.json("restriction-solutions.json", function(data) {
+   d3.json("./data/restriction-solutions.json", function(data) {
        var correctIndexes = [];
        var correctAnswers = d3.selectAll(".restriction-answers")
                                .filter(function(d, i) {
@@ -111,7 +111,7 @@ function submitRestrictions() {
 }
 
 function showRestrictionSolutions() {
-    d3.json("restriction-solutions.json", function(data) {
+    d3.json("./data/restriction-solutions.json", function(data) {
          var jsonArray = [];
          jsonLength = Object.keys(data).length;
          jsonKeysLength = Object.keys(data["1"]).length - 1;
