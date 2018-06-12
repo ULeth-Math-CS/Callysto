@@ -92,19 +92,17 @@ for(var i = 0; i < numberOfFillCircles; ++i) {
   drivingSubsetData.push({ x: (i*distanceBetweenCircles)+startingXNode, y: circleLineHeight+50, color: "none", border: "black" });
 }
 
-
-console.log(drivingSubsetData);
 outputFull.innerHTML = sliderFull.value; // Display the default slider value
 outputFill.innerHTML = sliderFill.value;
 // Create svg
 var subsetSvg = d3.select("#experiment-subset")
   .append("svg")
     .attr("width", "100%")
-    .attr("height", 300)
+    .attr("height", "300px")
   .append("g");
 
 // Create original circles
-createCircles(drivingSubsetData, subsetSvg, subset_drag_handler);
+createCircles(drivingSubsetData, subsetSvg, subset_drag_handler, numberOfFullCircles);
 
 // Update the current slider value (each time you drag the slider handle)
 sliderFull.oninput = function() {
@@ -330,7 +328,7 @@ function checkForSubsetEnd() {
       clearTimeout(subsetAnsweringTimeout);
 
     if(!isEmpty(drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
-      answer.text("Permutting...");
+      answer.text("Permuting...");
       answer.style("background-color", "transparent");
       subsetAnsweringTimeout = setTimeout(function() {
         answer.style("background-color", "red");

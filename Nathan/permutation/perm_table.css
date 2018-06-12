@@ -65,7 +65,7 @@ input {
 #table-button-container {
     padding-top: 20px;
     margin-left: 10%;
-    width: 25%;
+    width: 30%
 }
 
 #submit-table-button {
@@ -74,9 +74,11 @@ input {
 
 #show-solutions-button {
     margin-left: 20px;
+    float: right;
 }
 
 #unshow-solutions-button {
     margin-left: 20px;
+    float: right;
 }
 

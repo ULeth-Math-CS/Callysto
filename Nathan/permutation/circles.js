@@ -96,11 +96,11 @@ output.innerHTML = slider.value; // Display the default slider value
 var svg = d3.select("#experiment-full")
   .append("svg")
     .attr("width", "80%")
-    .attr("height", 300)
+    .attr("height", "300px")
   .append("g");
 
 // Create original circles
-createCircles(drivingData, svg, drag_handler);
+createCircles(drivingData, svg, drag_handler, numberOfCircles);
 
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
@@ -119,7 +119,7 @@ slider.oninput = function() {
 }
 
 
-function createCircles(data, svg, dragFunc) {
+function createCircles(data, svg, dragFunc, nCircles) {
     var circles = svg.selectAll("circle")
       .data(data)
         .enter()
@@ -130,7 +130,7 @@ function createCircles(data, svg, dragFunc) {
             .attr("fill", function(d) { return d.color;})
             .style("stroke", function(d) { return d.border; });
 
-  var draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < numberOfCircles*2; }).call(dragFunc);
+  var draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < nCircles*2; }).call(dragFunc);
 
     // d3.v4
     // draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < numberOfCircles*2; });
@@ -354,7 +354,7 @@ function isEmpty(data, nCircles, subset) {
   else {
     draggableIndex = nCircles*3;
   }
-  if(draggableIndex < drivingData.length) 
+  if(draggableIndex < data.length) 
     return false;
 
   return true;
@@ -506,7 +506,9 @@ function updateTable(tableBody, data) {
                         .append("td")
                           .text(function(d) { return d; })
                           .style("width", "100px")
-                            .style("height", "50px");
+                          .style("height", "50px")
+                          .style("text-align", "center")
+                          .classed("rendered_html", false);
 }
 
 function resetSets(table, data) {

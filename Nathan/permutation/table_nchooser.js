@@ -15,22 +15,33 @@ d3.json("./pchoosenData.json", function(data) {
                     .enter()
                         .append("th")
                             .text(function(d) { return d; })
+                            .style("width", "15%")
+                            .style("text-align", "center")
+                            .classed(".rendered_html", false);
         thead.select("tr")
                 .append("th")
                     .text("Answers")
                     .classed("hidden", true)
-                    .attr("id", "table-feedback-header");
+                    .classed(".rendered_html", false)
+                    .style("text-align", "center")
+                    .attr("id", "table-feedback-header")
+                    .style("width", "20%");
 
         thead.select("tr")
                 .append("th")
                     .text("Solutions")
                     .classed("hidden", true)
-                    .attr("id", "table-solution-header");
+                    .classed(".rendered_html", false)
+                    .attr("id", "table-solution-header")
+                    .style("width", "50%")
+                    .style("text-align", "center");
         
         var rows = tbody.selectAll("tr")
             .data(data)
                 .enter()
-                    .append("tr");
+                    .append("tr")
+                    .style("text-align", "center")
+                    .classed(".rendered_html", false);
 
         var cells = rows.selectAll('td')
             .data(function(row) {
@@ -39,20 +50,28 @@ d3.json("./pchoosenData.json", function(data) {
                 })
             }).enter()
             .append("td")
-                .text(function(d) { return d.value; });
-
+                .text(function(d) { return d.value; })
+                .classed(".rendered_html", false)
+                .style("text-align", "center")
+        
         rows.append("td")
                 .append("input")
                 .classed("table-answers", true)
-                    .style("width", "100%");
+                .style("text-align", "center")
+                .classed(".rendered_html", false)
+                .style("width", "100%");
 
         rows.append("td")
                 .classed("table-feedback", true)
-                .classed("hidden", true);
+                .classed("hidden", true)
+                .style("text-align", "center")
+                .classed(".rendered_html", false);
 
         rows.append("td")
             .classed("table-solution", true)
-            .classed("hidden", true);
+            .classed("hidden", true)
+            .style("text-align", "center")
+            .classed(".rendered_html", false);
 
         return table;
     }
@@ -107,9 +126,15 @@ function showFeedback() {
         .classed("correct", false)
         .classed("hidden", false)
         .text("Incorrect!");
-
-        d3.select("#table-feedback-header").classed("hidden", false);
-        d3.select("#show-solutions-button").classed("hidden", false);
+        var showSolutionsButton = d3.select("#show-solutions-button");
+        var unshowSolutionsButton = d3.select("#unshow-solutions-button");
+        if(unshowSolutionsButton.classed("hidden") && showSolutionsButton.classed("hidden"))
+            d3.select("#show-solutions-button").classed("hidden", false);
+    
+        var feedbackHeader = d3.select("#table-feedback-header");
+        if(feedbackHeader.classed("hidden")) {
+           feedbackHeader.classed("hidden", false);
+        }
 }
 
 function checkAnswer(obj, i, indexes) {
@@ -155,13 +180,12 @@ function showTableSolution() {
                             for(var i = (d.available-d.selected)-1; i >= 1; --i) {
                                 denominator += " * " + i;
                             }
-                            return "$$_" + d.available + "P_" + d.selected + " = \\frac{" + d.available + "}{(" + d.available + "-" + d.selected + ")} = \\frac{" + numerator + "}{" + denominator + "} = " + d.answer + "$$";
+                            return "$$_" + d.available + "P_" + d.selected + " = \\frac{" + d.available + "!}{(" + d.available + "-" + d.selected + ")!} = \\frac{" + numerator + "}{" + denominator + "} = " + d.answer + "$$";
                         });
 
             MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
         });
     }
-
     d3.select("#table-solution-header").classed("hidden", false);
     d3.select("#show-solutions-button").classed("hidden", true);
     d3.select("#unshow-solutions-button").classed("hidden", false);
