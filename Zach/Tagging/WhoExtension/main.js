@@ -12,25 +12,44 @@ define([
     "use strict";
 
     var initialize = function () {
-        var dropdown = $("<select></select>").attr("id", "snippet_picker")
+        var dropdown = $("<select></select>").attr("id", "class_selector")
                                              .css("margin-left", "0.75em")
-                                             .attr("class", "form-control select-xs")
-                                             .change(insert_cell);
-        Jupyter.toolbar.element.append(dropdown);
+                                             .attr("class", "form-control select-xs");
+                                             //.change(insert_cell);
+        Jupyter.toolbar.element.append(dropdown).append( $( "h2" ) );
+
+        var option = $("<option></option>")
+                         .attr("id", "header")
+                         .text("");
+        $("select#class_selector").append(option);
+        
+        // Add all of the base subjects
+        var subjectOptions = ["Math", "Physics", "Humanities", "Geogrophy"];
+        var i;
+        for(i = 0; i < subjectOptions.length; ++i)
+        {
+            var option = $("<option></option>").attr("value", 'None')
+                                               .text(subjectOptions[i]);
+                                               //.attr("code", "");
+            
+            $("select#class_selector").append(option);
+        }
     };
 
     // will be called when the nbextension is loaded
     function load_extension() {
         Jupyter.notebook.config.loaded.then(initialize); // trigger loading config parameters
-        var option = $("<option></option>")
-                         .attr("value", 'ERROR')
-                         .text('Error: failed to load snippets!')
-                         .attr("code", "");
-        $("select#snippet_picker").append(option);
-        /*
-        $.getJSON(Jupyter.notebook.base_url+"nbextensions/snippets/snippets.json", function(data) {
+        /*var option = $("<option></option>")
+                         .attr("id", "snippet_header")
+                         .text("Snippets");
+        $("#snippet_picker__23454").add(option);
+        
+        var option = $("<option></option>").attr("value", 'ERROR').text('Error: failed to load snippets!').attr("code", "");
+        $("#snippet_picker__23454").add(option);*/
+        
+        //$.getJSON(Jupyter.notebook.base_url+"nbextensions/snippets/snippets.json", function(data) {
             // Add the header as the top option, does nothing on click
-            var option = $("<option></option>")
+            /*var option = $("<option></option>")
                          .attr("id", "snippet_header")
                          .text("Snippets");
             $("select#snippet_picker").append(option);
@@ -51,12 +70,12 @@ define([
                          .text('Error: failed to load snippets!')
                          .attr("code", "");
             $("select#snippet_picker").append(option);
-        });*/
+        });//*/
 
     };
 
     var insert_cell = function() {
-        var selected_snippet = $("select#snippet_picker").find(":selected");
+        var selected_snippet = $("select#class_selector").find(":selected");
 
         if (selected_snippet.attr("name") != 'header') {
             var code = selected_snippet.attr("code");
@@ -64,7 +83,7 @@ define([
             new_cell.set_text(code);
             new_cell.focus_cell();
 
-            $("option#snippet_header").prop("selected",true);
+            //$("option#snippet_header").prop("selected",true);
         }
     };
 
