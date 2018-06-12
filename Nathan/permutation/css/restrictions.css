@@ -1,34 +1,35 @@
 #restriction-questions-container {
     margin-top: 20px;
+    margin-left: 10px;
 }
 
-#restriction-questions-container input {
-    margin: 10px;
-}
-
-#exercise2-button-container {
+#restrictions-button-container {
     width: 50%;
+    height: 50px;
     margin-top: 10px;
 }
 
-#submit-restrictions {
+#submit-restrictions-button {
+    margin-top: 20px;
     float: left;
 }
 
 #restriction-solutions-container {
+    margin-left: 10px;
     margin-top: 20px;
 }
 
 #restriction-solutions-button {
+    margin-top: 20px;
     float: right;
 }
 
-.exercise2-answer-fb-container {
+.restriction-exercise-container {
     width: 50%;
+    margin-top: 20px;
 }
 
 .restriction-answers {
-    margin-left: 10px;
     float: left;
 }
 
@@ -36,4 +37,9 @@
     float: right;
     text-align: center;
     width: 25%;
+}
+
+.restriction-solutions {
+    width: 60%;
+    margin-top: 20px;
 }
