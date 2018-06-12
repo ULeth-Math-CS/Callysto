@@ -1,0 +1,39 @@
+#restriction-questions-container {
+    margin-top: 20px;
+}
+
+#restriction-questions-container input {
+    margin: 10px;
+}
+
+#exercise2-button-container {
+    width: 50%;
+    margin-top: 10px;
+}
+
+#submit-restrictions {
+    float: left;
+}
+
+#restriction-solutions-container {
+    margin-top: 20px;
+}
+
+#restriction-solutions-button {
+    float: right;
+}
+
+.exercise2-answer-fb-container {
+    width: 50%;
+}
+
+.restriction-answers {
+    margin-left: 10px;
+    float: left;
+}
+
+.restriction-feedback {
+    float: right;
+    text-align: center;
+    width: 25%;
+}

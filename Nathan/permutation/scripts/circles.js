@@ -5,6 +5,8 @@ var startY = 0;
 var draggedCircleIndex = 0;
 var draggedCircleColors = [];
 var permutedSets = [];
+var numberOfSetsAllowed = 0;
+var tableComplete = false;
 
 var drag_handler = d3.behavior.drag()
   .on("drag", function(d) {
@@ -72,7 +74,7 @@ var drag_handler = d3.behavior.drag()
 var radius = 20;
 var distanceBetweenCircles = 80;
 var startingXNode = 40;
-var circleLineHeight = 150;
+var circleLineHeight = 100;
 var slider = document.getElementById("perm-range-slider");
 var output = document.getElementById("slider-output");
 var permutedSetsTable = d3.select("#correct-permutations").select("table");
@@ -81,15 +83,8 @@ var permutedSetsTableBody = permutedSetsTable.append("tbody");
 var answeringTimeout;
 
 var drivingData = [];
-var numberOfCircles = Number(slider.value);
-for(var i = 0; i < numberOfCircles; ++i) {
-  drivingData.push({x:(i*distanceBetweenCircles)+startingXNode, y: circleLineHeight-50, color:colors[i], border: "none" });
-  drivingData.push({x:(i*distanceBetweenCircles)+startingXNode, y: circleLineHeight-50, color:colors[i], border: "none" });
-}
-
-for(var i = 0; i < numberOfCircles; ++i) {
-  drivingData.push({ x: (i*distanceBetweenCircles)+startingXNode, y: circleLineHeight+50, color: "none", border: "black" });
-}
+var numberOfCircles = slider.value;
+numberOfSetsAllowed = factorial(numberOfCircles);
 
 output.innerHTML = slider.value; // Display the default slider value
 // Create svg
@@ -99,28 +94,40 @@ var svg = d3.select("#experiment-full")
     .attr("height", "300px")
   .append("g");
 
+// Initialize data
+drivingData = initData(numberOfCircles);
 // Create original circles
 createCircles(drivingData, svg, drag_handler, numberOfCircles);
 
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
     output.innerHTML = this.value;
+    if(tableComplete) {
+      drivingData = [];
+      svg.selectAll("circle").data(drivingData).exit().remove();
+      drivingData = initData(numberOfCircles);
+      createCircles(drivingData, svg, drag_handler, numberOfCircles);
+      tableComplete = false;
+      var answer = d3.select("#circles1-answer").text("").style("background-color", "transparent");
+    }
+
+    resetSets(permutedSetsTable, permutedSets);
+    permutedSets = [];
+
     if(this.value > numberOfCircles) {
-      resetSets(permutedSetsTable, permutedSets);
-      permutedSets = [];
       addCircle();
     }
 
     else {
-      resetSets(permutedSetsTable, permutedSets);
-      permutedSets = [];
       removeCircle();
+      
     }
+    numberOfSetsAllowed = factorial(numberOfCircles);
 }
 
 
-function createCircles(data, svg, dragFunc, nCircles) {
-    var circles = svg.selectAll("circle")
+function createCircles(data, d3Object, dragFunc, nCircles) {
+    var circles = d3Object.selectAll("circle")
       .data(data)
         .enter()
           .append("circle")
@@ -130,7 +137,7 @@ function createCircles(data, svg, dragFunc, nCircles) {
             .attr("fill", function(d) { return d.color;})
             .style("stroke", function(d) { return d.border; });
 
-  var draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < nCircles*2; }).call(dragFunc);
+  var draggableCircles = d3Object.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < nCircles*2; }).call(dragFunc);
 
     // d3.v4
     // draggableCircles = svg.selectAll("circle").filter(function(d, i) { return i % 2 == 1 && i < numberOfCircles*2; });
@@ -189,7 +196,6 @@ function addCircle() {
     drivingData.push(draggedCircles[i]);
   }
 
-  console.log(drivingData);
   var answerText = d3.select("#circle1-answer");
   updateCircles(drivingData, svg, numberOfCircles);
   var circles = svg.selectAll("circle")
@@ -205,9 +211,6 @@ function addCircle() {
 
   svg.selectAll("circle").filter(function(d,i) { return i % 2 == 1 && i < numberOfCircles*2; }).call(drag_handler);
   svg.selectAll("circle").filter(function(d, i) {
-    if(i >= numberOfCircles*3) {
-      console.log(i);
-    }
     return i >= numberOfCircles*3;
   })
   .on("click", function(d) { destroyElement(drivingData, svg, d, numberOfCircles); });
@@ -253,7 +256,6 @@ function removeCircle() {
   removeDraggedCircles();
   var indexToRemove = (numberOfCircles * 2) - 2;
   var circlesToRemove = 2;
-  console.log(indexToRemove);
   for(var i = 0; i < circlesToRemove; ++i) {
     drivingData.splice(indexToRemove, 1);
   }
@@ -273,16 +275,11 @@ function removeDraggedCircles() {
   var colorToRemove = drivingData[(numberOfCircles*2) - 1].color;
   if(indexToRemove < drivingData.length) {
     var i;
-    console.log(colorToRemove);
     for(i = indexToRemove; i < drivingData.length; ++i) {
       if(drivingData[i].color == colorToRemove) {
           drivingData.splice(i, 1);
       }
     }
-  }
-
-  else {
-    console.log("Nothing to remove!");
   }
 }
 
@@ -424,7 +421,7 @@ function checkForEnd() {
   addDraggedCircle(drivingData, svg, numberOfCircles);
   var answer = d3.select("#circles1-answer");
   if(areFull(drivingData, numberOfCircles)) {
-    var resetButton = d3.select("#reset-circles").style("display", "block");
+    var resetButton = d3.select("#reset-circles");
     if(isPermutation(drivingData, numberOfCircles)) {
       clearTimeout(answeringTimeout);
 
@@ -439,8 +436,16 @@ function checkForEnd() {
         permutedSets.push(set);
         updateTable(permutedSetsTableBody, permutedSets);
 
-        answer.style("background-color", "green");
-        answer.text("Correct.");
+        if(permutedSets.length == numberOfSetsAllowed) {
+          tableComplete = true;
+          disableDrag(drivingData, svg, numberOfCircles);
+          answer.text("You made all the different sets you can! Good job!");
+          answer.style("background-color", "green");
+        }
+        else {
+          answer.style("background-color", "green");
+          answer.text("Correct.");
+        }
       }
 
       else {
@@ -453,7 +458,10 @@ function checkForEnd() {
       answer.text("Incorrect.");
       answer.style("background-color", "red");
     }
-    slider.disabled = true;
+    if(!tableComplete) {
+      resetButton.style("display", "block");
+      slider.disabled = true;
+    }
   }
 
 
@@ -532,6 +540,7 @@ function resetSets(table, data) {
 function setMade(data, set) {
   var checkCount = 0;
   for(var i = 0; i < data.length; ++i) {
+    checkCount = 0;
     for(var j = 0; j < data[i].length; ++j) {
       if(data[i][j] == set[j]) { 
         checkCount += 1;
@@ -545,7 +554,6 @@ function setMade(data, set) {
 }
 
 function displaySet(svgObject, data, index) {
-  console.log(index);
   var setToTransition = svgObject.selectAll("tr")
   .data(data)
     .filter(function(d,i) {
@@ -560,4 +568,42 @@ function displaySet(svgObject, data, index) {
               .duration(1000)
               .style("background-color", "white"); 
   })
+}
+
+function disableDrag(data, d3Object, nCircles) {
+  d3Object.selectAll("circle").filter(function(d, i) {
+    if(i % 2 == 1 && i < nCircles*2) {
+      drivingData.splice(i, 1);
+      return true;
+    }
+  })
+  .remove();
+}
+
+function initData(nCircles, subset) {
+  var data = [];
+  for(var i = 0; i < numberOfCircles; ++i) {
+    data.push({x:(i*distanceBetweenCircles)+startingXNode, y: circleLineHeight-50, color:colors[i], border: "none" });
+    data.push({x:(i*distanceBetweenCircles)+startingXNode, y: circleLineHeight-50, color:colors[i], border: "none" });
+  }
+  
+  var numberOfFills = subset ? subset : nCircles;
+  
+  for(var i = 0; i < numberOfFills; ++i) {
+    data.push({ x: (i*distanceBetweenCircles)+startingXNode, y: circleLineHeight+50, color: "none", border: "black" });
+  }
+
+  return data;
+}
+
+function factorial(num)
+{
+    var rval=1;
+    for (var i = 2; i <= num; i++)
+        rval = rval * i;
+    return rval;
+}
+
+function reinitializeCircles(data, svgObject, nCircles) {
+
 }

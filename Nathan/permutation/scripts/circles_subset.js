@@ -66,13 +66,15 @@ var subset_drag_handler = d3.behavior.drag()
 var radius = 20;
 var distanceBetweenCircles = 80;
 var startingXNode = 40;
-var circleLineHeight = 150;
+var circleLineHeight = 100;
 var sliderFull = document.getElementById("perm-fullsubset-range-slider");
 var sliderFill = document.getElementById("perm-fillsubset-range-slider");
 var outputFull = document.getElementById("slider-full-output");
 var outputFill = document.getElementById("slider-fill-output");
+var permutedSetsTable_subset = d3.select("#correct-subset-permutations-table");
 var permutedSetsTableBody_subset = d3.select("#correct-subset-permutations-table").append("tbody");
 var subsetAnsweringTimeout;
+var tableComplete_subset = false;
 
 console.log(sliderFill.value);
 d3.select("#perm-fillsubset-range-slider").attr("max", Number(sliderFull.value)-1);
@@ -83,6 +85,8 @@ var draggedCircles_subset = [];
 var permutedSets_subset = [];
 var numberOfFullCircles = Number(sliderFull.value);
 var numberOfFillCircles = Number(sliderFill.value);
+var numberOfSetsAllowed_subset = factorial(numberOfFullCircles) / factorial(numberOfFullCircles - numberOfFillCircles);
+var tableComplete_subset = false;
 for(var i = 0; i < numberOfFullCircles; ++i) {
   drivingSubsetData.push({x:(i*distanceBetweenCircles)+startingXNode, y: circleLineHeight-50, color:colors[i], border: "none" });
   drivingSubsetData.push({x:(i*distanceBetweenCircles)+startingXNode, y: circleLineHeight-50, color:colors[i], border: "none" });
@@ -107,6 +111,18 @@ createCircles(drivingSubsetData, subsetSvg, subset_drag_handler, numberOfFullCir
 // Update the current slider value (each time you drag the slider handle)
 sliderFull.oninput = function() {
     outputFull.innerHTML = this.value;
+    if(tableComplete_subset) {
+      drivingSubsetData = [];
+      subsetSvg.selectAll("circle").data(drivingSubsetData).exit().remove();
+      drivingSubsetData = initData(numberOfFullCircles, numberOfFillCircles);
+      createCircles(drivingData, svg, drag_handler, numberOfCircles);
+      tableComplete_subset = false;
+      var answer = d3.select("#circles-subset-answer").text("").style("background-color", "transparent");
+    }
+
+    resetSets(permutedSetsTable_subset, permutedSets);
+    permutedSets_subset = [];
+
     if(this.value > numberOfFullCircles) {
       addFullCircle();
     }
@@ -114,12 +130,25 @@ sliderFull.oninput = function() {
     else {
       removeFullCircle();
     }
-
+    numberOfSetsAllowed_subset = factorial(numberOfFullCircles) / factorial(numberOfFullCircles - numberOfFillCircles);
+    console.log(numberOfSetsAllowed_subset);
     d3.select("#perm-fillsubset-range-slider").attr("max", Number(sliderFull.value)-1);
 }
 
 sliderFill.oninput = function() {
     outputFill.innerHTML = this.value;
+    if(tableComplete_subset) {
+      drivingSubsetData = [];
+      subsetSvg.selectAll("circle").data(drivingSubsetData).exit().remove();
+      drivingSubsetData = initData(numberOfFullCircles, numberOfFillCircles);
+      createCircles(drivingData, svg, drag_handler, numberOfCircles);
+      tableComplete_subset = false;
+      var answer = d3.select("#circles-subset-answer").text("").style("background-color", "transparent");
+    }
+
+    resetSets(permutedSetsTable_subset, permutedSets);
+    permutedSets_subset = [];
+
     if(this.value > numberOfFillCircles) {
       addFillCircle();
     }
@@ -128,7 +157,8 @@ sliderFill.oninput = function() {
       removeFillCircle();
       // Put this in removeCircles!
     }
-
+    console.log(numberOfSetsAllowed_subset);
+    numberOfSetsAllowed_subset = factorial(numberOfFullCircles) / factorial(numberOfFullCircles - numberOfFillCircles);
     d3.select("#perm-fullsubset-range-slider").attr("min", Number(sliderFill.value)+1);
 }
 
@@ -269,6 +299,7 @@ function removeFillCircle() {
         }
     }
     drivingSubsetData.splice((numberOfFullCircles*2+numberOfFillCircles) - 1, 1);
+    --numberOfFillCircles;
     updateCircles(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
     subsetSvg.selectAll("circle").data(drivingSubsetData).exit().remove();
 }
@@ -292,7 +323,7 @@ function checkForSubsetEnd() {
   addDraggedCircle(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
   var answer = d3.select("#circles-subset-answer");
   if(areFull(drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
-    var resetButton = d3.select("#reset-circles-subset").style("display", "block");
+    var resetButton = d3.select("#reset-circles-subset");
     if(isPermutation(drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
       if(subsetAnsweringTimeout)
         clearTimeout(subsetAnsweringTimeout);
@@ -302,9 +333,16 @@ function checkForSubsetEnd() {
       if(indexOfSet < 0) {
         permutedSets_subset.push(set);
         updateTable(permutedSetsTableBody_subset, permutedSets_subset);
-
-        answer.style("background-color", "green");
-        answer.text("Correct.");
+        if(permutedSets_subset.length == numberOfSetsAllowed_subset) {
+          tableComplete_subset = true;
+          disableDrag(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
+          answer.text("You made all the different sets you can! Good job!");
+          answer.style("background-color", "green");
+        }
+        else {
+          answer.style("background-color", "green");
+          answer.text("Correct.");
+        }
       }
 
       else {
@@ -317,9 +355,11 @@ function checkForSubsetEnd() {
       answer.text("Incorrect.");
       answer.style("background-color", "red");
     }
-
-    sliderFull.disabled = true;
-    sliderFill.disabled = true;
+    if(!tableComplete_subset) {
+      resetButton.style("display", "block");
+      sliderFull.disabled = true;
+      sliderFill.disabled = true;
+    }
   }
   
 
