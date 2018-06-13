@@ -1,0 +1,5 @@
+#Python Cache files
+*.pyc
+
+#Checkpoints
+*-checkpoint.ipynb
