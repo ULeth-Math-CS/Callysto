@@ -1,2 +1,7 @@
-.ipynb_checkpoints/
 *.html
+=======
+#Python Cache files
+*.pyc
+
+#Checkpoints
+*-checkpoint.ipynb
