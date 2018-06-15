@@ -7,6 +7,7 @@ var draggedCircleColors = [];
 var permutedSets = [];
 var numberOfSetsAllowed = 0;
 var tableComplete = false;
+var scrollingThreshold = 8;
 
 var drag_handler = d3.behavior.drag()
   .on("drag", function(d) {
@@ -77,7 +78,7 @@ var startingXNode = 40;
 var circleLineHeight = 100;
 var slider = document.getElementById("perm-range-slider");
 var output = document.getElementById("slider-output");
-var permutedSetsTable = d3.select("#correct-permutations").select("table");
+var permutedSetsTable = d3.select("#correct-permutations").select("table").style("width", "100%");
 var permutedSetsTableHead = permutedSetsTable.append("thead");
 var permutedSetsTableBody = permutedSetsTable.append("tbody");
 var answeringTimeout;
@@ -108,7 +109,7 @@ slider.oninput = function() {
       drivingData = initData(numberOfCircles);
       createCircles(drivingData, svg, drag_handler, numberOfCircles);
       tableComplete = false;
-      var answer = d3.select("#circles1-answer").text("").style("background-color", "transparent");
+      d3.select("#circles1-answer").text("").style("background-color", "transparent");
     }
 
     resetSets(permutedSetsTable, permutedSets);
@@ -422,8 +423,8 @@ function checkForEnd() {
   var answer = d3.select("#circles1-answer");
   if(areFull(drivingData, numberOfCircles)) {
     var resetButton = d3.select("#reset-circles");
+    clearTimeout(answeringTimeout);
     if(isPermutation(drivingData, numberOfCircles)) {
-      clearTimeout(answeringTimeout);
 
       if(permutedSets.length == 0) {
         permutedSetsTable.append("caption").text("Permuted Sets Made")
@@ -434,12 +435,18 @@ function checkForEnd() {
       var indexOfSet = setMade(permutedSets, set);
       if(indexOfSet < 0) {
         permutedSets.push(set);
-        updateTable(permutedSetsTableBody, permutedSets);
+        updateTable(permutedSetsTable, permutedSets);
+        if(permutedSets.length >= scrollingThreshold) {
+          d3.select("#correct-permutations").style("overflow-y", "scroll");
+        }
+        else {
+          d3.select("#correct-permutations").style("overflow-y", "hidden");
+        }
 
         if(permutedSets.length == numberOfSetsAllowed) {
           tableComplete = true;
           disableDrag(drivingData, svg, numberOfCircles);
-          answer.text("You made all the different sets you can! Good job!");
+          answer.text("You made all the different sets you can! Good job! You many scroll the slider to make a new set.");
           answer.style("background-color", "green");
         }
         else {
@@ -452,10 +459,14 @@ function checkForEnd() {
 
         displaySet(permutedSetsTableBody, permutedSets, indexOfSet);
         answer.text("Permutation has already been made. Try again.");
+        answer.style("background-color", "red");
       }
     }
     else {
-      answer.text("Incorrect.");
+      if(areDuplicates(drivingData, numberOfCircles)) {
+        answer.text("Incorrect. You cannot use the same circle twice as there are no repetitions in the original set");
+      }
+      
       answer.style("background-color", "red");
     }
     if(!tableComplete) {
@@ -470,11 +481,11 @@ function checkForEnd() {
         clearTimeout(answeringTimeout);
 
       if(!isEmpty(drivingData, numberOfCircles)){ 
-        answer.text("Permutting...");
+        answer.text("Permuting...");
         answer.style("background-color", "transparent");
         answeringTimeout = setTimeout(function() {
           answer.style("background-color", "red");
-          answer.text("Incorrect.");
+          answer.text("Incorrect. You need to complete the set.");
         }, 5000);
       }
 
@@ -502,8 +513,9 @@ function getSet(data, nCircles, subset) {
     return set;
 }
 
-function updateTable(tableBody, data) {
-  tableBody.selectAll("tr")
+function updateTable(table, data) {
+  table.select("tbody")
+        .selectAll("tr")
           .data(data)
             .enter()
               .append("tr")
@@ -513,7 +525,7 @@ function updateTable(tableBody, data) {
                       .enter()
                         .append("td")
                           .text(function(d) { return d; })
-                          .style("width", "100px")
+                          .style("width", (100 / numberOfCircles).toString() + "%")
                           .style("height", "50px")
                           .style("text-align", "center")
                           .classed("rendered_html", false);
@@ -573,7 +585,7 @@ function displaySet(svgObject, data, index) {
 function disableDrag(data, d3Object, nCircles) {
   d3Object.selectAll("circle").filter(function(d, i) {
     if(i % 2 == 1 && i < nCircles*2) {
-      drivingData.splice(i, 1);
+      data.splice(i, 1);
       return true;
     }
   })
@@ -604,6 +616,28 @@ function factorial(num)
     return rval;
 }
 
-function reinitializeCircles(data, svgObject, nCircles) {
+function areDuplicates(data, nCircles, subset) {
+  var draggedIndex = 0;
+  if(subset) {
+    draggedIndex = nCircles*2 + subset;
+  }
 
+  else {
+    draggedIndex = nCircles*3;
+  }
+
+  var currentColors = colors.slice(0, numberOfCircles);
+  var colorCount = 0;
+  for(var i = 0; i < currentColors.length; ++i) {
+    for(var j = draggedIndex; j < data.length; ++j) {
+      if(currentColors[i] == data[j].color) {
+        ++colorCount;
+        if(colorCount > 1) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
 }

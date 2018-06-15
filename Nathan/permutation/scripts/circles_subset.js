@@ -71,7 +71,7 @@ var sliderFull = document.getElementById("perm-fullsubset-range-slider");
 var sliderFill = document.getElementById("perm-fillsubset-range-slider");
 var outputFull = document.getElementById("slider-full-output");
 var outputFill = document.getElementById("slider-fill-output");
-var permutedSetsTable_subset = d3.select("#correct-subset-permutations-table");
+var permutedSetsTable_subset = d3.select("#correct-subset-permutations-table").style("width", "100%");
 var permutedSetsTableBody_subset = d3.select("#correct-subset-permutations-table").append("tbody");
 var subsetAnsweringTimeout;
 var tableComplete_subset = false;
@@ -332,11 +332,19 @@ function checkForSubsetEnd() {
       var indexOfSet = setMade(permutedSets_subset, set);
       if(indexOfSet < 0) {
         permutedSets_subset.push(set);
-        updateTable(permutedSetsTableBody_subset, permutedSets_subset);
+        updateTable(permutedSetsTable_subset, permutedSets_subset);
+        if(permutedSets_subset.length >= scrollingThreshold) {
+          d3.select("#correct-subset-permutations").style("overflow-y", "scroll");
+        }
+
+        else {
+          d3.select("#correct-subset-permutations").style("overflow-y", "hidden");
+        }
+
         if(permutedSets_subset.length == numberOfSetsAllowed_subset) {
           tableComplete_subset = true;
           disableDrag(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
-          answer.text("You made all the different sets you can! Good job!");
+          answer.text("You made all the different sets you can! Good job! You many scroll the slider to make a new set.");
           answer.style("background-color", "green");
         }
         else {
@@ -352,7 +360,7 @@ function checkForSubsetEnd() {
 
     }
     else {
-      answer.text("Incorrect.");
+      
       answer.style("background-color", "red");
     }
     if(!tableComplete_subset) {
@@ -372,7 +380,7 @@ function checkForSubsetEnd() {
       answer.style("background-color", "transparent");
       subsetAnsweringTimeout = setTimeout(function() {
         answer.style("background-color", "red");
-        answer.text("Incorrect.");
+        answer.text("Incorrect. You need to complete the set.");
       }, 5000);
     }
 
