@@ -7,7 +7,6 @@ var subset_drag_handler = d3.behavior.drag()
   .on("dragstart", function(d) {
     startX = d.x
     startY = d.y;
-    console.log(startX);
     draggedCircleIndex = 0;
     for(var i = 1; i < numberOfFullCircles*2; i=i+2) {
       if(startX == drivingSubsetData[i].x && startY == drivingSubsetData[i].y) {
@@ -24,7 +23,7 @@ var subset_drag_handler = d3.behavior.drag()
         d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
       }
       else {
-        var startingIndex = numberOfCircles*2;
+        var startingIndex = numberOfFullCircles*2;
         for(var i = startingIndex; i < drivingSubsetData.length; ++i) {
           if(endX <= drivingSubsetData[i].x && Math.abs(drivingSubsetData[i].x-endX) < (distanceBetweenCircles/2)) {
             if(isOccupied(drivingSubsetData[i], drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
@@ -75,8 +74,6 @@ var permutedSetsTable_subset = d3.select("#correct-subset-permutations-table").s
 var permutedSetsTableBody_subset = d3.select("#correct-subset-permutations-table").append("tbody");
 var subsetAnsweringTimeout;
 var tableComplete_subset = false;
-
-console.log(sliderFill.value);
 d3.select("#perm-fillsubset-range-slider").attr("max", Number(sliderFull.value)-1);
 d3.select("#perm-fullsubset-range-slider").attr("min", Number(sliderFill.value)+1);
 
@@ -117,7 +114,6 @@ sliderFull.oninput = function() {
       drivingSubsetData = initData(numberOfFullCircles, numberOfFillCircles);
       createCircles(drivingData, svg, drag_handler, numberOfCircles);
       tableComplete_subset = false;
-      var answer = d3.select("#circles-subset-answer").text("").style("background-color", "transparent");
     }
 
     resetSets(permutedSetsTable_subset, permutedSets);
@@ -131,8 +127,10 @@ sliderFull.oninput = function() {
       removeFullCircle();
     }
     numberOfSetsAllowed_subset = factorial(numberOfFullCircles) / factorial(numberOfFullCircles - numberOfFillCircles);
-    console.log(numberOfSetsAllowed_subset);
     d3.select("#perm-fillsubset-range-slider").attr("max", Number(sliderFull.value)-1);
+    clearTimeout(subsetAnsweringTimeout);
+        var answer = d3.select("#circles-subset-answer").text("").style("background-color", "transparent");
+    answer.text("");
 }
 
 sliderFill.oninput = function() {
@@ -143,7 +141,6 @@ sliderFill.oninput = function() {
       drivingSubsetData = initData(numberOfFullCircles, numberOfFillCircles);
       createCircles(drivingData, svg, drag_handler, numberOfCircles);
       tableComplete_subset = false;
-      var answer = d3.select("#circles-subset-answer").text("").style("background-color", "transparent");
     }
 
     resetSets(permutedSetsTable_subset, permutedSets);
@@ -155,11 +152,12 @@ sliderFill.oninput = function() {
 
     else {
       removeFillCircle();
-      // Put this in removeCircles!
     }
-    console.log(numberOfSetsAllowed_subset);
     numberOfSetsAllowed_subset = factorial(numberOfFullCircles) / factorial(numberOfFullCircles - numberOfFillCircles);
     d3.select("#perm-fullsubset-range-slider").attr("min", Number(sliderFill.value)+1);
+    clearTimeout(subsetAnsweringTimeout);
+    var answer = d3.select("#circles-subset-answer").text("").style("background-color", "transparent");
+    answer.text("");
 }
 
 function addFullCircle() {
@@ -199,7 +197,6 @@ function addFullCircle() {
         else {
             drivingSubsetData[index] = { x: (k*distanceBetweenCircles) + startingXNode, y: circleLineHeight + 50, color: "none", border: "black"};
         }
-        console.log(drivingSubsetData[index]);
     }
     
     for(var i = 0; i < draggedCircles.length; ++i) {
@@ -222,16 +219,13 @@ function addFullCircle() {
 
     subsetSvg.selectAll("circle").filter(function(d,i) { return i % 2 == 1 && i < numberOfFullCircles*2; }).call(subset_drag_handler);
     subsetSvg.selectAll("circle").filter(function(d, i) {
-      if(i >= numberOfFullCircles*2+numberOfFillCircles) {
-        console.log(i);
-      }
       return i >= numberOfFullCircles*2+numberOfFillCircles;
     })
     .on("click", function(d) { destroyElement(drivingSubsetData, subsetSvg, d, numberOfFullCircles, numberOfFillCircles); });
 }
 
 function addFillCircle() {
-    var draggedCircleIndex = numberOfCircles*2+numberOfFillCircles;
+    var draggedCircleIndex = numberOfFullCircles*2+numberOfFillCircles;
     var draggedCircles = drivingSubsetData.slice(draggedCircleIndex, drivingSubsetData.length);
     if(draggedCircles.length == 0) {
       drivingSubsetData.push({ x:(numberOfFillCircles*distanceBetweenCircles) + startingXNode, y: circleLineHeight + 50, color: "none", border: "black"});
@@ -260,9 +254,6 @@ function addFillCircle() {
               .style("stroke", function(d) { return d.border});
 
     subsetSvg.selectAll("circle").filter(function(d, i) {
-      if(i >= numberOfFullCircles*2+numberOfFillCircles) {
-        console.log(i);
-      }
       return i >= numberOfFullCircles*2+numberOfFillCircles;
     })
     .on("click", function(d) { destroyElement(drivingSubsetData, subsetSvg, d, numberOfFullCircles, numberOfFillCircles); });
@@ -298,7 +289,7 @@ function removeFillCircle() {
             break;
         }
     }
-    drivingSubsetData.splice((numberOfFullCircles*2+numberOfFillCircles) - 1, 1);
+    drivingSubsetData.splice(indexToRemove, 1);
     --numberOfFillCircles;
     updateCircles(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
     subsetSvg.selectAll("circle").data(drivingSubsetData).exit().remove();
@@ -324,9 +315,13 @@ function checkForSubsetEnd() {
   var answer = d3.select("#circles-subset-answer");
   if(areFull(drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
     var resetButton = d3.select("#reset-circles-subset");
+    clearTimeout(subsetAnsweringTimeout);
     if(isPermutation(drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
-      if(subsetAnsweringTimeout)
-        clearTimeout(subsetAnsweringTimeout);
+        
+      if(permutedSets_subset.length == 0) {
+        permutedSetsTable_subset.append("caption").text("Permuted Sets Made")
+                                    .style("color", "black");
+      }
       
       var set = getSet(drivingSubsetData, numberOfFullCircles, numberOfFillCircles);
       var indexOfSet = setMade(permutedSets_subset, set);
@@ -377,7 +372,7 @@ function checkForSubsetEnd() {
 
     if(!isEmpty(drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
       answer.text("Permuting...");
-      answer.style("background-color", "transparent");
+      answer.style("background-color", "yellow");
       subsetAnsweringTimeout = setTimeout(function() {
         answer.style("background-color", "red");
         answer.text("Incorrect. You need to complete the set.");

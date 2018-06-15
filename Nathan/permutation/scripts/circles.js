@@ -7,7 +7,7 @@ var draggedCircleColors = [];
 var permutedSets = [];
 var numberOfSetsAllowed = 0;
 var tableComplete = false;
-var scrollingThreshold = 8;
+var scrollingThreshold = 6;
 
 var drag_handler = d3.behavior.drag()
   .on("drag", function(d) {
@@ -482,7 +482,7 @@ function checkForEnd() {
 
       if(!isEmpty(drivingData, numberOfCircles)){ 
         answer.text("Permuting...");
-        answer.style("background-color", "transparent");
+        answer.style("background-color", "yellow");
         answeringTimeout = setTimeout(function() {
           answer.style("background-color", "red");
           answer.text("Incorrect. You need to complete the set.");

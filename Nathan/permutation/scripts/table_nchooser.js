@@ -125,7 +125,7 @@ function showFeedback() {
         .classed("incorrect", true)
         .classed("correct", false)
         .classed("hidden", false)
-        .text("Incorrect!");
+        .text("Incorrect.");
         var showSolutionsButton = d3.select("#show-solutions-button");
         var unshowSolutionsButton = d3.select("#unshow-solutions-button");
         if(unshowSolutionsButton.classed("hidden") && showSolutionsButton.classed("hidden"))
