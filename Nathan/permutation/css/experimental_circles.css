@@ -4,21 +4,55 @@ h1 {
 
 body {
     background-color: #0099cc;
+    margin-left: 10px;
 }
 
 hr {
     border-color: #007399;
 }
 
+input[type=range] {
+    pointer-events: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    pointer-events:auto;
+}
+
 #reset-circles {
-    margin-left: 30%;
+    float: right;
+    display: none;
+}
+
+#experiment-container {
+    margin-top: 50px;
+}
+
+#correct-permutations-table {
+    border: 1px solid black;
+}
+
+#correct-permutations-table td {
+    border-top: 1px solid black;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#correct-subset-permutations-table {
+    width: 50%;
+    border: 1px solid black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+#correct-subset-permutations-table td {
+    border-top: 1px solid black;
 }
 
 #reset-circles-subset {
-    margin-left: 30%;
-    float: left;
+    float: right;
+    display: none;
 }
-
 
 #slider-output {
     margin-left: 10px;
@@ -42,43 +76,39 @@ hr {
     float: left;
 }
 
-
 #perm-range-container {
-    padding-left: 17%;
-    width: 50%
+    width: 50%;
+    float: left;
+    padding-top: 20px;
 }
 
 #perm-subset-range-container {
-    padding-left: 17%;
-    width: 50%
+    width: 50%;
 }
 
 #perm-range-slider {
     float: left;
-    width: 75%;
+    width: 50%;
 }
 
 #perm-fillsubset-range-slider {
     margin-top: 20px;
     float: left;
-    width: 75%;
+    width: 50%;
 }
 
 #perm-fullsubset-range-slider {
     float: left;
-    width: 75%;
+    width: 50%;
     margin-top: 20px;
 }
 
 #circles1-answer-container {
-    width: 50%;
-    margin-left: 17%;
-    margin-top: 50px;
-    display: none;
+    width: 25%;
 }
 
 #circles1-answer {
-    width: 80px;
+    width: 75%;
     float: left;
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
@@ -96,14 +126,12 @@ hr {
 }
 
 #circles-subset-answer-container {
-    width: 50%;
-    margin-left: 17%;
+    width: 25%;
     margin-top: 50px;
-    display: none;
 }
 
 #circles-subset-answer {
-    width: 80px;
+    width: 75%;
     float: left;
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
@@ -150,4 +178,19 @@ hr {
     border-radius: 50%;
     background: #4CAF50;
     cursor: pointer;
+}
+
+.align-container {
+    margin-left: 20px;
+}
+
+.permutation-table-container {
+    float: right;
+    width: 40%;
+    height: 300px;
+}
+
+.experiment {
+    float: left;
+    width: 60%;   
 }
