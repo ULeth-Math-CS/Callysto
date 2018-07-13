@@ -344,7 +344,9 @@ function checkTable() {
              }
              
          }
-    }) 
+    });
+    
+    d3.select("#show-table-solutions-button").classed("hidden", false);
 }
 
 function showTableSolutions() {
@@ -399,8 +401,94 @@ function createTableSolutionData(numberOfRows) {
     return data;
 }
 
-function showExerciseSolutions() {
+function checkExercises() {
+    let answers = d3.selectAll(".exercise-answers");
     
+    d3.json("./data/exercises.json", function(data) {
+        let jsonArray = [];
+        jsonLength = Object.keys(data).length;
+        for(let i = 0; i < jsonLength; ++i) {
+            jsonArray.push(data[(i+1).toString()].answer);
+        }
+    
+    
+        let feedback = d3.selectAll(".exercise-feedback")
+        
+        let correctAnswers = answers.filter(function(d,i) {
+            if(this.value == "")
+                 return false;
+            
+            let answer = this.value.toLowerCase();
+            
+            if(answer == jsonArray[i]) {
+                d3.select(feedback[0][i])
+                              .classed("hidden", false)
+                              .classed("green", true)
+                              .classed("red", false)
+                              .text("Correct!");
+                return true;
+            }
+            
+            console.log("Incorrect.");
+            d3.select(feedback[0][i])
+                        .classed("hidden", false)
+                        .classed("green", false)
+                        .classed("red", true)
+                        .text("Incorrect");
+
+            
+        });
+    });
+    
+    answeredQuestions = answers.filter(function(d) { 
+        if(this.value == "")
+            return false;
+        
+        return true;
+    });
+    
+    if(answeredQuestions[0].length >= 3) {
+        d3.select("#show-exercise-solutions-button").classed("hidden", false);
+        d3.select("#exercise-error-message").classed("hidden", true);
+    }
+    else
+        d3.select("#exercise-error-message").classed("hidden", false)
+                                            .text("You must answer at least 3 questions before seeing the solutions.")
+                                            .classed("red", true);
+}
+
+function showExerciseSolutions() {
+    let exerciseContainer = d3.select("#combination-exercises-solutions-container");
+    
+    d3.json("./data/exercises.json", function(data) {
+        let jsonArray = [];
+        jsonLength = Object.keys(data).length;
+        for(let i = 0; i < jsonLength; ++i) {
+            jsonArray.push([]);
+            jsonArray[i].push(data[(i+1).toString()].explaination);
+            if(data[(i+1).toString()].solution != "")
+                jsonArray[i].push(data[(i+1).toString()].solution);
+        }
+        
+        let questionNumber = 1;
+        exerciseContainer.selectAll("div")
+                      .data(jsonArray)
+                             .enter()
+                                .append("div")
+                                        .classed("exercise-solution-container", true)
+                                            .selectAll("p")
+                                                .data(function(d) { return d; })
+                                                     .enter()
+                                                          .append("p")
+                                                              .text(function(d, i) {
+                                                                        if(i == 0)
+                                                                            return questionNumber++ + ") " + d;
+                                                                        else
+                                                                            return d;
+                                                                });
+        
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    });
 }
 
 function factorial(num)

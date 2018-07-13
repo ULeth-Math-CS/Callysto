@@ -23,9 +23,21 @@ body {
     color: green;
 }
 
+.hidden {
+   display: none;
+}
+
 .pascal-element {
     stroke-width: 2;
     stroke: black;
+}
+
+.clear-floats {
+    clear: both;
+}
+
+.exercise-solution-container {
+    margin-top: 20px;
 }
 
 #n-choose-r-table-container {
@@ -84,4 +96,8 @@ body {
 
 #combination-exercises-buttons-container {
     padding-top: 10px;
+}
+
+#combination-exercises-container input {
+   margin: 10px;
 }
