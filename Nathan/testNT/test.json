@@ -1,0 +1,9 @@
+{
+    "1" : 
+        {
+            "question" : "What is the answer to the meaning of life?",
+            "answer" : 42,
+            "solution" : "Dolphin said so",
+            "explanation" : "Yes"
+        }
+}

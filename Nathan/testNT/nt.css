@@ -1,0 +1,31 @@
+.question-container {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-container {
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.answer-input {
+    width: 100px;
+    text-align: center;
+    height: 25px;
+    margin-top: 10px;
+}
+
+.show-solutions-button {
+    margin-left: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.correct {
+    color: green;
+}
