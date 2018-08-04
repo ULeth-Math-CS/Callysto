@@ -2,19 +2,26 @@
     width: 50%;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+}
+
+.question-container input[type=text] {
+    height: 30px;
+    text-align: center;
+}
+
+.question-container input[type=radio] {
+    margin-top: 10px;
+}
+
+.solutions-container {
+    margin-top: 20px;
 }
 
 .button-container {
     width: 50%;
     display: flex;
     justify-content: flex-start;
-    margin-top: 10px;
-}
-
-.answer-input {
-    width: 100px;
-    text-align: center;
-    height: 25px;
     margin-top: 10px;
 }
 
@@ -28,4 +35,8 @@
 
 .correct {
     color: green;
+}
+
+.incorrect {
+    color:red;
 }
