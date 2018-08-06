@@ -1,0 +1,44 @@
+{
+    "1" : 
+        {
+            "question" : "What is the answer to the meaning of life?",
+            "answer" : 42,
+            "solution" : "Dolphin said so",
+            "explanation" : "Yes"
+        },
+    "2" : 
+        {
+            "question" : "What is the name of Jackie Chan's character in Rush Hour?",
+            "answer" : "Lee",
+            "solution" : "Dolphin said so",
+            "explanation" : "Yes"
+        },
+    "3" : 
+        {
+            "question" : "In what year did Japan surrender during World War II?",
+            "answer": 2,
+            "options" : [ 1943, 1941, 1939, 1945 ],
+            "explanation" : "Japan surrendered in 1945 when The United States Of America dropped atomic bombs on Hiroshima and Nagasaki."
+        },
+    "4" :
+        {
+            "question" : "What hero has the ability \"Arcane aura\"?",
+            "answer" : 2,
+            "options" : [ "Pugna", "Earthshaker", "Crystal Maiden", "Arc Warden"],
+            "explanation" : ""
+        },
+    "5" :
+        {
+            "question" : "Which of the following heroes can obtain/have their ultimates before level 6?",
+            "answer" : [1, 3],
+            "options" : ["Phantom Assassin", "Invoker", "Templar Assassin", "Meepo"],
+            "explanation" : "Invoker starts with his ultimate, Invoke, at level 1. Meepo can obtain his at level 3."
+        },
+    "6" :
+        {
+            "question" : "Shadow Fiend's \"Presence of the Dark Lord\" ability grants -6 armor reduction to enemies at max level?",
+            "answer" : 0,
+            "options" : ["True", "False"],
+            "explanation" : ""
+        }
+}
