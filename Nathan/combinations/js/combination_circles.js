@@ -37,6 +37,7 @@ var subset_drag_handler = d3.behavior.drag()
     for(var i = 1; i < numberOfFullCircles*2; i=i+2) {
       if(startX == drivingSubsetData[i].x && startY == drivingSubsetData[i].y) {
         draggedCircleIndex = i;
+        console.log(draggedCircleIndex);
         break;
       }
     }
@@ -45,7 +46,7 @@ var subset_drag_handler = d3.behavior.drag()
     var circle = d3.select(this);
     var endX = Number(circle.attr("cx"));
     var endY = Number(circle.attr("cy"));
-    console.log("Helllo!" + startX)
+    console.log("endX" + endX + " endY " + endY);
     if(endY < circleLineHeight || (startY > circleLineHeight && endY < circleLineHeight)) {
       d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
     }
