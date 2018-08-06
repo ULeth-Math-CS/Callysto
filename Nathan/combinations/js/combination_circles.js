@@ -20,6 +20,10 @@ var numberOfFillCircles = Number(sliderFill.value);
 var numberOfSetsAllowed_subset = factorial(numberOfFullCircles) / (factorial(numberOfFillCircles) * factorial(numberOfFullCircles - numberOfFillCircles));
 var tableComplete_subset = false;
 
+var startX = 0;
+var startY = 0;
+var draggedCircleIndex = 0;
+
 var subset_drag_handler = d3.behavior.drag()
   .on("drag", function(d) {
         d3.select(this)
@@ -38,10 +42,10 @@ var subset_drag_handler = d3.behavior.drag()
     }
   })
   .on("dragend", function(d) {
-    console.log("Helllo!")
     var circle = d3.select(this);
     var endX = Number(circle.attr("cx"));
     var endY = Number(circle.attr("cy"));
+    console.log("Helllo!" + startX)
     if(endY < circleLineHeight || (startY > circleLineHeight && endY < circleLineHeight)) {
       d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
     }
