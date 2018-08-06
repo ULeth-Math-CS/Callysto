@@ -44,6 +44,7 @@ var subset_drag_handler = d3.behavior.drag()
   })
   .on("dragend", function(d) {
     var circle = d3.select(this);
+    console.log(circle);
     var endX = Number(circle.attr("cx"));
     var endY = Number(circle.attr("cy"));
     console.log("endX" + endX + " endY " + endY);
@@ -626,8 +627,8 @@ function d3transtionBack(data, obj, objIndex) {
 
 function d3transitionTo(data, obj, objIndex, toIndex, callback) {
   console.log("Transition to " + data[toIndex].x + " " + data[toIndex].y);
-  console.log(obj);
-  obj.transition()
+  d3.select(obj)
+    .transition()
     .attr("cx", function() { return data[objIndex].x = data[toIndex].x; })
     .attr("cy", function() { return data[objIndex].y = data[toIndex].y; })
     .each("end", function(d, i) { 
