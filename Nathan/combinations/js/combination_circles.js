@@ -1,3 +1,4 @@
+colors = [ "green", "blue", "red", "yellow", "cyan"];
 var subset_drag_handler = d3.behavior.drag()
   .on("drag", function(d) {
         d3.select(this)
