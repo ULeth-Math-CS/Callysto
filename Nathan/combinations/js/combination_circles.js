@@ -633,6 +633,8 @@ function d3transitionTo(data, obj, objIndex, toIndex, callback) {
       createCopy(data, obj, data[toIndex].x, data[toIndex].y);
       callback();
     });
+
+    updateCircles(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
 }
 
 function moveTo(data, objIndex, toIndex) {
