@@ -38,51 +38,52 @@ var subset_drag_handler = d3.behavior.drag()
     }
   })
   .on("dragend", function(d) {
-      var circle = d3.select(this);
-      var endX = Number(circle.attr("cx"));
-      var endY = Number(circle.attr("cy"));
-      if(endY < circleLineHeight || (startY > circleLineHeight && endY < circleLineHeight)) {
-        d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
-      }
-      else {
-        var startingIndex = numberOfFullCircles*2;
-        for(var i = startingIndex; i < drivingSubsetData.length; ++i) {
-          if(endX <= drivingSubsetData[i].x && Math.abs(drivingSubsetData[i].x-endX) < (distanceBetweenCircles/2)) {
-            if(isOccupied(drivingSubsetData[i], drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
-              d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
-            }
-
-            else {
-              d3transitionTo(drivingSubsetData, circle, draggedCircleIndex, i, checkForSubsetEnd);
-            }
-            break;
+    console.log("Helllo!")
+    var circle = d3.select(this);
+    var endX = Number(circle.attr("cx"));
+    var endY = Number(circle.attr("cy"));
+    if(endY < circleLineHeight || (startY > circleLineHeight && endY < circleLineHeight)) {
+      d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
+    }
+    else {
+      var startingIndex = numberOfFullCircles*2;
+      for(var i = startingIndex; i < drivingSubsetData.length; ++i) {
+        if(endX <= drivingSubsetData[i].x && Math.abs(drivingSubsetData[i].x-endX) < (distanceBetweenCircles/2)) {
+          if(isOccupied(drivingSubsetData[i], drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
+            d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
           }
 
-          else if(endX > drivingSubsetData[i].x && Math.abs(drivingSubsetData[i].x-endX) < (distanceBetweenCircles/2)) {
-            if(isOccupied(drivingSubsetData[i], drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
-              d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
-            }
+          else {
+            d3transitionTo(drivingSubsetData, circle, draggedCircleIndex, i, checkForSubsetEnd);
+          }
+          break;
+        }
 
-            else {
-              d3transitionTo(drivingSubsetData, circle, draggedCircleIndex, i, checkForSubsetEnd)
-            }
-            break;
+        else if(endX > drivingSubsetData[i].x && Math.abs(drivingSubsetData[i].x-endX) < (distanceBetweenCircles/2)) {
+          if(isOccupied(drivingSubsetData[i], drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
+            d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
           }
 
-          else if(endX > drivingSubsetData[i].x && i == drivingSubsetData.length-1) {
-            if(isOccupied(drivingSubsetData[i], drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
-              d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
-            }
-
-            else {
-              d3transitionTo(drivingSubsetData, circle, draggedCircleIndex, i, checkForSubsetEnd)
-            }
-            break;
+          else {
+            d3transitionTo(drivingSubsetData, circle, draggedCircleIndex, i, checkForSubsetEnd)
           }
+          break;
+        }
+
+        else if(endX > drivingSubsetData[i].x && i == drivingSubsetData.length-1) {
+          if(isOccupied(drivingSubsetData[i], drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
+            d3transtionBack(drivingSubsetData, circle, draggedCircleIndex);
+          }
+
+          else {
+            d3transitionTo(drivingSubsetData, circle, draggedCircleIndex, i, checkForSubsetEnd)
+          }
+          break;
         }
       }
+    }
 
-    });
+  });
 
 for(var i = 0; i < numberOfFullCircles; ++i) {
   drivingSubsetData.push({x:(i*distanceBetweenCircles)+startingXNode, y: circleLineHeight-50, color:colors[i], border: "none" });
@@ -472,7 +473,6 @@ function resetSets(table, data) {
         .remove();
 }
 
-// NEEDS TO CHANGE!
 function setMade(data, set) {
   let k = 0;
   for(let i = 0; i < data.length; ++i) {
