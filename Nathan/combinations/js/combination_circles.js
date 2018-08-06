@@ -1,4 +1,25 @@
 colors = [ "green", "blue", "red", "yellow", "cyan"];
+var radius = 20;
+var distanceBetweenCircles = 80;
+var startingXNode = 40;
+var circleLineHeight = 100;
+var sliderFull = document.getElementById("perm-fullsubset-range-slider");
+var sliderFill = document.getElementById("perm-fillsubset-range-slider");
+var outputFull = document.getElementById("slider-full-output");
+var outputFill = document.getElementById("slider-fill-output");
+var permutedSetsTable_subset = d3.select("#correct-subset-permutations-table").style("width", "100%");
+var permutedSetsTableBody_subset = d3.select("#correct-subset-permutations-table").append("tbody");
+var subsetAnsweringTimeout;
+var tableComplete_subset = false;
+
+var drivingSubsetData = [];
+var draggedCircles_subset = [];
+var permutedSets_subset = [];
+var numberOfFullCircles = Number(sliderFull.value);
+var numberOfFillCircles = Number(sliderFill.value);
+var numberOfSetsAllowed_subset = factorial(numberOfFullCircles) / (factorial(numberOfFillCircles) * factorial(numberOfFullCircles - numberOfFillCircles));
+var tableComplete_subset = false;
+
 var subset_drag_handler = d3.behavior.drag()
   .on("drag", function(d) {
         d3.select(this)
@@ -63,26 +84,6 @@ var subset_drag_handler = d3.behavior.drag()
 
     });
 
-var radius = 20;
-var distanceBetweenCircles = 80;
-var startingXNode = 40;
-var circleLineHeight = 100;
-var sliderFull = document.getElementById("perm-fullsubset-range-slider");
-var sliderFill = document.getElementById("perm-fillsubset-range-slider");
-var outputFull = document.getElementById("slider-full-output");
-var outputFill = document.getElementById("slider-fill-output");
-var permutedSetsTable_subset = d3.select("#correct-subset-permutations-table").style("width", "100%");
-var permutedSetsTableBody_subset = d3.select("#correct-subset-permutations-table").append("tbody");
-var subsetAnsweringTimeout;
-var tableComplete_subset = false;
-
-var drivingSubsetData = [];
-var draggedCircles_subset = [];
-var permutedSets_subset = [];
-var numberOfFullCircles = Number(sliderFull.value);
-var numberOfFillCircles = Number(sliderFill.value);
-var numberOfSetsAllowed_subset = factorial(numberOfFullCircles) / (factorial(numberOfFillCircles) * factorial(numberOfFullCircles - numberOfFillCircles));
-var tableComplete_subset = false;
 for(var i = 0; i < numberOfFullCircles; ++i) {
   drivingSubsetData.push({x:(i*distanceBetweenCircles)+startingXNode, y: circleLineHeight-50, color:colors[i], border: "none" });
   drivingSubsetData.push({x:(i*distanceBetweenCircles)+startingXNode, y: circleLineHeight-50, color:colors[i], border: "none" });
