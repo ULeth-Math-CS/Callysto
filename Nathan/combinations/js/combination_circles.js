@@ -626,18 +626,15 @@ function d3transtionBack(data, obj, objIndex) {
 }
 
 function d3transitionTo(data, obj, objIndex, toIndex, callback) {
-  console.log("Transition to " + data[toIndex].x + " " + data[toIndex].y);
   d3.select(obj)
     .transition()
-    .attr("cx", function() { return data[objIndex].x = data[toIndex].x; })
+    .attr("cx", function() { return data[objIndex].x = /*data[toIndex].x*/500; })
     .attr("cy", function() { return data[objIndex].y = data[toIndex].y; })
     .each("end", function(d, i) { 
       moveTo(data, objIndex, objIndex-1);
       createCopy(data, obj, data[toIndex].x, data[toIndex].y);
       callback();
     });
-
-    //updateCircles(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
 }
 
 function moveTo(data, objIndex, toIndex) {
