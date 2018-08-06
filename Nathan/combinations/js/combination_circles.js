@@ -311,6 +311,7 @@ function resetCircles_subset() {
 }
 
 function checkForSubsetEnd() {
+  console.log("Checking for end");
   addDraggedCircle(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
   var answer = d3.select("#circles-subset-answer");
   if(areFull(drivingSubsetData, numberOfFullCircles, numberOfFillCircles)) {
