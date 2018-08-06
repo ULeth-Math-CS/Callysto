@@ -626,7 +626,7 @@ function d3transtionBack(data, obj, objIndex) {
 }
 
 function d3transitionTo(data, obj, objIndex, toIndex, callback) {
-  obj.transition()
+  obj.transition().duration(1000);
     .attr("cx", function() { return data[objIndex].x = /*data[toIndex].x*/500; })
     .attr("cy", function() { return data[objIndex].y = data[toIndex].y; })
     .each("end", function(d, i) { 
