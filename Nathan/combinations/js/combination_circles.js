@@ -626,6 +626,7 @@ function d3transtionBack(data, obj, objIndex) {
 
 function d3transitionTo(data, obj, objIndex, toIndex, callback) {
   console.log("Transition to " + data[toIndex].x + " " + data[toIndex].y);
+  console.log(obj);
   obj.transition()
     .attr("cx", function() { return data[objIndex].x = data[toIndex].x; })
     .attr("cy", function() { return data[objIndex].y = data[toIndex].y; })
