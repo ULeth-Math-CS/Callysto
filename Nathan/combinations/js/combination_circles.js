@@ -635,7 +635,7 @@ function d3transitionTo(data, obj, objIndex, toIndex, callback) {
       callback();
     });
 
-    updateCircles(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
+    //updateCircles(drivingSubsetData, subsetSvg, numberOfFullCircles, numberOfFillCircles);
 }
 
 function moveTo(data, objIndex, toIndex) {
