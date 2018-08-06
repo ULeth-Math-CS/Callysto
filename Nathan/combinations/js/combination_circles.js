@@ -626,8 +626,7 @@ function d3transtionBack(data, obj, objIndex) {
 }
 
 function d3transitionTo(data, obj, objIndex, toIndex, callback) {
-  d3.select(obj)
-    .transition()
+  obj.transition()
     .attr("cx", function() { return data[objIndex].x = /*data[toIndex].x*/500; })
     .attr("cy", function() { return data[objIndex].y = data[toIndex].y; })
     .each("end", function(d, i) { 
@@ -637,7 +636,7 @@ function d3transitionTo(data, obj, objIndex, toIndex, callback) {
     });
 }
 
-function moveTo(data, objIndex, toIndex) {
-  data[objIndex].x = data[toIndex].x;
-  data[objIndex].y = data[toIndex].y;
-}
+// function moveTo(data, objIndex, toIndex) {
+//   data[objIndex].x = data[toIndex].x;
+//   data[objIndex].y = data[toIndex].y;
+// }
