@@ -1,6 +1,6 @@
 function display(pH) {
 	var width = 600;
-	var height = 400;
+	var height = 300;
 	var datas = [{
 		id: "Red", fade: "pH_Animation/RedLitmus2.png", lastx: 450
 		},{		
@@ -78,7 +78,7 @@ function display(pH) {
 	}
 	
 	function dragended(d) {
-		if (d.x <= 325 && d.x >= 150 && d.y <=95 && d.y >= 0) {
+		if (d.x <= 375 && d.x >= 200 && d.y <=95 && d.y >= 0) {
 			d3.select(this).select("rect")
 				.transition()
 				.duration(1000)
