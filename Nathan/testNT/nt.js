@@ -1,7 +1,14 @@
-var nt = {
+requirejs.config({
+    paths: {
+        "d3": "//d3js.org/d3.v4.min" // version 4
+    }
+});
+requirejs(["d3"], function(d3) {
+    var nt = {
     containers : [],
     register : function(questionsContainer, solutionsContainer, jsonPath, callback, displayExplaination=true) {
         // Check for correct arguments
+        console.log("Hello");
         if(!d3.select("#"+questionsContainer)[0][0]) {
             console.error("Container with id " + questionsContainer + " does not exist. Please make an id to store the exercises.");
             return;
@@ -28,9 +35,8 @@ var nt = {
         }
 
         if(questionsContainer in this.containers) {
-            console.warn("container with id " + containerId + " is about to overidden. Did you mean to do that?");
+            console.warn("container with id " + questionsContainer + " is about to overidden. Did you mean to do that?");
         }
-
         // Get json and make register it to the object associated with the container
         this.getJson(questionsContainer, jsonPath, callback);
         this.containers[questionsContainer] = 
@@ -381,3 +387,4 @@ var nt = {
         }
     }
 }
+})
