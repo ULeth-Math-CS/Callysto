@@ -40,7 +40,7 @@ class MyMagics(Magics):
                 <input id="init" type="submit" value="Initialize">'''
 
         self.shell.run_cell(raw_code, store_history=False)
-        
+
 #define more custom magic function here as needed.
 
 ip = get_ipython()
