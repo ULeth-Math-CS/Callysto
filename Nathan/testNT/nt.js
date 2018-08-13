@@ -1,9 +1,10 @@
-requirejs.config({
-    paths: {
-        "d3": "//d3js.org/d3.v4.min" // version 4
-    }
-});
-requirejs(["d3"], function(d3) {
+console.log("Hello");
+// requirejs.config({
+//     paths: {
+//         "d3": "//d3js.org/d3.v3.min" // version 4
+//     }
+// });
+// requirejs(["d3"], function(d3) {
     var nt = {
     containers : [],
     register : function(questionsContainer, solutionsContainer, jsonPath, callback, displayExplaination=true) {
@@ -387,4 +388,4 @@ requirejs(["d3"], function(d3) {
         }
     }
 }
-})
+// })

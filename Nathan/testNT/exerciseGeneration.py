@@ -13,12 +13,9 @@ class MyMagics(Magics):
     #When run it initilizes the 'show/hide code' buttons and the 'initialize' button
     @line_magic
     def exerciseGeneration(self, line):
-        from IPython.display import Javascript, display, HTML
-
-        display(HTML('''<script src=\"nt.js\"></script>
-                <link rel=\"stylesheet\" type=\"text/css\" href=\"nt.css\">'''));
-        
-        print("Hello");
+        raw_code = "from IPython.display import Javascript\nwith open(\"nt.js\") as f:\n\tdisplay(Javascript(f.read()))";
+        self.shell.run_cell(raw_code, store_history=False)
+         
         
 #define more custom magic function here as needed.
 
