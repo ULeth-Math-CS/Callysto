@@ -35,8 +35,8 @@ var gameCodes = Object.freeze({ "SUCCESS" : 0, "FAILURE" : 1 });
 
 // Global Variables
 var canvas,
-    rows = 6,
-    cols = 6,
+    rows = 0,
+    cols = 0,
     trafficControl = [
                         [ 1, 0, 1, 0, 1, 0 ],
                         [ 0, 1, 0, 1, 0, 1 ],
@@ -59,18 +59,39 @@ var canvas,
     endNode = new Point(),
     currentY = 0,
     currentX = 0,
-    run = false;
+    run = false,
+    drawSketch = false;
 
 function init(nRows, nCols, control) {
     rows = nRows;
     cols = nCols;
     trafficControl = control;
+    if(rows > 0 && cols > 0) {
+        drawSketch = true;
+        setUpNodes();
+        redraw();
+        noLoop();
+    }
+}
+
+function centerCanvas(cnv) {
+  var x = (windowWidth - width) / 2;
+  var y = (windowHeight - height) / 2;
+  cnv.position(x, y);
 }
 
 // p5 setup
 function setup() {
     canvas = createCanvas(640, 480);
+    centerCanvas(canvas);
+    if(rows > 0 && cols > 0) {
+        setUpNodes();
+    }
+    angleMode(RADIANS);
+    rectMode(CENTER);
+}
 
+function setUpNodes() {
     let stepX = canvas.width / cols,
         stepY = canvas.height / rows;
     let x = stepX / 2,
@@ -94,91 +115,86 @@ function setup() {
     currentY = trafficNodes[0][0].y;
 
     // Randomize the end node
-    endNode.y = 4;
+    endNode.y = 2;
     endNode.x = 0;//Math.floor((Math.random() * (rows*cols)));
-
-    angleMode(RADIANS);
-    rectMode(CENTER);
-
-    // Don't loop draw right away
-    noLoop();
 }
 
 function draw() {
-    canvas.background(200, 200, 255);
-    noFill();
-    // Create the nodes and draw lines in between them
-    for(let i = 0; i < rows; ++i) {
-        for(let j = 0; j < cols; ++j) {
-            if(i + 1 < rows) {
-                line(trafficNodes[i][j].x, trafficNodes[i][j].y, trafficNodes[i+1][j].x, trafficNodes[i+1][j].y);
-                // Determine Color
-            }
-            if(j + 1 < cols) {
-                line(trafficNodes[i][j].x, trafficNodes[i][j].y, trafficNodes[i][j+1].x, trafficNodes[i][j+1].y);
-            }
+    if(drawSketch) {
+        canvas.background(200, 200, 255);
+        noFill();
+        // Create the nodes and draw lines in between them
+        for(let i = 0; i < rows; ++i) {
+            for(let j = 0; j < cols; ++j) {
+                if(i + 1 < rows) {
+                    line(trafficNodes[i][j].x, trafficNodes[i][j].y, trafficNodes[i+1][j].x, trafficNodes[i+1][j].y);
+                    // Determine Color
+                }
+                if(j + 1 < cols) {
+                    line(trafficNodes[i][j].x, trafficNodes[i][j].y, trafficNodes[i][j+1].x, trafficNodes[i][j+1].y);
+                }
 
-            if(i === endNode.y && j === endNode.x) {
-                push();
-                    fill(51);
-                    textSize(50);
-                    text("End", 0, 0);
-                pop();
-                push();
-                    fill('red');
+                if(i === endNode.y && j === endNode.x) {
+                    push();
+                        fill(51);
+                        textSize(50);
+                        text("End", 0, 0);
+                    pop();
+                    push();
+                        fill('red');
+                        ellipse(trafficNodes[i][j].x, trafficNodes[i][j].y, nodeDiameter, nodeDiameter);
+                    pop();
+                }
+
+                else if(trafficControl[i][j]) {
+                    push();
+                        fill('rgb(100%,0%,100%)');
+                        ellipse(trafficNodes[i][j].x, trafficNodes[i][j].y, nodeDiameter, nodeDiameter);
+                    pop();
+                }
+
+                else {
+                    push();
+                    fill('rgb(0,255,0)');
                     ellipse(trafficNodes[i][j].x, trafficNodes[i][j].y, nodeDiameter, nodeDiameter);
                 pop();
-            }
-
-            else if(trafficControl[i][j]) {
-                push();
-                    fill('rgb(100%,0%,100%)');
-                    ellipse(trafficNodes[i][j].x, trafficNodes[i][j].y, nodeDiameter, nodeDiameter);
-                pop();
-            }
-
-            else {
-                push();
-                fill('rgb(0,255,0)');
-                ellipse(trafficNodes[i][j].x, trafficNodes[i][j].y, nodeDiameter, nodeDiameter);
-            pop();
+                }
             }
         }
-    }
-
-    push();
-        rotate(vehicleRotation);
-        fill('rgb(0,255,0)');
-        translate(0, 0);
-        rect(currentX, currentY, carDiameter, carDiameter, 2);
-    pop();
-    if(run) {
-        if(animationDirection === animation.LEFT) {
-            if(currentX <= trafficNodes[nextNode.y][nextNode.x].x) {
-                reachedDestination();
+        push();
+            rotate(vehicleRotation);
+            fill('rgb(0,255,0)');
+            translate(0, 0);
+            rect(currentX, currentY, carDiameter, carDiameter, 2);
+        pop();
+        if(run) {
+            if(animationDirection === animation.LEFT) {
+                if(currentX <= trafficNodes[nextNode.y][nextNode.x].x) {
+                    reachedDestination();
+                }
             }
-        }
 
-        else if(animationDirection === animation.RIGHT) {
-            if(currentX >= trafficNodes[nextNode.y][nextNode.x].x) {
-                reachedDestination();
+            else if(animationDirection === animation.RIGHT) {
+                if(currentX >= trafficNodes[nextNode.y][nextNode.x].x) {
+                    reachedDestination();
+                }
             }
-        }
 
-        else if(animationDirection === animation.UP) {
-            if(currentY <= trafficNodes[nextNode.y][nextNode.x].y) {
-                reachedDestination();
+            else if(animationDirection === animation.UP) {
+                if(currentY <= trafficNodes[nextNode.y][nextNode.x].y) {
+                    reachedDestination();
+                }
             }
-        }
 
-        else if(animationDirection === animation.DOWN) {
-            if(currentY >= trafficNodes[nextNode.y][nextNode.x].y) {
-                reachedDestination();
+            else if(animationDirection === animation.DOWN) {
+                if(currentY >= trafficNodes[nextNode.y][nextNode.x].y) {
+                    reachedDestination();
+                }
             }
-        }
 
-        currentX += vehicleMovement.x;
-        currentY += vehicleMovement.y;
+            currentX += vehicleMovement.x;
+            currentY += vehicleMovement.y;
+        }
     }
 }
 
