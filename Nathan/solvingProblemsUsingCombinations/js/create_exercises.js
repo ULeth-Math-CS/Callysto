@@ -28,7 +28,9 @@ d3.json("./data/exercises.json", function(data) {
                 .append("input")
                     .style("type", "text")
                     .style("float", "left")
-                    .classed("exercise-answers", true);
+                    .style("text-align", "center")
+                    .classed("exercise-answers", true)
+                    .classed("rendered_html", false);
     
     exerciseDivs.append("p")
                    .classed("exercise-feedback", true);
