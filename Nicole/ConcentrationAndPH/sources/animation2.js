@@ -2,22 +2,18 @@ function display(pH) {
 	var width = 600;
 	var height = 300;
 	var datas = [{
-		id: "Red", fade: "pH_Animation/RedLitmus2.png", lastx: 450
+		id: "Red", fade: "./images/RedLitmus2.png", lastx: 450
 		},{		
-		id: "Blue", fade: "pH_Animation/BlueLitmus2.png", lastx: 500
+		id: "Blue", fade: "./images/BlueLitmus2.png", lastx: 500
 		}];
 		
-	//var svg = d3.select("#animation")
-		//.append("svg")
-		//.attr("height", height)
-		//.attr("width", width);
 		
 	var svg = d3.select("#animation")
 		.append("svg")
 		.attr("viewBox", "0 0 1000 500");
 		
 	svg.append("image")
-		.attr("href", "pH_Animation/Beaker.png")
+		.attr("href", "./images/Beaker.png")
 		.attr("x", 175)
 		.attr("y", 20)
 		.attr("width", 250)

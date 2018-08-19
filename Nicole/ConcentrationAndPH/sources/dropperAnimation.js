@@ -1,8 +1,6 @@
 function display2(pH) {
 	var datas = [{
-		id: "Red", image: "dropper2.png", lastx: 450, 
-		AcidHigh: "DarkRed", AcidMid: "DarkOrange", AcidLow: "Yellow", Neutral: "LimeGreen", 
-		BaseLow: "DarkGreen", BaseMid: "MediumBlue", BaseHigh: "Indigo"
+		id: "Red", image: "./images/dropper2.png", lastx: 450
 		}];
 		
 	var svg = d3.select("#beaker")
@@ -38,10 +36,10 @@ function display2(pH) {
 		.attr("height", 1)
 		.attr("width", 1)
 		.attr("preserveAspectRatio", "none")
-		.attr("href", "pH_Animation/dropper2.png");
+		.attr("href", "./images/dropper2.png");
 		
 	svg.append("image")
-		.attr("href", "pH_Animation/BeakerEmpty.png")
+		.attr("href", "./images/BeakerEmpty.png")
 		.attr("x", 175)
 		.attr("y", 100)
 		.attr("width", 250)
