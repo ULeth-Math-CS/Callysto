@@ -1,4 +1,4 @@
-let jsonArray = [];
+var jsonArray = [];
 
 d3.json("./data/wiki_data.json", function(data) {
       let index = 1;
