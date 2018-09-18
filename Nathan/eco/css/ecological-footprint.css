@@ -99,6 +99,14 @@
     margin-left: 10px;
 }
 
+.user-score {
+    background-color: orange !important;
+}
+
+.water-usage-topic {
+    color: blue;
+}
+
 /* Tags */
 
 input[type="checkbox"] {
@@ -115,7 +123,7 @@ select {
 }
 
 input[type="text"] {
-    height: 20px;
+    height: 30px;
     margin-left: 10px;
     margin-right: 10px;
     width: 50px;
@@ -196,4 +204,19 @@ body {
 
 #wikitable th {
     width: 100px;
+}
+
+#water-use-at-home-container {
+   display: flex;
+   justify-content: center;
+}
+
+
+#water-use-at-home-container table {
+   width: 90%;
+}
+
+#water-use-at-home-container td {
+   text-align: center !important;
+   font-size: 1.1em;
 }
