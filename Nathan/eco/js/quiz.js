@@ -140,8 +140,6 @@ function calculate_quiz() {
             stuffScore += stuffSelects[i][answer];
         }
 
-        console.log(stuffScore);
-
         let stuffCheckboxQuestions = d3.select("#stuff-use-question-container")
                                             .selectAll("input[type=checkbox]");
 
@@ -177,6 +175,7 @@ function calculate_quiz() {
         let grandTotal = waterScore + foodScore + transportationScore + shelterScore + energyScore + clothingScore + stuffScore + funScore;
         d3.selectAll(".grand-total-score-value").text(function() { return grandTotal; });
         let ecologicalFootprint = grandTotal / 100;
-        d3.selectAll(".ecological-footprint-value").text(function() { return ecologicalFootprint; });  
+        d3.selectAll(".ecological-footprint-value").text(function() { return ecologicalFootprint + " hectares."; });
+        buildEcoTable(ecologicalFootprint);
     });
 }
