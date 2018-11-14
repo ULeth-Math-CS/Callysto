@@ -2,3 +2,8 @@
   margin: auto;
   width: 80%;
 }
+
+.tooltip {
+  position: absolute;
+  opacity: 0;
+}
