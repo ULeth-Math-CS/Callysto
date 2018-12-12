@@ -1,14 +1,14 @@
-require.config({
-    paths: {
-        d3: "//d3js.org/d3.v5.min.js"
-    }
-})
-require(['d3'], function(d3) {
+// require.config({
+//     paths: {
+//         d3: "https://d3js.org/d3.v4.min"
+//     }
+// });
+// require(['d3'], function(d3) {
     var nt = {
-        containers : [],
+        containers : { },
         register : function(questionsContainer, solutionsContainer, jsonPath, callback, displayExplaination=true) {
             // Check for correct arguments
-            if(!d3.select("#"+questionsContainer)[0][0]) {
+            if(d3.select("#"+questionsContainer).empty()) {
                 console.error("Container with id " + questionsContainer + " does not exist. Please make an id to store the exercises.");
                 return;
             }
@@ -34,18 +34,21 @@ require(['d3'], function(d3) {
             }
 
             if(questionsContainer in this.containers) {
-                console.warn("container with id " + containerId + " is about to overidden. Did you mean to do that?");
+                console.warn("container with id " + questionsContainer + " is about to overidden. Did you mean to do that?");
             }
 
             // Get json and make register it to the object associated with the container
-            this.getJson(questionsContainer, jsonPath, callback);
             this.containers[questionsContainer] = 
                                                 {
                                                     "solutions" : solutionsContainer,
-                                                    "displayExplaination" : displayExplaination 
-                                                }
+                                                    "displayExplaination" : displayExplaination
+                                                };
+            console.log(this.containers);
+            this.getJson(questionsContainer, jsonPath, callback);
+            console.log(this.containers);
         },
         registerJson : function(questionsContainer, data, callback) {
+            console.log(this.containers);
             this.containers[questionsContainer].json = data;
             callback();
         },
@@ -225,7 +228,16 @@ require(['d3'], function(d3) {
             let shortAnswerFeedback = shortAnswerQuestions.selectAll(".question-feedback");
             shortAnswerQuestions.selectAll("input")
                 .filter(function(d, i, j) {
-                    if(this.value == d.answer) {
+                    console.log("short answer");
+                    let correct = false;
+                    if(is_fraction(d.answer) && is_fraction(this.value)) {
+                        correct = evaluate_fraction(d.answer) == evaluate_fraction(this.value); 
+                    }
+                    
+                    else {
+                        correct = this.value == d.answer;
+                    }
+                    if(correct) {
                         d3.select(shortAnswerFeedback[j][i]).classed("correct", true)
                                                             .classed("incorrect", false)
                                                             .classed("hidden", false)
@@ -239,6 +251,7 @@ require(['d3'], function(d3) {
                         .classed("hidden", false)
                         .text("Incorrect.");
                     }
+                    
                 });
 
             // Multiple-choice answer compare
@@ -385,6 +398,21 @@ require(['d3'], function(d3) {
                         return "multiple-choice";
                 }
             }
+        },
+        is_fraction : function(x) {
+            if(x.indexOf('/') < 0) {
+                console.log("ITS NOT A FRACTION");
+                return false;
+            }
+            console.log("ITS A FRACTION");
+            return true;
+        },
+        evaluate_fraction : function(x) {
+            sFraction = x.replace(/\s/g, '');
+            let offset = sFraction.indexOf('/');
+            let n = parseInt(sFraction.substr(0, offset));
+            let d = parseInt(sFraction.substr(offset+1));
+            return n / d;
         }
     }
-});
+// });

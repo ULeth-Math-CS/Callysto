@@ -1,0 +1,25 @@
+##### Example 2 : Never average averages
+**If Tommy averaged $20$ points for $3$ basketball games and $30$ points in next two, what was his average for all five games?**
+###### Solution:
+Total points for first three games: $20 \times 3 = 60$
+<br>Points for next two games: $30 \times 2 = 60 $
+<br>Total number of games: $3 + 2 = 5$
+<br>Therefore the mean is $\dfrac{60+60}{5} = 24$
+
+You might have been tempted to take the average of 20 and 30, but these two averages occur over a different number of games!<br>
+In a situation like this, we first "work backward" from the average.<br>
+The averages do not tell us how many points Tommy scored in each game.<br>
+However, we know that one set of scores that produce our averages is $20, 20, 20, 30, 30$.<br>
+Averaging these gives us our result.
+
+**Note:** there is a way to correctly "average averages," but it's beyond the level of this notebook.<br>
+If you're curious, you can read online about how to calculated a [weighted mean](https://en.wikipedia.org/wiki/Weighted_arithmetic_mean).
+
+As we will see in [our next notebook](CC66-Effect_Of_Outliers_On_Central_Tendency.ipynb), the mean of a dataset is sensitive to extreme values (outliers).<br>
+This can be useful in situations where we want to take those values into account.<br>
+For example, if we include the cost of home heating in a household budget, the average cost of our heating bill will give the best measure of heating's impact on our budget over the course of a year.
+
+The median is a useful statistic because it is **not** as sensitive to extreme values.<br>
+(You will see this for yourself in [the sequel to this notebook](CC66-Effect_Of_Outliers_On_Central_Tendency.ipynb).)<br>
+For example, businesses -- or city planners -- are more interested in median income than mean income when making decisions on where to locate a business or service.<br>
+One very wealthy person moving to an area will increase the mean income in that area, but not the median.
