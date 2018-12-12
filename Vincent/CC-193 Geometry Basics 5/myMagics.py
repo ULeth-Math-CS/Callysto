@@ -43,6 +43,28 @@ class MyMagics(Magics):
 
 #define more custom magic function here as needed.
     @line_magic
+    def toggleMore(self, line):
+        raw_code = '''%%html
+                    <button onclick='toggleMore()'>More</button>
+                    <script>
+                     var cells = document.getElementById('notebook-container');
+                     $(cells).find('.hideMe').closest('div.cell').hide('0');
+                    function toggleMore() {
+                      setTimeout(function() {
+                        var index = 0;
+                        var cells = document.getElementById('notebook-container');
+                        for (var cell of cells.childNodes) {
+                            if ($(cell).hasClass('selected'))
+                                break;
+                            index++;
+                        }
+                        $(cells.childNodes[index - 1]).toggle('500');
+                        }, 100);
+                    }
+                    </script>'''
+        self.shell.run_cell(raw_code, store_history=False)
+
+    @line_magic
     def addYoutube(self, line):
         raw_code = '''%%html
             <div align="middle">
