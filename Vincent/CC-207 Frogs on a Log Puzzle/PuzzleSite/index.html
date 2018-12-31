@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frogs on a Log</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div>
+        <img id="background" src="imgs/background.jpg" alt="">
+    </div>
+
+    <div class="canvas">
+        <ul id="frogList">
+            <li class="frog" id="pos0"><img class="clickable" src="imgs/frogRed.png" alt="red frog"></li>
+            <li class="frog" id="pos1"><img class="clickable" src="imgs/frogRed.png" alt="red frog"></li>
+            <li class="frog" id="pos2"><img class="clickable" src="imgs/frogRed.png" alt="red frog"></li>
+            <li class="frog" id="pos3"><img src="imgs/blankSpace.png" alt=""></li>
+            <li class="frog" id="pos4"><img class="clickable" src="imgs/frogGreen.png" alt="green frog"></li>
+            <li class="frog" id="pos5"><img class="clickable" src="imgs/frogGreen.png" alt="green frog"></li>
+            <li class="frog" id="pos6"><img class="clickable" src="imgs/frogGreen.png" alt="green frog"></li>
+        </ul>
+    </div>
+    <div class="buttons">
+        <button onclick="resetFrogs()">Reset</button>
+        <button onclick="undo()">Undo</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
