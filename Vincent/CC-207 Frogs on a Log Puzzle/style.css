@@ -48,3 +48,8 @@
   text-decoration: underline;
   border: solid 1px #a4bef0;
 }
+
+.moveCounter {
+  grid-column: span 1;
+  align-self: center;
+}
