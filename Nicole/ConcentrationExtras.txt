@@ -1,0 +1,31 @@
+%%html
+
+<script type = "text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+<script type = "text/javascript" src="sources/animation2.js"></script>
+
+Javascript("require.config({paths: {d3: 'https://d3js.org/d3.v5.min'}});") 
+Javascript(filename='sources/animation2.js')
+
+from IPython.display import Javascript
+
+
+%%html
+
+<link rel="stylesheet" type="text/css" href="sources/dropperstyle.css">
+<script type = "text/javascript" src="sources/dropperAnimation.js"></script>
+
+HTML("<a href=sources/dropperstyle>""</a>")
+Javascript(filename='sources/dropperAnimation.js')
+
+
+function reset_liquid(){
+	d3.select("#Liquid")
+		.style("fill", "LightSteelBlue");
+}
+
+<input id="reset" type="button" value="Reset" onclick="reset_liquid()">
+
+		d3.select("#Liquid")
+			.transition()
+			.duration(1000)
+			.style("fill", "LightSteelBlue");
