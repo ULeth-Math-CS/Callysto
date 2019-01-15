@@ -12,24 +12,55 @@ var FROG = {
 };
 
 var BLANK_SPACE = "blank";
-var START_ARRAY = [FROG.red.color, FROG.red.color, FROG.red.color, BLANK_SPACE, FROG.green.color, FROG.green.color, FROG.green.color];
-var FINAL_ARRAY = [FROG.green.color, FROG.green.color, FROG.green.color, BLANK_SPACE, FROG.red.color, FROG.red.color, FROG.red.color];
+var START_ARRAY = [];
+var FINAL_ARRAY = [];
 
-var posArray = START_ARRAY.slice();
+var posArray = [];
 var prevArray = [];
 var counter = 0;
-prevArray.push(START_ARRAY.slice());
 
 window.onresize = function() {
     resizeBackground();
 }
 
+setFrogNum($('#frogNumberSelector').children('option:selected').val());
 
+function setFrogNum(num) {
+  var columns = Number((num * 2) + 1);
+  $('.frog').remove();
+  counter = 0;
+  buildArrays(num);
+  prevArray = [];
+  posArray = [];
+  prevArray.push(START_ARRAY.slice());
+  posArray = START_ARRAY.slice();
+  buildFrogs();
+  $('.frogGrid').css('grid-template-columns', 'repeat(' + columns + ', 1fr)');
+  displayFrogs();
+  resizeBackground();
+}
 
-$('.frog').click(function () {
-  var pos = $(this).index();
-  makeMove(pos);
-});
+function buildArrays(num) {
+  START_ARRAY = [BLANK_SPACE];
+  FINAL_ARRAY = [BLANK_SPACE];
+  for (var i = 0; i < num; i++) {
+    START_ARRAY.unshift(FROG.red.color);
+    START_ARRAY.push(FROG.green.color);
+    FINAL_ARRAY.unshift(FROG.green.color);
+    FINAL_ARRAY.push(FROG.red.color);
+  }
+}
+
+function buildFrogs() {
+  var list = document.getElementById('frogList');
+  for (var i = 0; i < START_ARRAY.length; i++) {
+    var listItem = document.createElement('li');
+    listItem.setAttribute('id', 'pos' + i);
+    listItem.setAttribute('class', 'frog');
+    document.getElementById('frogList').appendChild(listItem);
+
+  }
+}
 
 function displayFrogs() {
   $('#counter').html(counter);
@@ -114,3 +145,13 @@ function resizeBackground() {
     $('.mainGrid').width($('.mainGrid').closest('.rendered_html').width());
     $('.mainGrid').height($('.mainGrid').closest('.rendered_html').width() * 0.53);
 }
+
+$('#frogNumberSelector').change(function() {
+  setFrogNum($(this).children('option:selected').val());
+});
+
+$(document).on('click', '.frog', function() {
+  var pos = $(this).index();
+  // - 3 since the index of the list already has 3 elements for the buttons
+  makeMove(pos - 3);
+});
