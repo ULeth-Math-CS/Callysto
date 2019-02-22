@@ -28,21 +28,21 @@
             var gameCodes = Object.freeze({ "SUCCESS" : 0, "FAILURE" : 1 });
 
             // Global Variables
-            var rows = 5,
-                cols = 5,
+            var rows = 6,
+                cols = 6,
                 trafficControl = [
-                                    [ 1, 0, 1, 0, 1 ],
-                                    [ 0, 1, 0, 1, 0 ],
-                                    [ 1, 0, 0, 0, 1 ],
-                                    [ 0, 1, 0, 1, 0 ],
-                                    [ 1, 0, 1, 0, 1 ],
-                                    [ 1, 1, 1, 1, 1 ]
+                                    [ 0, 0, 2, 0, 0, 0 ],
+                                    [ 0, 0, 0, 0, 0, 0 ],
+                                    [ 0, 0, 0, 0, 0, 0 ],
+                                    [ 0, 0, 0, 0, 0, 0 ],
+                                    [ 0, 0, 0, 0, 0, 0 ],
+                                    [ 0, 0, 0, 0, 0, 0 ]
                                 ],
                 trafficNodes = [],
                 nodesVisited = [],
                 nodeDiameter = 30,
                 carDiameter = 20,
-                vehicleSpeed = 1,
+                vehicleSpeed = 10,
                 circles = [],
                 vehicleRotation = 0,
                 vehicleMovement = new Point(),

@@ -87,7 +87,7 @@ require(['d3'], function(d3) {
             }
           })
           .style("fill", "green")
-          .attr("r", 5);
+          .attr("r", 2);
         });
     });
 
