@@ -1,4 +1,4 @@
-let combinationExercises = d3.select("#combination-exercises-container")
+var combinationExercises = d3.select("#combination-exercises-container")
 
 d3.json("./data/exercises.json", function(data) {
       let jsonArray = [];
