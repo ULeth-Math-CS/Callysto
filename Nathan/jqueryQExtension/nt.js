@@ -1,6 +1,6 @@
 var nt = {
     containers : { },
-    register : function(questionsContainer, solutionsContainer, jsonPath, callback, displayExplaination=true) {
+    register : function(questionsContainer, solutionsContainer, jsonPath, callback, displayExplanation=true) {
         // Check for correct arguments
         if($("#"+questionsContainer).length == 0) {
             console.error("Container with id " + questionsContainer + " does not exist. Please make an id to store the exercises.");
@@ -35,7 +35,7 @@ var nt = {
         this.containers[questionsContainer] =
                                             {
                                                 "solutions" : solutionsContainer,
-                                                "displayExplaination" : displayExplaination
+                                                "displayExplanation" : displayExplanation
                                             };
         this.getJson(questionsContainer, jsonPath, callback);
         console.log(this.containers);
@@ -204,7 +204,50 @@ var nt = {
             return;
         }
 
-        let solutionsContainer = $("#"+this.containers[containerId].solutions);
+        let solutionsContainer = $("#"+this.containers[containerId].solutions),
+            containerData = this.containers[containerId].data,
+            data = this.containers[containerId].json,
+            containers = this.containers;
+
+        $.each(data, function(key, value) {
+          let explanation = "",
+              solution = "",
+              answer;
+          answer = data[parseInt(key)].answer;
+          if(containerData.types[parseInt(key)-1] == "short-answer") {
+            solution = data[parseInt(key)].solution;
+          }
+          if(containers[containerId].displayExplanation && data[parseInt(key)].explanation != "") {
+            explanation = data[parseInt(key)].explanation;
+          }
+
+          // format
+          if(explanation == "" && solution == "") {
+            solutionsContainer.append(`<div class="solution-container"><p>${parseInt(key)}. ${answer}</p></div>`)
+          }
+          else if(explanation == "" && solution != "") {
+            solutionsContainer.append(`
+                                        <div class="solution-container">
+                                          <p>${parseInt(key)}. ${answer}</p>
+                                          <p>Solution: ${solution}</p>
+                                        </div>`)
+          }
+          else if(explanation != "" && solution == "") {
+            solutionsContainer.append(`
+                                        <div class="solution-container">
+                                          <p>${parseInt(key)}. ${answer}</p>
+                                          <p>Explanation: ${explanation}</p>
+                                        </div>`)
+          }
+          else {
+            solutionsContainer.append(`
+                                        <div class="solution-container">
+                                          <p>${parseInt(key)}. ${answer}</p>
+                                          <p>Solution: ${solution}</p>
+                                          <p>Explanation: ${explanation}</p>
+                                        </div>`)
+          }
+        });
         // let solutionsContainer = d3.select("#"+this.containers[containerId].solutions);
         // if(!solutionsContainer[0][0]) {
         //     console.log("Container with that id does not exist: " + containerId + ". Please try again!");
